@@ -1,0 +1,233 @@
+# Before coding: the preparation plan
+
+This document details everything that happens **before the first line of the Spec browser is written** (Phases 0 and 1 of the [plan](plan.md)). The goal of this preparation is that, when coding starts, we know exactly what to build, we have the safety nets that tell us when we break something, the decisions are taken, and the blocking upstream problems are known and already moving.
+
+Each step says: **why** it is needed, **what** is done, what it **produces**, **when it is done**, a rough **effort**, and **what you review or decide**. Effort is in working days for one developer, to compare steps, not a commitment.
+
+## Overview
+
+```mermaid
+flowchart TD
+  A1[A1 Review and commit the docs] --> A2[A2 Decisions D-01..D-08]
+  A1 --> A3[A3 Working process]
+  A3 --> B1[B1 Rebuild recipe and baseline]
+  B1 --> B2[B2 CI]
+  B1 --> B3[B3 Driver spike S-5]
+  B1 --> B4[B4 Inventory tooling]
+  A2 --> C1[C1 Feature sheets per area]
+  B3 --> C2[C2 Morphic driver + first scenarios]
+  C1 --> C2
+  B4 --> C3[C3 Command parity check]
+  A1 --> D1[D1 Spikes S-1..S-4]
+  D1 --> D2[D2 Design notes: architecture, browser protocol, R-01..R-05]
+  D1 --> E2[E2 Spec issues for confirmed gaps]
+  A1 --> E1[E1 Calypso bug fixes B-01..B-04]
+  C2 --> G{Ready-to-code gate}
+  C3 --> G
+  D2 --> G
+  E2 --> G
+  E1 --> G
+```
+
+Stages A to E overlap: B, D and E can run in parallel once A1 is done.
+
+---
+
+## Stage A — Agree
+
+### A1. Review and commit the documentation (PR 0.1)
+
+- **Why.** Everything else refers to the feature IDs, the gaps and the plan. They must be agreed before they are used as a reference.
+- **What.** You read [features/README.md](features/README.md), [walkthrough.md](features/walkthrough.md), [calypso-architecture.md](calypso-architecture.md), [spec-gaps.md](spec-gaps.md), [pain-points.md](pain-points.md), [testing-plan.md](testing-plan.md), [coding-guidelines.md](coding-guidelines.md), this file and the plan. You also run the 8 manual keyboard and drag-and-drop checks at the end of the walkthrough (a few minutes) and tell me what differs. I update the documents, then commit them as the first PR of the repository.
+- **Produces.** PR 0.1 (docs only).
+- **Done when.** You approved the PR; the manual checks K-1..K-8 are recorded as "click" or corrected in the inventory.
+- **Effort.** Review: your time. Updates: 0.5 day.
+- **You.** Review; tell me which features are missing, wrong, or that you would like to drop.
+
+### A2. Decisions
+
+- **Why.** Some choices change the work. They are cheap to take now and expensive to change later.
+- **What.** The decisions of the plan, with when each is needed:
+
+| Id | Decision | Needed before | Proposal |
+|---|---|---|---|
+| D-01 | Package and class naming | B1 | packages `Calypso-Spec-*`, class prefix `ClySp` |
+| D-02 | Panes embedded in the Morphic browser, or only in a new Spec shell | after S-1 | new shell only, unless S-1 shows it is cheap |
+| D-03 | Where the acceptance tests live once integrated in Pharo | decided | in Pharo with the code (plain SUnit) |
+| D-04 | Write the Morphic driver (pin today's behaviour) | C2 | yes, limited to the areas the refactorings touch |
+| D-05 | Target Pharo version | decided | Pharo 15 |
+| D-06 | Features to drop | C1 | candidates: window groups (BRW-06), legacy annotations (CMD-11) |
+| D-07 | MVP scope (M tier) | C1 | as marked in the inventory |
+| D-08 | `ClyQueryBrowserMorph`: port to Spec, or retire it in favour of `StMethodBrowser` | D2 | retire it: route the remaining entry points to `StMethodBrowser` (fixing bug B-02), port nothing |
+
+- **Produces.** A "Decisions" section in the plan with your answers and the date.
+- **Done when.** D-01, D-04, D-05, D-06, D-07 answered (D-02, D-03, D-08 can wait for their step).
+- **You.** Decide.
+
+### A3. Working process
+
+- **Why.** We will work for weeks with many small PRs in three repositories (this one, Pharo, Spec). The process must be clear before the first PR.
+- **What.** Agree on:
+  - **Branches and PRs here:** one branch per PR, named after the PR id (`pr-0.2-baseline`), PR template with feature IDs, scenarios, upstream dependencies, "how to try".
+  - **Review:** you review the change in the image first (the code reviewer tool), then on GitHub. Nothing is committed or pushed without your go.
+  - **Upstream tracking:** every upstream issue/PR (Pharo, Spec) is listed in `docs/upstream.md` with its status and the step it blocks; workarounds in `docs/workarounds.md`.
+  - **Syncing with Pharo:** Pharo 15 is a moving development version. We rebuild the image from the recipe (B1) at a fixed rhythm (proposal: weekly, and whenever an upstream PR we need is merged) and re-run the catalogue and baseline tests to detect changes in Calypso.
+  - **Who opens upstream PRs:** you, from your accounts, after reviewing them.
+- **Produces.** `docs/process.md`, `docs/upstream.md`, a PR template in `.github/`.
+- **Done when.** You approved the three files (in PR 0.1 or a follow-up).
+- **Effort.** 0.5 day.
+
+---
+
+## Stage B — Infrastructure
+
+### B1. Rebuild recipe and baseline (PR 0.2)
+
+- **Why.** The image must be reproducible: anyone (CI, you, me in a new session) must get the same environment. Iceberg and the MCP must know the packages before any code exists.
+- **What.**
+  - `BaselineOfCalypsoOnSteroids` with empty packages named per D-01 (e.g. `Calypso-Spec-Core`, `Calypso-Spec-Core-Tests`, `Calypso-Spec-AcceptanceTests`, `CalypsoOnSteroids-Inventory`) and groups (`default`, `tests`, `acceptance`).
+  - The rebuild recipe in `docs/rebuild.md`: Pharo version and build, how to create the image with Pharo Launcher, Pharo MCP revision and how it is loaded and started, the baseline load expression.
+  - Packages registered in the Iceberg repository through the MCP.
+- **Produces.** PR 0.2 (baseline, empty packages, recipe).
+- **Done when.** A fresh image built from the recipe loads the baseline without errors, and the repository status is clean.
+- **Effort.** 1 day.
+
+### B2. Continuous integration
+
+- **Why.** Every PR must show green tests without you having to run them.
+- **What.** GitHub Actions with smalltalkCI on Pharo 15 (the dev image changes daily: the workflow pins the image build used, updated on purpose). Two jobs: unit tests; acceptance tests (allowed to fail at the beginning, reported).
+- **Produces.** `.github/workflows/ci.yml`, `.smalltalk.ston`; part of PR 0.2 or a follow-up.
+- **Done when.** CI runs on a PR and reports.
+- **Effort.** 0.5–1 day.
+
+### B3. Driver spike: what SUnit tests can drive (PR 0.3, spike S-5)
+
+- **Why.** The acceptance tests go through two drivers (see the [testing plan](testing-plan.md)). Before writing them we must know what each driver can do reliably, especially for trees, context menus and keys.
+- **What.**
+  1. **Morphic:** with today's browser, select in each pane through the API, open a context menu and run an item, run a shortcut by asking the key dispatcher, read pane contents and tabs.
+  2. **Spec:** on a small throw-away presenter with a tree table, a Commander2 context menu and a key binding, do the same through the presenters.
+  3. A helper that waits until the UI is idle (deferred updates, background tool building), and the leak check (windows, processes) for the test base class.
+  4. List what cannot be automated reliably: it goes to the manual checks (T-09).
+- **Produces.** PR 0.3 (test base class, idle helper, leak check); `docs/spikes/S-5-drivers.md`.
+- **Done when.** The note says, for each kind of interaction, how it is tested: by a driver, through the registry, or by hand.
+- **Effort.** 1.5–2 days.
+- **You.** Review the note and the manual-check list.
+
+### B4. Inventory tooling (PR 0.4)
+
+- **Why.** The catalogue was generated by a one-off script. It must become reproducible so we notice when Calypso changes (new commands, removed tabs) during the weeks of work, and so the parity check (C3) has a source of truth.
+- **What.** In `CalypsoOnSteroids-Inventory`, a dev-only package (its own baseline group, never shipped; shipped packages do not depend on it):
+  - a class that builds the catalogue from `ClyCommandRegistry` and writes `command-catalogue.md`;
+  - a test that fails when the registry contains entries missing from the committed catalogue (or the reverse), with a clear message;
+  - the generator of the [progress board](progress.md) (feature sheets + the tests they name + manual-check log), with a test that fails when the committed board is stale;
+  - the screenshot harness used for the walkthrough (open a browser, click by coordinates or by widget, capture the window) turned into a small class, because it is the seed of the Morphic driver (C2).
+- **Produces.** PR 0.4.
+- **Done when.** Regenerating the catalogue produces the committed file; the test passes; the walkthrough screenshots can be regenerated.
+- **Effort.** 1.5 days.
+
+---
+
+## Stage C — Specify the behaviour (acceptance)
+
+### C1. Feature sheets, area by area (PRs 0.6a–h)
+
+- **Why.** The inventory says *what* exists in one line per feature. Before coding we need, for every feature, the exact behaviour, the code behind it and the agreed scenarios. Reviewing these sheets is how you understand the code and approve the behaviour we keep; it is also the agent's full specification (decided 2026-11-19).
+- **What.** One [feature sheet](features/sheets/README.md) per area, following the template: behaviour, how to trigger, code entry points (checked in the image), edge cases, existing tests, scenarios with IDs (`SEL-01.a`), manual check, notes. All tiers are described; scenarios are required for M-tier features first. One text-only PR per one or two areas, in order of need: TAB+EDT (first deliverable, Phase 2), SEL+HIS (refactorings), PKG+CLS, MGP+MTH, CMD, DEC+FLT, BRW+QRY+UPD, ENT+SET, plus the bugs B-01..B-04 (expected behaviour) in the sheet of their area.
+- **Produces.** `docs/features/sheets/<AREA>.md`, reviewed.
+- **Done when.** Every area has a reviewed sheet, and every M-tier feature has at least one scenario you approved.
+- **Effort.** 8–10 days.
+- **You.** Review each PR: do you understand the feature and its code? Is this the behaviour you want to keep? Questions you raise are answered in the sheet itself.
+
+### C2. Morphic driver and the first executable scenarios (PR 0.7, if D-04 = yes)
+
+- **Why.** The Calypso refactorings (R-01..R-05) change the Morphic browser. Executable scenarios on the Morphic browser tell us immediately if a refactoring changes behaviour. They also prove the tests before the Spec browser exists.
+- **What.** `ClyMorphicBrowserDriver` built on the browser API and the B4 harness (mouse events where the API does not exist), tests for the SEL, HIS and TAB scenarios, and the areas touched by R-02/R-03 (pane selection and decorations). Bug scenarios are marked as expected failures on Morphic.
+- **Produces.** PR 0.7 (2–3 PRs).
+- **Done when.** These scenarios run green on today's Calypso in CI (except the expected failures).
+- **Effort.** 3–4 days.
+
+### C3. Command placement parity check
+
+- **Why.** 397 command entries cannot be checked by hand, but the Spec browser must offer each one where Morphic does.
+- **What.** A test design (implemented when the first Spec pane exists): for fixture contexts, compare per interaction the entries `ClyCommandRegistry` answers with what the UI under test shows (menu tree, toolbar, keys, table icons, tab actions, drop targets). Written now against the Morphic renderers so it is already proven.
+- **Produces.** Part of PR 0.4 or 0.7.
+- **Done when.** The check passes on the Morphic browser.
+- **Effort.** 1 day.
+
+---
+
+## Stage D — Understand the remaining unknowns (spikes and design)
+
+### D1. Spikes S-1 to S-4
+
+Throw-away code on branches that are never merged. Each ends with a note in `docs/spikes/` (what was tried, what worked, measurements, screenshots, the upstream issues to open, the recommendation).
+
+| Spike | Question | Feeds |
+|---|---|---|
+| S-1 | Embed one Spec tree in place of a `ClyQueryViewMorph` in the Morphic browser: selection events, focus, keymaps, theme, resizing, deferred updates. Measure: how much glue imitating `ClyQueryViewMorph` is needed? | D-02, R-02 |
+| S-2 | Render the method-group pane in Spec (protocols, virtual groups with icons, inherited rows with checkboxes, bold class side, highlighting) with `SpTreeTablePresenter` and with `SpTreeListViewPresenter`; measure speed on `Object` with all superclasses visible (≈ 600 methods, 50 groups) | R-03, G-05..G-08 |
+| S-3 | Context menu and shortcuts of a Spec pane from `ClyCommandRegistry`: sub-menus, inlined groups, shortcut labels, chords, shared keys resolved by context | G-11, G-12 |
+| S-4 | A Spec method editor (`SpCodePresenter`) inside a Morphic tab through a bridge tool: accept/cancel, dirty state, conflict, navigation hook (browse/senders/implementors), text segments, live syntax errors | Phase 2, G-16..G-19 |
+
+- **Effort.** 1.5–2 days each, ≈ 7 days.
+- **You.** Read the notes; decide D-02 after S-1.
+
+### D2. Design notes
+
+- **Why.** The code must be maintainable; that is decided by the design, before code. And the Calypso refactorings touch the main Pharo repository, so they need agreement before any PR.
+- **What.** Short notes (2–4 pages each), reviewed by you:
+  - `docs/design/architecture.md`: the Spec side: application object, presenter tree, how presenters talk to the model (announcements, no polling), the tool contract, the bridge package and its end of life, package dependencies (no cycles), naming.
+  - `docs/design/browser-protocol.md`: the ~45 messages commands and contexts send to browsers and tools (measured), each with its senders and its meaning; which of them the Spec browser implements, which are replaced.
+  - `docs/design/R-01.md` … `R-05.md`: one per Calypso refactoring: the problem, the proposed objects and API, the steps as small Pharo PRs, the tests that protect it, the risk.
+  - `docs/design/query-browser.md` (for D-08): what still uses `ClyQueryBrowserMorph`, and the plan to route it to `StMethodBrowser`.
+- **Produces.** The notes, merged as docs PRs.
+- **Done when.** You approved architecture, browser protocol, and at least R-02 and R-03 (the first ones needed).
+- **Effort.** 4–5 days.
+
+---
+
+## Stage E — Fix upstream first
+
+### E1. Calypso bug fixes (first Pharo PRs)
+
+- **Why.** The four bugs found (B-01..B-04) are small, real, and fixing them first teaches us the Pharo contribution path (issue, PR, CI, review, merge timing) on low-risk changes, before the larger refactorings.
+- **What.** One Pharo issue + PR per bug, each with a test: B-04 (`canBeExecuted` on empty selection, a one-line guard and a test), B-02 (route `spawnQueryBrowserOn:` users to `StMethodBrowser`, or decide per D-08), B-01 (status bar rebuilt instead of appended on update), B-03 (duplicate creation tab).
+- **Produces.** Up to four Pharo PRs, listed in `docs/upstream.md`.
+- **Done when.** The PRs are open and reviewed (merging may take longer; it does not block coding).
+- **Effort.** 0.5–1.5 days each.
+- **You.** Review and open them.
+
+### E2. Spec issues for the confirmed gaps
+
+- **Why.** Spec gaps are fixed **iteratively** (decided 2026-11-19): a gap is fixed when the step that needs it comes, not all up front. Opening the issues early still lets the Spec maintainers react and tells us which gaps are already known.
+- **What.** For every gap confirmed by the spikes, an issue on pharo-spec/Spec describing the Calypso need. No Spec PR is required before coding starts; each PR is made just before the Calypso step that needs it (see [spec-gaps.md](spec-gaps.md#upstream-candidates-expected-prs-to-spec)).
+- **Produces.** Spec issues.
+- **Done when.** Issues opened.
+- **Effort.** 0.5 day.
+
+---
+
+## Ready-to-code gate
+
+Coding of Phase 2 (Spec tools inside the Morphic browser) starts when all of these hold:
+
+- [ ] Docs merged (A1), decisions D-01, D-06, D-07 taken (D-02..D-05, D-08, D-09 decided) (A2), process agreed (A3).
+- [ ] The image is reproducible from the recipe; CI runs (B1, B2).
+- [ ] Testing plan agreed (T-01..T-09); driver spike done and manual-check list known (B3).
+- [ ] The catalogue is regenerated by code and guarded by a test (B4).
+- [ ] Feature sheets reviewed for every area, M-tier scenarios agreed (C1); progress board generated (B4); SEL/HIS/TAB scenarios green on Morphic (C2).
+- [ ] Spikes S-1..S-4 done, D-02 decided (D1); architecture, browser protocol, R-02, R-03 notes approved (D2).
+- [ ] Bug PRs open (E1); Spec issues open (E2).
+
+Phase 2 needs less than this (only S-4, the tool contract and the editor scenarios), so if you prefer an earlier first deliverable, Phase 2 PR 2.1–2.2 (bridge + diff tool) can start right after B1, B2, S-4 and the architecture note, while the rest of the preparation continues.
+
+## Effort summary
+
+| Stage | Days (one developer) |
+|---|---|
+| A — Agree | 1 + your review time |
+| B — Infrastructure | 5–6.5 |
+| C — Specify | 12–15 |
+| D — Spikes and design | 11–12 |
+| E — Upstream first | 4–8 |
+| **Total** | **≈ 33–42 days**, about 7–8 weeks, less with B, D and E in parallel |

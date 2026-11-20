@@ -1,0 +1,590 @@
+# Calypso command catalogue (generated)
+
+Generated on 2026-11-16 from the live image (Pharo 15.0 build 126, sha 0aaea4b) by enumerating every `<calypsoCommands>` declaration (`ClyCommandMap forAnchor:`), excluding test mocks. **Do not edit by hand**: regenerate it (see the bottom of this file) whenever Calypso changes.
+
+397 entries, 31 anchors. Feature IDs refer to [the feature inventory](README.md).
+
+| Interaction | Entries |
+|---|---|
+| `contextMenu` | 219 |
+| `shortcuts` | 74 |
+| `toolbar` | 27 |
+| `tableDecorators` | 25 |
+| `tabs` | 15 |
+| `tableIcons` | 12 |
+| `dragAndDrop` | 10 |
+| `tabActions` | 6 |
+| `doubleClick` | 4 |
+| `textLeftBarMenu` | 3 |
+| `textLeftBarDoubleClick` | 1 |
+| `textLeftBarClick` | 1 |
+
+Columns: **Interaction** (how the entry is reached), **Command / tool**, **Group** (menu or toolbar group), **Order**, **Label** (as shown; `—` when the label is computed from the context at run time), **Trigger** (key combination, mouse button or drop target), **Declared in**.
+
+## `ClyBrowserContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| shortcuts | `ClyCloseBrowserCommand` |  |  | ClyCloseBrowserCommand | Meta + W | `ClyBrowserContext class>>#calypsoBrowserCommandsIn:` |
+| shortcuts | `ClyNavigateBrowserBackCommand` |  |  | go backward | Alt + LEFT | `ClyBrowserContext class>>#calypsoBrowserCommandsIn:` |
+| shortcuts | `ClyNavigateBrowserForwardCommand` |  |  | go forward | Alt + RIGHT | `ClyBrowserContext class>>#calypsoBrowserCommandsIn:` |
+| tabActions | `ClyNavigateBrowserBackCommand` |  |  | go backward |  | `ClyBrowserContext class>>#calypsoBrowserCommandsIn:` |
+| tabActions | `ClyNavigateBrowserForwardCommand` |  |  | go forward |  | `ClyBrowserContext class>>#calypsoBrowserCommandsIn:` |
+| tableDecorators | `ClyCommandBasedTableDecorator` |  |  | — |  | `ClyBrowserContext class>>#calypsoBrowserCommandsIn:` |
+
+## `ClyClass`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `SycBrowseClassCommand` | `ClyQueryMenuGroup` |  | Browse |  | `ClyClass class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `ClyJumpToTestClassCommand` |  |  | Jump to test class |  | `ClyClass class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `ClyRunTestsFromClassesCommand` |  |  | Run tests |  | `ClyClass class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `SycMigrateReferencesOfClassCommand` |  |  | Migrate references |  | `ClyClass class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `SycRenameClassCommand` |  |  | (Old refactor) rename class |  | `ClyClass class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `SycRenameClassCommand2` |  |  | (R) Rename class |  | `ClyClass class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `SycCopyClassNameCommand` | `SycClassExtraMenuGroup` | 10 | Copy class name to Clipboard |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycFileOutClassCommand` | `SycClassExtraMenuGroup` | 20 | File out |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycInspectClassCommand` | `SycClassExtraMenuGroup` | 30 | Inspect |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycUpdateClassCommand` | `SycClassExtraMenuGroup` | 40 | Update |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycClassCritiqueCommand` | `SycClassExtraMenuGroup` | 50 | Class Critique Browser |  | `ClyClass class>>#newToolsCodeCritiquesCommandsIn:` |
+| contextMenu | `ClyMoveClassToGroupCommand` | `SycClassRefactoringMenuGroup` | 10 | Move to package |  | `ClyClass class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycMakeAbstractCommand` | `SycClassRefactoringMenuGroup` | 20 | (T) Make abstract |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycDuplicateClassCommand` | `SycClassRefactoringMenuGroup` | 30 | Duplicate class |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycDeprecateClassCommand` | `SycClassRefactoringMenuGroup` | 50 | Deprecate |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycGenerateEqualAndHashCommand` | `SycClassRefactoringMenuGroup` | 60 | Generate equal and hash |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycGeneratePrintOnCommand` | `SycClassRefactoringMenuGroup` | 70 | Generate printOn: |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycInsertSubclassCommand` | `SycClassRefactoringMenuGroup` | 80 | (R) Insert subclass |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycInsertSuperclassCommand` | `SycClassRefactoringMenuGroup` | 90 | (R) Insert superclass |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| contextMenu | `SycAddClassesScopeCommand` | `SycClassScopesMenuGroup` | 10 | Create new scope from selected class(es) |  | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| dragAndDrop | `ClyMoveClassToGroupCommand` |  |  | Move to package | drop on ClyNoTagClassGroup | `ClyClass class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| dragAndDrop | `ClyMoveClassToGroupCommand` |  |  | Move to package | drop on ClyTaggedClassGroup | `ClyClass class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| dragAndDrop | `ClyMoveClassToGroupCommand` |  |  | Move to package | drop on Package | `ClyClass class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClyOpenMenuGroupCommand` |  |  | — | Meta + T | `ClyClass class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `ClyRunTestsFromClassesCommand` |  |  | Run tests | Meta + T | `ClyClass class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| shortcuts | `SycAbstractAllInstVarAccessorsCommand` |  |  | Abstract instance variables | Meta + (A , A) | `ClyClass class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycDuplicateClassCommand` |  |  | Duplicate class | Meta + D | `ClyClass class>>#systemCommandsClassCommandsIn:` |
+| shortcuts | `SycGenerateAllInstVarAccessorsCommand` |  |  | Generate accessors | Meta + (G , A) | `ClyClass class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycRenameClassCommand2` |  |  | (R) Rename class | Meta + R | `ClyClass class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tableDecorators | `ClyAbstractClassTableDecorator` |  |  | — |  | `ClyClass class>>#calypsoSystemPluginsInheritanceAnalysisBrowserCommandsIn:` |
+| tableDecorators | `ClyClassIconTableDecorator` |  |  | — |  | `ClyClass class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tableDecorators | `ClyUncommentedItemTableDecorator` |  |  | — |  | `ClyClass class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tableIcons | `ClyRunTestsFromClassesCommand` |  |  | Run tests |  | `ClyClass class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| tabs | `ClyClassDefinitionEditorToolMorph` |  |  | — |  | `ClyClass class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tabs | `ClyRichTextClassCommentEditorToolMorph` |  |  | — |  | `ClyClass class>>#beautifulCommentsCommandsIn:` |
+| tabs | `ClyTestSetUpEditorToolMorph` |  |  | — |  | `ClyClass class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| tabs | `RSMapBrowserToolMorph` |  |  | — |  | `ClyClass class>>#roassalBaselineMapCommandsIn:` |
+
+## `ClyClassComment`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| tableDecorators | `ClyClassCommentTableDecorator` |  |  | — |  | `ClyClassComment class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tabs | `ClyRichTextClassCommentEditorToolMorph` |  |  | — |  | `ClyClassComment class>>#beautifulCommentsCommandsIn:` |
+
+## `ClyClassDefinitionContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyExpandClassDefinitionCommand` |  | -20 | Expand class definition |  | `ClyClassDefinitionContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| contextMenu | `ClyExpandClassDefinitionCommand` | `SycSourceCodeMenuGroup` | -100 | Expand class definition |  | `ClyClassDefinitionContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `ClyExpandClassDefinitionCommand` |  |  | Expand class definition | Meta + E | `ClyClassDefinitionContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+
+## `ClyClassGroup`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyRunTestsFromClassGroupCommand` |  |  | Run tests |  | `ClyClassGroup class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| shortcuts | `ClyRunTestsFromClassGroupCommand` |  |  | Run tests | Meta + T | `ClyClassGroup class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| tableDecorators | `ClyGroupItemTableDecorator` |  |  | — |  | `ClyClassGroup class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tableIcons | `ClyRunTestsFromClassGroupCommand` |  |  | Run tests |  | `ClyClassGroup class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| tabs | `ClyPackageRichTextCommentEditorToolMorph` |  |  | — |  | `ClyClassGroup class>>#beautifulCommentsCommandsIn:` |
+
+## `ClyCriticContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyBrowseCritiqueRuleCommand` | `ClyExtraMenuGroup` |  | Browse rule |  | `ClyCriticContext class>>#calypsoSystemPluginsCriticBrowserCommandsIn:` |
+
+## `ClyFullBrowserClassContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyShowClassRefCommand` | `ClyQueryMenuGroup` |  | Class refs. |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowPoolUsersCommand` | `ClyQueryMenuGroup` |  | Show pool users |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowTraitUsersCommand` | `ClyQueryMenuGroup` |  | Show trait users |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycAbstractAllInstVarAccessorsCommand` |  |  | Abstract instance variables |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycAddNewProtocolCommand` |  |  | New protocol |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycCategorizeAllUnclassifiedMethodsCommand` |  |  | Categorize all uncategorized |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycGenerateAllInstVarAccessorsCommand` |  |  | Generate accessors |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRealizeClassCommand` |  |  | (T) Realize class |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRemoveClassCommand` |  |  | (R) Remove |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRemoveEmptyMethodTagsCommand` |  |  | Remove empty protocols |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClyJumpToTestClassCommand` |  |  | Jump to test class | Meta + (G , J) | `ClyFullBrowserClassContext class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| shortcuts | `ClyMoveClassToGroupCommand` |  |  | Move to package | Meta + (M , C) | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClyShowClassRefCommand` |  |  | Class refs. | Meta + N | `ClyFullBrowserClassContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| shortcuts | `ClySwitchToFullHierarchyCommand` |  |  | Hier. | Meta + H | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `SycRemoveClassCommand` |  |  | (R) Remove | Meta + X | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tabActions | `ClyOpenMenuGroupCommand` |  |  | — |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClyShowClassRefCommand` | `ClyButtonToolbarGroup` | 1000 | Class refs. |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| toolbar | `ClySwitchToFlatClassesCommand` | `ClyClassHierarchyToolbarGroup` |  | Flat |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToFullHierarchyCommand` | `ClyClassHierarchyToolbarGroup` |  | Hier. |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToInheritedTraitsCommand` | `ClyClassHierarchyToolbarGroup` |  | Traits |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToTraitUsersCommand` | `ClyClassHierarchyToolbarGroup` |  | Users |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToInstanceSideCommand` | `ClyMetaLevelToolbarGroup` | 1 | Inst. side |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToClassSideCommand` | `ClyMetaLevelToolbarGroup` | 2 | Class side |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToMethodGroupsCommand` | `ClyMethodViewToolbarGroup` |  | Methods |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToVariablesCommand` | `ClyMethodViewToolbarGroup` |  | Vars |  | `ClyFullBrowserClassContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyFullBrowserClassGroupContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyRemoveClassGroupCommand` |  |  | Remove |  | `ClyFullBrowserClassGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClyRenamePackageTagCommand` |  |  | Rename |  | `ClyFullBrowserClassGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycAddNewClassTagCommand` |  |  | New tag |  | `ClyFullBrowserClassGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClyRemoveClassGroupCommand` |  |  | Remove | Meta + X | `ClyFullBrowserClassGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClyRenamePackageTagCommand` |  |  | Rename | Meta + R | `ClyFullBrowserClassGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tableIcons | `ClyRunTestsFromPackagesCommand` |  |  | Run tests |  | `ClyFullBrowserClassGroupContext class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| tabs | `ClyClassCreationToolMorph` |  |  | — |  | `ClyFullBrowserClassGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToPackagesCommand` | `ClyPackageToolbarGroup` | 1 | All Packages |  | `ClyFullBrowserClassGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToScopedViewCommand` | `ClyPackageToolbarGroup` | 1 | Scoped View |  | `ClyFullBrowserClassGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToProjectsCommand` | `ClyPackageToolbarGroup` | 10 | Projects |  | `ClyFullBrowserClassGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyFullBrowserContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| doubleClick | `ClySpawnFullBrowserCommand` |  |  | Browse | button #red | `ClyFullBrowserContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClySwitchFocusToNextBrowserPaneCommand` |  |  | ClySwitchFocusToNextBrowserPaneCommand | RIGHT | `ClyFullBrowserContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClySwitchFocusToPreviousBrowserPaneCommand` |  |  | ClySwitchFocusToPreviousBrowserPaneCommand | LEFT | `ClyFullBrowserContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tableDecorators | `ClyProjectTableIndentationDecorator` |  |  | — |  | `ClyFullBrowserContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyFullBrowserGlobalContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| shortcuts | `ClyCommitPackageCommand` |  |  | Commit | Meta + S | `ClyFullBrowserGlobalContext class>>#calypsoSystemPluginsMonticelloBrowserCommandsIn:` |
+| shortcuts | `ClyFindClassCommand` |  |  | Find class | Meta + F | `ClyFullBrowserGlobalContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `SycAddNewPackageCommand` |  |  | New package | Meta + (K , P) | `ClyFullBrowserGlobalContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyFullBrowserMethodContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| shortcuts | `ClyFindMethodInBrowserCommand` |  |  | Find method | Meta + F | `ClyFullBrowserMethodContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tableDecorators | `ClyClassSideBoldTableDecorator` |  |  | — |  | `ClyFullBrowserMethodContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tableDecorators | `ClyClassSideLinkTableDecorator` |  |  | — |  | `ClyFullBrowserMethodContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyFullBrowserMethodGroupContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyShowClassRefCommand` | `ClyQueryMenuGroup` |  | Class refs. |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowGroupsInMethodBrowserCommand` | `ClyQueryMenuGroup` |  | Show in method browser |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowPoolUsersCommand` | `ClyQueryMenuGroup` |  | Show pool users |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowTraitUsersCommand` | `ClyQueryMenuGroup` |  | Show trait users |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyConvertMethodGroupToProtocolCommand` |  |  | Convert to protocol |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClyMoveMethodGroupsToPackageCommand` |  |  | Convert to extension |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClyRemoveMethodGroupCommand` |  |  | Remove |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClyRenameProtocolCommand` |  |  | Rename |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycAbstractAllInstVarAccessorsCommand` |  |  | Abstract instance variables |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycAddNewProtocolCommand` |  |  | New protocol |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycCategorizeAllUnclassifiedMethodsCommand` |  |  | Categorize all uncategorized |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycGenerateAllInstVarAccessorsCommand` |  |  | Generate accessors |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRealizeClassCommand` |  |  | (T) Realize class |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRemoveClassCommand` |  |  | (R) Remove |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRemoveEmptyMethodTagsCommand` |  |  | Remove empty protocols |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| doubleClick | `ClyShowGroupsInMethodBrowserCommand` |  |  | Show in method browser | button #red | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| shortcuts | `ClyRemoveMethodGroupCommand` |  |  | Remove | Meta + X | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClyRenameProtocolCommand` |  |  | Rename | Meta + R | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tableDecorators | `ClyClassSideBoldTableDecorator` |  |  | — |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tabs | `ClyMethodCreationToolMorph` |  |  | — |  | `ClyFullBrowserMethodGroupContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyFullBrowserPackageContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyOpenCriticBrowserCommand` | `ClyQueryMenuGroup` |  | Browse critiques |  | `ClyFullBrowserPackageContext class>>#calypsoSystemPluginsCriticBrowserCommandsIn:` |
+| contextMenu | `ClyOpenDependencyBrowserCommand` | `ClyQueryMenuGroup` |  | Browse dependencies |  | `ClyFullBrowserPackageContext class>>#calypsoSystemPluginsDependencyAnalyserBrowserCommandsIn:` |
+| contextMenu | `ClyCommitPackageCommand` |  |  | Commit |  | `ClyFullBrowserPackageContext class>>#calypsoSystemPluginsMonticelloBrowserCommandsIn:` |
+| contextMenu | `SycAddNewClassTagCommand` |  |  | New tag |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycAddNewPackageCommand` |  |  | New package |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycAddPackagesScopeCommand` |  |  | Create scope from selected package(s) |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycDuplicatePackageCommand` |  |  | Duplicate package |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRemovePackageCommand` |  |  | Remove |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRenamePackageCommand` |  |  | Rename |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `SycDuplicatePackageCommand` |  |  | Duplicate package | Meta + C | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `SycRemovePackageCommand` |  |  | Remove | Meta + X | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `SycRenamePackageCommand` |  |  | Rename | Meta + R | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tabs | `ClyClassCreationToolMorph` |  |  | — |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToPackagesCommand` | `ClyPackageToolbarGroup` | 1 | All Packages |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToScopedViewCommand` | `ClyPackageToolbarGroup` | 1 | Scoped View |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToProjectsCommand` | `ClyPackageToolbarGroup` | 10 | Projects |  | `ClyFullBrowserPackageContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyFullBrowserProjectContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| tabs | `ClyClassCreationToolMorph` |  |  | — |  | `ClyFullBrowserProjectContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToPackagesCommand` | `ClyPackageToolbarGroup` | 1 | All Packages |  | `ClyFullBrowserProjectContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToScopedViewCommand` | `ClyPackageToolbarGroup` | 1 | Scoped View |  | `ClyFullBrowserProjectContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| toolbar | `ClySwitchToProjectsCommand` | `ClyPackageToolbarGroup` | 10 | Projects |  | `ClyFullBrowserProjectContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyFullBrowserVariableContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyBreakOnVariableReadCommand` | `ClyDebuggingPointsMenuGroup` |  | Break on read |  | `ClyFullBrowserVariableContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyBreakOnVariableReadWriteCommand` | `ClyDebuggingPointsMenuGroup` |  | Break on access |  | `ClyFullBrowserVariableContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyBreakOnVariableWriteCommand` | `ClyDebuggingPointsMenuGroup` |  | Break on write |  | `ClyFullBrowserVariableContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyDebugBreakOnVariableCommand` | `ClyDebuggingPointsMenuGroup` |  | Add debug point: |  | `ClyFullBrowserVariableContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyDebugVariableCommand` | `ClyDebuggingPointsMenuGroup` |  | Add debug point: |  | `ClyFullBrowserVariableContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyDebugWatchOnVariableCommand` | `ClyDebuggingPointsMenuGroup` |  | Add debug point: |  | `ClyFullBrowserVariableContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyDebugWatchOnVariableReadCommand` | `ClyDebuggingPointsMenuGroup` |  | Watch on read |  | `ClyFullBrowserVariableContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyDebugWatchOnVariableReadWriteCommand` | `ClyDebuggingPointsMenuGroup` |  | Watch on access |  | `ClyFullBrowserVariableContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyDebugWatchOnVariableWriteCommand` | `ClyDebuggingPointsMenuGroup` |  | Watch on write |  | `ClyFullBrowserVariableContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyShowVariableRefCommand` | `ClyQueryMenuGroup` |  | References |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowVariableWriterCommand` | `ClyQueryMenuGroup` |  | Writers |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycBrowseVariableCommand` | `ClyQueryMenuGroup` |  | Browse |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycInspectVariableValueCommand` | `ClyQueryMenuGroup` |  | Inspect value |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycAbstractVariableCommand` |  |  | Abstract accessors |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycGenerateVariableAccessorCommand` |  |  | (T) Generate accessors |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycGenerateVariableAccessorsWithLazyInitializationCommand` |  |  | (T) Generate lazy accessors |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycMergeVariableCommand` |  |  | Merge into another |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycMoveInstanceVariableToClassSideCommand` |  |  | (T) Move to class side |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycProtectVariableCommand` |  |  | Protect |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycPushDownVariableCommand` |  |  | Push down |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycPushUpVariableCommand` |  |  | (R) Push up |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRemoveVariablesCommand` |  |  | Remove |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `SycRenameVariableCommand` |  |  | Rename |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| doubleClick | `SycInspectVariableValueCommand` |  |  | Inspect value | button #red | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClyShowVariableRefCommand` |  |  | References | Meta + N | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| shortcuts | `ClyShowVariableWriterCommand` |  |  | Writers | Meta + M | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| shortcuts | `SycInspectVariableValueCommand` |  |  | Inspect value | Meta + I | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `SycRemoveVariablesCommand` |  |  | Remove | Meta + X | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `SycRenameVariableCommand` |  |  | Rename | Meta + R | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tableDecorators | `ClyClassSideBoldTableDecorator` |  |  | — |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tabs | `ClyMethodCreationToolMorph` |  |  | — |  | `ClyFullBrowserVariableContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyInheritedMethodGroup`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `SycInspectVariableCommand` | `ClyMethodGroupExtraMenuGroup` | 10 | Inspect variable |  | `ClyInheritedMethodGroup class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClyInvertMethodVisibilityHierarchyCommand` | `ClyMethodGroupExtraMenuGroup` | 20 | Invert hierarchy |  | `ClyInheritedMethodGroup class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClyInvertVariableOrderCommand` | `ClyMethodGroupExtraMenuGroup` | 30 | Invert hierarchy |  | `ClyInheritedMethodGroup class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `ClyMethod`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyAddBreakPointCommand` | `ClyMethodDebugPointsMenuGroup` | 1 | — |  | `ClyMethod class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyAddAndConfigureBreakPointCommand` | `ClyMethodDebugPointsMenuGroup` | 1.8 | — |  | `ClyMethod class>>#newToolsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyAddWatchDebugPointCommand` | `ClyMethodDebugPointsMenuGroup` | 4 | — |  | `ClyMethod class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyIcebergShowMethodVersionCommand` | `ClyQueryMenuGroup` |  | Commit history |  | `ClyMethod class>>#calypsoSystemPluginsMonticelloBrowserCommandsIn:` |
+| contextMenu | `ClyShowMessageImplementorCommand` | `ClyQueryMenuGroup` |  | Implementors |  | `ClyMethod class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowMessageSenderCommand` | `ClyQueryMenuGroup` |  | Senders |  | `ClyMethod class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycShowMethodVersionCommand` | `ClyQueryMenuGroup` |  | Versions |  | `ClyMethod class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `ClyDebugTestCommand` |  |  | Debug tests |  | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `ClyDebugTestSetupCommand` |  |  | Debug test setup |  | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `ClyRunCoveringTestMethodsCommand` |  |  | Run tests |  | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `ClyRunTestsFromMethodsCommand` |  |  | Run tests |  | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `ClyShowMethodInheritanceCommand` |  |  | Hierarchical implementors |  | `ClyMethod class>>#calypsoSystemPluginsInheritanceAnalysisBrowserCommandsIn:` |
+| contextMenu | `SycDeprecateMessageCommand` |  |  | (T) Deprecate method |  | `ClyMethod class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `SycProfileTestMethodCommand` |  |  | Profile method |  | `ClyMethod class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `SycRemoveMethodCommand` |  |  | (R) Remove |  | `ClyMethod class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `SycRenameMessageCommand` |  |  | (R) Rename |  | `ClyMethod class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `SycShowLocalSendersCommand` |  |  | Hierarchical senders |  | `ClyMethod class>>#calypsoBrowserCommandsIn:` |
+| contextMenu | `ClyJumpToTestMethodCommand` | `ClySUnitMethodMenuGroup` |  | Jump to test method |  | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `ClyOpenTestMethodCommand` | `ClySUnitMethodMenuGroup` |  | Open test method |  | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `SycClassifyMethodsCommand` | `SycMethodExtraMenuGroup` | 10 | Classify methods |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycCopyMethodNameToClipboardCommand` | `SycMethodExtraMenuGroup` | 20 | Copy method name(s) to Clipboard |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycCopyTestMethodNameToClipboardCommand` | `SycMethodExtraMenuGroup` | 30 | Copy test method selector(s) to Clipboard |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycFileOutMethodCommand` | `SycMethodExtraMenuGroup` | 40 | File out |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycInspectMethodCommand` | `SycMethodExtraMenuGroup` | 50 | Inspect |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycPullUpMethodCommand` | `SycMethodRefactoringMenuGroup` | 10 | (R) Pull up |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycPushDownMethodCommand` | `SycMethodRefactoringMenuGroup` | 20 | Push down |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycPushDownMethodInSomeClassesCommand` | `SycMethodRefactoringMenuGroup` | 30 | Push down in some classes |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycFindAndReplaceMethodCommand` | `SycMethodRefactoringMenuGroup` | 40 | (T) Find and Replace |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycAddMessageArgumentCommand` | `SycMethodRefactoringMenuGroup` | 50 | Add argument |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycInlineIntoLocalSendersMessageCommand` | `SycMethodRefactoringMenuGroup` | 60 | Inline senders |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycRemoveAllSendersCommand` | `SycMethodRefactoringMenuGroup` | 70 | Remove all senders |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycRemoveMessageArgumentCommand` | `SycMethodRefactoringMenuGroup` | 80 | Remove argument |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycMoveMethodsToClassSideCommand` | `SycMethodRefactoringMenuGroup` | 90 | Move to class side |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycMoveMethodsToInstanceSideCommand` | `SycMethodRefactoringMenuGroup` | 100 | Move to instance side |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycMoveMethodsToClassCommand` | `SycMethodRefactoringMenuGroup` | 110 | Move to another class |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycMoveMethodsToPackageCommand` | `SycMethodRefactoringMenuGroup` | 120 | Move to package |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycMoveMethodsToTheDefiningClassCommand` | `SycMethodRefactoringMenuGroup` | 130 | Move to defining class |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycRemoveMethodsInHierarchyCommand` | `SycMethodRefactoringMenuGroup` | 140 | Remove and the ones in subclasses |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| contextMenu | `SycReplaceMessageCommand` | `SycMethodRefactoringMenuGroup` | 150 | (T) Replace senders |  | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| dragAndDrop | `ClyMoveMethodsToGroupCommand` |  |  | Move to method group | drop on ClyAllMethodGroup | `ClyMethod class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| dragAndDrop | `ClyMoveMethodsToGroupCommand` |  |  | Move to method group | drop on ClyExternalPackageMethodGroup | `ClyMethod class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| dragAndDrop | `ClyMoveMethodsToGroupCommand` |  |  | Move to method group | drop on ClyMethodsInProtocolGroup | `ClyMethod class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| dragAndDrop | `SycMoveMethodsToClassCommand` |  |  | Move to another class | drop on ClyClass | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| dragAndDrop | `SycMoveMethodsToPackageCommand` |  |  | Move to package | drop on Package | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `ClyDebugTestCommand` |  |  | Debug tests | Meta + D | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| shortcuts | `ClyDebugTestSetupCommand` |  |  | Debug test setup | Shift + Meta + D | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| shortcuts | `ClyJumpToTestMethodCommand` |  |  | Jump to test method | Meta + (H , J) | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| shortcuts | `ClyOpenMenuGroupCommand` |  |  | — | Meta + T | `ClyMethod class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| shortcuts | `ClyOpenMenuGroupCommand` |  |  | — | Meta + T | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `ClyOpenTestMethodCommand` |  |  | Open test method | Meta + (T , O) | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| shortcuts | `ClyRunCoveringTestMethodsCommand` |  |  | Run tests | Meta + T | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| shortcuts | `ClyRunTestsFromMethodsCommand` |  |  | Run tests | Meta + T | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| shortcuts | `ClyShowMessageImplementorCommand` |  |  | Implementors | Meta + M | `ClyMethod class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| shortcuts | `ClyShowMessageSenderCommand` |  |  | Senders | Meta + N | `ClyMethod class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| shortcuts | `ClyShowMethodInheritanceCommand` |  |  | Hierarchical implementors | Meta + H | `ClyMethod class>>#calypsoSystemPluginsInheritanceAnalysisBrowserCommandsIn:` |
+| shortcuts | `SycMoveMethodsToClassSideCommand` |  |  | Move to class side | Meta + (T , C) | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycMoveMethodsToInstanceSideCommand` |  |  | Move to instance side | Meta + (T , I) | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycPullUpMethodCommand` |  |  | (R) Pull up | Meta + (P , U) | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycPushDownMethodCommand` |  |  | Push down | Meta + (P , D) | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycRemoveMethodCommand` |  |  | (R) Remove | Meta + X | `ClyMethod class>>#systemCommandsMethodCommandsIn:` |
+| shortcuts | `SycRenameMessageCommand` |  |  | (R) Rename | Meta + R | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycShowMethodVersionCommand` |  |  | Versions | Meta + V | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tabActions | `ClyIcebergShowMethodVersionCommand` |  | 1000 | Commit history |  | `ClyMethod class>>#calypsoSystemPluginsMonticelloBrowserCommandsIn:` |
+| tabActions | `SycShowMethodVersionCommand` |  | 1000 | Versions |  | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tabActions | `SycCopyMethodNameToClypboardCommand` |  |  | Copy method name(s) to Clipboard |  | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tableDecorators | `ClyAbstractMethodTableDecorator` |  |  | — |  | `ClyMethod class>>#calypsoSystemPluginsInheritanceAnalysisBrowserCommandsIn:` |
+| tableDecorators | `ClyFFIMethodTableDecorator` |  |  | — |  | `ClyMethod class>>#calypsoSystemPluginsFFIBrowserCommandsIn:` |
+| tableDecorators | `ClyFlagMethodTableDecorator` |  |  | — |  | `ClyMethod class>>#calypsoSystemPluginsFlagsBrowserCommandsIn:` |
+| tableDecorators | `ClyHaltMethodTableDecorator` |  |  | — |  | `ClyMethod class>>#calypsoSystemPluginsReflectivityBrowserCommandsIn:` |
+| tableDecorators | `ClyOverriddenMethodTableDecorator` |  |  | — |  | `ClyMethod class>>#calypsoSystemPluginsInheritanceAnalysisBrowserCommandsIn:` |
+| tableDecorators | `ClyTraitMethodDecorator` |  |  | — |  | `ClyMethod class>>#calypsoSystemPluginsTraitsBrowserCommandsIn:` |
+| tableDecorators | `ClyUndeclaredMethodTableDecorator` |  |  | — |  | `ClyMethod class>>#calypsoSystemPluginsUndeclaredBrowserCommandsIn:` |
+| tableIcons | `ClyRunClassScriptCommand` |  |  | Run script |  | `ClyMethod class>>#calypsoSystemPluginsClassScriptsBrowserCommandsIn:` |
+| tableIcons | `ClyRunCoveringTestMethodsCommand` |  |  | Run tests |  | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| tableIcons | `ClyRunTestsFromMethodsCommand` |  |  | Run tests |  | `ClyMethod class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| tabs | `ClyMethodCodeEditorToolMorph` |  |  | — |  | `ClyMethod class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tabs | `ClyMethodDiffToolMorph` |  |  | — |  | `ClyMethod class>>#calypsoSystemPluginsMethodDiffToolCommandsIn:` |
+| toolbar | `ClyShowMessageImplementorCommand` | `ClyButtonToolbarGroup` | 1000 | Implementors |  | `ClyMethod class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| toolbar | `ClyShowMessageSenderCommand` | `ClyButtonToolbarGroup` | 1000 | Senders |  | `ClyMethod class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+
+## `ClyMethodGroup`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| dragAndDrop | `ClyMoveMethodGroupToClassCommand` |  |  | ClyMoveMethodGroupToClassCommand | drop on ClyClass | `ClyMethodGroup class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| dragAndDrop | `ClyMoveMethodGroupsToPackageCommand` |  |  | Convert to extension | drop on Package | `ClyMethodGroup class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tableDecorators | `ClyGroupItemTableDecorator` |  |  | — |  | `ClyMethodGroup class>>#calypsoSystemToolsCoreCommandsIn:` |
+
+## `ClyMethodSourceCodeContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyAddBreakPointCommand` | `ClySourceCodeDebugPointsMenuGroup` | 1 | — |  | `ClyMethodSourceCodeContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyAddAndConfigureBreakPointCommand` | `ClySourceCodeDebugPointsMenuGroup` | 1.8 | — |  | `ClyMethodSourceCodeContext class>>#newToolsDebugPointsBrowserCommandsIn:` |
+| contextMenu | `ClyAddWatchDebugPointCommand` | `ClySourceCodeDebugPointsMenuGroup` | 4 | — |  | `ClyMethodSourceCodeContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| shortcuts | `SycMoveTempDefinitionCommand` |  |  | (R) Move temp. definition | Meta + O | `ClyMethodSourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycRenameArgOrTempCommand2` |  |  | (R) Rename temp | Meta + R | `ClyMethodSourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycRenameMessageCommand` |  |  | (R) Rename | Meta + R | `ClyMethodSourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycShowLocalSendersCommand` |  |  | Hierarchical senders | Shift + Meta + Y | `ClyMethodSourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| textLeftBarDoubleClick | `ClyAddBreakPointCommand` |  |  | — | button #red | `ClyMethodSourceCodeContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| textLeftBarMenu | `ClyAddBreakPointCommand` | `ClyDebuggingPointsMenuGroup` | 1 | — |  | `ClyMethodSourceCodeContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+| textLeftBarMenu | `ClyAddAndConfigureBreakPointCommand` | `ClyDebuggingPointsMenuGroup` | 1.8 | — |  | `ClyMethodSourceCodeContext class>>#newToolsDebugPointsBrowserCommandsIn:` |
+| textLeftBarMenu | `ClyAddWatchDebugPointCommand` | `ClyDebuggingPointsMenuGroup` | 4 | — |  | `ClyMethodSourceCodeContext class>>#calypsoSystemPluginsDebugPointsBrowserCommandsIn:` |
+
+## `ClyMethodsInProtocolGroup`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| tableDecorators | `ClyClassSideLinkTableDecorator` |  |  | — |  | `ClyMethodsInProtocolGroup class>>#calypsoSystemToolsCoreCommandsIn:` |
+
+## `ClyQueryBrowserContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyShowClassRefCommand` | `ClyQueryMenuGroup` |  | Class refs. |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowPoolUsersCommand` | `ClyQueryMenuGroup` |  | Show pool users |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowTraitUsersCommand` | `ClyQueryMenuGroup` |  | Show trait users |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycAbstractAllInstVarAccessorsCommand` |  |  | Abstract instance variables |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycAddNewProtocolCommand` |  |  | New protocol |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycCategorizeAllUnclassifiedMethodsCommand` |  |  | Categorize all uncategorized |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycGenerateAllInstVarAccessorsCommand` |  |  | Generate accessors |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycRealizeClassCommand` |  |  | (T) Realize class |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycRemoveClassCommand` |  |  | (R) Remove |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycRemoveEmptyMethodTagsCommand` |  |  | Remove empty protocols |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClySwitchQueryScopeCommand` | `ClySwitchScopeMenuGroup` |  | Switch scope |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| doubleClick | `ClySpawnFullBrowserCommand` |  |  | Browse | button #red | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| shortcuts | `ClyShowClassRefCommand` |  |  | Class refs. | Meta + (C , N) | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| toolbar | `ClyShowClassRefCommand` | `ClyButtonToolbarGroup` | 1000 | Class refs. |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| toolbar | `ClySpawnFullBrowserCommand` | `ClyButtonToolbarGroup` | 1000 | Browse |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| toolbar | `ClyRunAllTestsFromMethodDataSourceCommand` | `ClyButtonToolbarGroup` | 10000 | — |  | `ClyQueryBrowserContext class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| toolbar | `ClyRunFailedTestsFromMethodDataSourceCommand` | `ClyButtonToolbarGroup` | 10001 | — |  | `ClyQueryBrowserContext class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| toolbar | `ClySwitchQueryScopeCommand` | `ClyQueryResultToolbarGroup` | -5 | Switch scope |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| toolbar | `ClySwitchToFlatQueryResultCommand` | `ClyQueryResultToolbarGroup` |  | Flat |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| toolbar | `ClySwitchToHierarchicalQueryResultCommand` | `ClyQueryResultToolbarGroup` |  | Hier. |  | `ClyQueryBrowserContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+
+## `ClySourceCodeContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyJumpToTestClassCommand` | `SycSourceCodeMenuGroup` |  | Jump to test class |  | `ClySourceCodeContext class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `ClyRequestMethodPackageForEditorCommand` | `SycSourceCodeMenuGroup` |  | Select method package |  | `ClySourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| contextMenu | `ClyRequestProtocolForEditorCommand` | `SycSourceCodeMenuGroup` |  | — |  | `ClySourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| contextMenu | `ClyResetProtocolForEditorCommand` | `SycSourceCodeMenuGroup` |  | Unclassify method |  | `ClySourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| contextMenu | `SycAbstractAllInstVarAccessorsCommand` | `SycSourceCodeMenuGroup` |  | Abstract instance variables |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycAbstractVariableCommand` | `SycSourceCodeMenuGroup` |  | Abstract accessors |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycAddMessageArgumentCommand` | `SycSourceCodeMenuGroup` |  | Add argument |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycAddNewProtocolCommand` | `SycSourceCodeMenuGroup` |  | New protocol |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycCategorizeAllUnclassifiedMethodsCommand` | `SycSourceCodeMenuGroup` |  | Categorize all uncategorized |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycConvertTempToInstVarCommand` | `SycSourceCodeMenuGroup` |  | (R) Convert to Instance Var |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycDeprecateMessageCommand` | `SycSourceCodeMenuGroup` |  | (T) Deprecate method |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycExtractMethodAndOccurrencesCommand` | `SycSourceCodeMenuGroup` |  | (Old refactor) Extract method with occurrences |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycExtractMethodCommand` | `SycSourceCodeMenuGroup` |  | (Old refactor) Extract method (no occurrences) |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycExtractSetUpCommand` | `SycSourceCodeMenuGroup` |  | Extract setUp |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycExtractTempCommand` | `SycSourceCodeMenuGroup` |  | Extract temp |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycFindAndReplaceMethodCommand` | `SycSourceCodeMenuGroup` |  | (T) Find and Replace |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycFormatSourceCodeCommand` | `SycSourceCodeMenuGroup` |  | Format code |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycGenerateAllInstVarAccessorsCommand` | `SycSourceCodeMenuGroup` |  | Generate accessors |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycGenerateVariableAccessorCommand` | `SycSourceCodeMenuGroup` |  | (T) Generate accessors |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycGenerateVariableAccessorsWithLazyInitializationCommand` | `SycSourceCodeMenuGroup` |  | (T) Generate lazy accessors |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycInlineIntoLocalSendersMessageCommand` | `SycSourceCodeMenuGroup` |  | Inline senders |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycInlineMethodCommand` | `SycSourceCodeMenuGroup` |  | Inline method |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycInlineTempCommand` | `SycSourceCodeMenuGroup` |  | Inline temp |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycInspectNodeCommand` | `SycSourceCodeMenuGroup` |  | — |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycMergeVariableCommand` | `SycSourceCodeMenuGroup` |  | Merge into another |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycMigrateReferencesOfClassCommand` | `SycSourceCodeMenuGroup` |  | Migrate references |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycMoveInstanceVariableToClassSideCommand` | `SycSourceCodeMenuGroup` |  | (T) Move to class side |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycMoveTempDefinitionCommand` | `SycSourceCodeMenuGroup` |  | (R) Move temp. definition |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycNewExtractMethodCommand` | `SycSourceCodeMenuGroup` |  | (R) Extract method (no occurrences) |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycProtectVariableCommand` | `SycSourceCodeMenuGroup` |  | Protect |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycPushDownVariableCommand` | `SycSourceCodeMenuGroup` |  | Push down |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycPushUpVariableCommand` | `SycSourceCodeMenuGroup` |  | (R) Push up |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRealizeClassCommand` | `SycSourceCodeMenuGroup` |  | (T) Realize class |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRemoveAllSendersCommand` | `SycSourceCodeMenuGroup` |  | Remove all senders |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRemoveClassCommand` | `SycSourceCodeMenuGroup` |  | (R) Remove |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRemoveEmptyMethodTagsCommand` | `SycSourceCodeMenuGroup` |  | Remove empty protocols |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRemoveMessageArgumentCommand` | `SycSourceCodeMenuGroup` |  | Remove argument |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRemoveVariablesCommand` | `SycSourceCodeMenuGroup` |  | Remove |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRenameArgOrTempCommand` | `SycSourceCodeMenuGroup` |  |  (Old refactor) rename temp |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRenameArgOrTempCommand2` | `SycSourceCodeMenuGroup` |  | (R) Rename temp |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRenameClassCommand` | `SycSourceCodeMenuGroup` |  | (Old refactor) rename class |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRenameClassCommand2` | `SycSourceCodeMenuGroup` |  | (R) Rename class |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRenameMessageCommand` | `SycSourceCodeMenuGroup` |  | (R) Rename |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRenameVariableCommand` | `SycSourceCodeMenuGroup` |  | Rename |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycReplaceMessageCommand` | `SycSourceCodeMenuGroup` |  | (T) Replace senders |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycRunTestCommand` | `SycSourceCodeMenuGroup` |  | Run test |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycShowLocalSendersCommand` | `SycSourceCodeMenuGroup` |  | Hierarchical senders |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `ClyShowClassRefCommand` | `SycSourceCodeQueryMenuGroup` |  | Class refs. |  | `ClySourceCodeContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowMessageImplementorCommand` | `SycSourceCodeQueryMenuGroup` |  | Implementors |  | `ClySourceCodeContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowMessageSenderCommand` | `SycSourceCodeQueryMenuGroup` |  | Senders |  | `ClySourceCodeContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowPoolUsersCommand` | `SycSourceCodeQueryMenuGroup` |  | Show pool users |  | `ClySourceCodeContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowTraitUsersCommand` | `SycSourceCodeQueryMenuGroup` |  | Show trait users |  | `ClySourceCodeContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowVariableRefCommand` | `SycSourceCodeQueryMenuGroup` |  | References |  | `ClySourceCodeContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `ClyShowVariableWriterCommand` | `SycSourceCodeQueryMenuGroup` |  | Writers |  | `ClySourceCodeContext class>>#calypsoSystemToolsQueryBrowserCommandsIn:` |
+| contextMenu | `SycBrowseClassCommand` | `SycSourceCodeQueryMenuGroup` |  | Browse |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycBrowseVariableCommand` | `SycSourceCodeQueryMenuGroup` |  | Browse |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| contextMenu | `SycInspectVariableValueCommand` | `SycSourceCodeQueryMenuGroup` |  | Inspect value |  | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| shortcuts | `ClyOpenMenuGroupCommand` |  |  | — | Meta + T | `ClySourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycExtractMethodAndOccurrencesCommand` |  |  | (Old refactor) Extract method with occurrences | Meta + (E , M) | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| shortcuts | `SycExtractMethodCommand` |  |  | (Old refactor) Extract method (no occurrences) | Meta + (E , M) | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| shortcuts | `SycInspectVariableValueCommand` |  |  | Inspect value | Meta + I | `ClySourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycNewExtractMethodCommand` |  |  | (R) Extract method (no occurrences) | Meta + (E , M , T) | `ClySourceCodeContext class>>#systemCommandsSourceCodeCommandsIn:` |
+| shortcuts | `SycRenameClassCommand2` |  |  | (R) Rename class | Meta + R | `ClySourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycRenameVariableCommand` |  |  | Rename | Meta + R | `ClySourceCodeContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+
+## `ClySystemBrowserContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyBrowseCoveringTestCaseCommand` | `ClyQueryMenuGroup` |  | Browse test class |  | `ClySystemBrowserContext class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `ClyFindClassCommand` | `ClyQueryMenuGroup` |  | Find class |  | `ClySystemBrowserContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| contextMenu | `ClyFindMethodInBrowserCommand` | `ClyQueryMenuGroup` |  | Find method |  | `ClySystemBrowserContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClySpawnFullBrowserCommand` | `ClyQueryMenuGroup` |  | Browse |  | `ClySystemBrowserContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClyCreateClassCommand` |  |  | New class |  | `ClySystemBrowserContext class>>#calypsoSystemPluginsTraitsBrowserCommandsIn:` |
+| contextMenu | `ClyCreateTestCaseCommand` |  |  | New test class |  | `ClySystemBrowserContext class>>#calypsoSystemPluginsTraitsBrowserCommandsIn:` |
+| contextMenu | `ClyCreateTraitCommand` |  |  | New trait |  | `ClySystemBrowserContext class>>#calypsoSystemPluginsTraitsBrowserCommandsIn:` |
+| contextMenu | `ClySwitchToScopedModeCommand` |  |  | Set up scope |  | `ClySystemBrowserContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| shortcuts | `ClySpawnFullBrowserCommand` |  |  | Browse | Meta + B | `ClySystemBrowserContext class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| tableDecorators | `ClyDeprecatedItemTableDecorator` |  |  | — |  | `ClySystemBrowserContext class>>#calypsoSystemPluginsDeprecationBrowserCommandsIn:` |
+
+## `ClyTaggedClassGroup`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `SycDemoteToPackageWithTagCommand` | `SycPackageExtraMenuGroup` | 10 | Demote to package with tag |  | `ClyTaggedClassGroup class>>#systemCommandsPackageCommandsIn:` |
+| contextMenu | `SycFileOutPackageCommand` | `SycPackageExtraMenuGroup` | 20 | File out |  | `ClyTaggedClassGroup class>>#systemCommandsPackageCommandsIn:` |
+| contextMenu | `SycInspectPackageCommand` | `SycPackageExtraMenuGroup` | 30 | Inspect |  | `ClyTaggedClassGroup class>>#systemCommandsPackageCommandsIn:` |
+| contextMenu | `SycPromotePackageFromTagCommand` | `SycPackageExtraMenuGroup` | 40 | Promote as package |  | `ClyTaggedClassGroup class>>#systemCommandsPackageCommandsIn:` |
+| contextMenu | `SycRecompilePackageCommand` | `SycPackageExtraMenuGroup` | 50 | Recompile |  | `ClyTaggedClassGroup class>>#systemCommandsPackageCommandsIn:` |
+
+## `ClyTextEditorContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| shortcuts | `ClyCloseBrowserCommand` |  |  | ClyCloseBrowserCommand | Meta + W | `ClyTextEditorContext class>>#calypsoBrowserCommandsIn:` |
+| shortcuts | `ClyNavigateBrowserBackCommand` |  |  | go backward | Alt + LEFT | `ClyTextEditorContext class>>#calypsoBrowserCommandsIn:` |
+| shortcuts | `ClyNavigateBrowserForwardCommand` |  |  | go forward | Alt + RIGHT | `ClyTextEditorContext class>>#calypsoBrowserCommandsIn:` |
+| shortcuts | `ClyRequestMethodPackageForEditorCommand` |  |  | Select method package | Meta + (E , M , P) | `ClyTextEditorContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `ClyRequestProtocolForEditorCommand` |  |  | — | Meta + (E , P) | `ClyTextEditorContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `ClyResetProtocolForEditorCommand` |  |  | Unclassify method | Meta + (E , U) | `ClyTextEditorContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycFormatSourceCodeCommand` |  |  | Format code | Meta + Shift + F | `ClyTextEditorContext class>>#calypsoSystemToolsCoreCommandsIn:` |
+| shortcuts | `SycRunTestCommand` |  |  | Run test | Meta + (E , T) | `ClyTextEditorContext class>>#systemCommandsSourceCodeCommandsIn:` |
+
+## `ClyToolContext`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| textLeftBarClick | `ClyOpenTextLeftBarMenuCommand` |  |  | Open self context menu | button #yellow | `ClyToolContext class>>#calypsoCommandsIn:` |
+
+## `ClyVariableMethodGroup`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `SycInspectVariableCommand` | `ClyMethodGroupExtraMenuGroup` | 10 | Inspect variable |  | `ClyVariableMethodGroup class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClyInvertMethodVisibilityHierarchyCommand` | `ClyMethodGroupExtraMenuGroup` | 20 | Invert hierarchy |  | `ClyVariableMethodGroup class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+| contextMenu | `ClyInvertVariableOrderCommand` | `ClyMethodGroupExtraMenuGroup` | 30 | Invert hierarchy |  | `ClyVariableMethodGroup class>>#calypsoSystemToolsFullBrowserCommandsIn:` |
+
+## `Package`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| contextMenu | `ClyRunTestsFromPackagesCommand` |  |  | Run tests |  | `Package class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| contextMenu | `SycDemoteToPackageWithTagCommand` | `SycPackageExtraMenuGroup` | 10 | Demote to package with tag |  | `Package class>>#systemCommandsPackageCommandsIn:` |
+| contextMenu | `SycFileOutPackageCommand` | `SycPackageExtraMenuGroup` | 20 | File out |  | `Package class>>#systemCommandsPackageCommandsIn:` |
+| contextMenu | `SycInspectPackageCommand` | `SycPackageExtraMenuGroup` | 30 | Inspect |  | `Package class>>#systemCommandsPackageCommandsIn:` |
+| contextMenu | `SycPromotePackageFromTagCommand` | `SycPackageExtraMenuGroup` | 40 | Promote as package |  | `Package class>>#systemCommandsPackageCommandsIn:` |
+| contextMenu | `SycRecompilePackageCommand` | `SycPackageExtraMenuGroup` | 50 | Recompile |  | `Package class>>#systemCommandsPackageCommandsIn:` |
+| shortcuts | `ClyRunTestsFromPackagesCommand` |  |  | Run tests | Meta + T | `Package class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| tableDecorators | `ClyEmptyPackageTableDecorator` |  |  | — |  | `Package class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tableDecorators | `ClyPackageIconTableDecorator` |  |  | — |  | `Package class>>#calypsoSystemToolsCoreCommandsIn:` |
+| tableIcons | `ClyRunTestsFromPackagesCommand` |  |  | Run tests |  | `Package class>>#calypsoSystemPluginsSUnitBrowserCommandsIn:` |
+| tabs | `ClyPackageRichTextCommentEditorToolMorph` |  |  | — |  | `Package class>>#beautifulCommentsCommandsIn:` |
+| tabs | `DABrowserToolMorph` |  |  | — |  | `Package class>>#toolDependencyAnalyserUITabCommandsIn:` |
+
+## `Project`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| tableDecorators | `ClyProjectIconTableDecorator` |  |  | — |  | `Project class>>#calypsoSystemToolsCoreCommandsIn:` |
+
+## `ReAbstractCritique`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| tableDecorators | `ClyCritiquesTableDecorator` |  |  | — |  | `ReAbstractCritique class>>#calypsoSystemPluginsCriticBrowserCommandsIn:` |
+| tableIcons | `ClyBanCritiqueRuleCommand` |  |  | ClyBanCritiqueRuleCommand |  | `ReAbstractCritique class>>#calypsoSystemPluginsCriticBrowserCommandsIn:` |
+| tableIcons | `ClyFixCritiqueCommand` |  |  | ClyFixCritiqueCommand |  | `ReAbstractCritique class>>#calypsoSystemPluginsCriticBrowserCommandsIn:` |
+| tableIcons | `ClyShowCritiqueDetailsCommand` |  |  | ClyShowCritiqueDetailsCommand |  | `ReAbstractCritique class>>#calypsoSystemPluginsCriticBrowserCommandsIn:` |
+| tableIcons | `ClyShowDependencyCritiqueCommand` |  |  | ClyShowDependencyCritiqueCommand |  | `ReAbstractCritique class>>#calypsoSystemPluginsCriticBrowserCommandsIn:` |
+
+## `ReProperty`
+
+| Interaction | Command / tool | Group | Order | Label | Trigger | Declared in |
+|---|---|---|---|---|---|---|
+| tableIcons | `ClyDebugBrokenCritiqueCommand` |  |  | Debug the exception |  | `ReProperty class>>#calypsoSystemPluginsCriticBrowserCommandsIn:` |
+
+## Regenerating this file
+
+The rows come from this traversal of the image (the formatting into Markdown was done outside the image for this first version):
+
+```smalltalk
+anchors := ((Pragma allNamed: #calypsoCommands)
+	collect: [ :p | p method methodClass instanceSide ]) asSet.
+anchors do: [ :anchor |
+	(ClyCommandMap forAnchor: anchor) allEntries do: [ :entry |
+		"anchor, entry interaction name, entry commandClass, entry group,
+		 entry menuItemOrder, entry label, keyCombination / mouseButton / dropAnchor,
+		 entry declaringMethod" ] ]
+```
+
+Phase 0 of the plan turns this script into a class of the `CalypsoOnSteroids-Inventory` package, so that the catalogue and the parity check are reproducible (see `docs/plan.md`, PR 0.4).
