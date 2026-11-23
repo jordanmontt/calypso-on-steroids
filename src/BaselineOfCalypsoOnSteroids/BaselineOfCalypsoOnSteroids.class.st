@@ -12,5 +12,8 @@ Class {
 BaselineOfCalypsoOnSteroids >> baseline: spec [
 
 	<baseline>
-	spec for: #common do: [ spec package: 'Calypso-Spec-Tests' ]
+	spec for: #common do: [
+		spec
+			package: 'Calypso-Spec-Tests';
+			package: 'Calypso-Spec-Spike-Tests' with: [ spec requires: #( 'Calypso-Spec-Tests' ) ] ]
 ]
