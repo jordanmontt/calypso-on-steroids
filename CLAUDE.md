@@ -4,8 +4,8 @@ Goal: a Spec version of Calypso (the Pharo system browser) with every feature of
 
 ## Current state (update at the end of each session)
 
-- **Done:** Stage A of [docs/before-coding.md](docs/before-coding.md): docs, decisions D-01..D-09, manual checks, working process.
-- **Next:** step B1 (baseline, empty packages, rebuild recipe, PR 0.2), then B2 (CI).
+- **Done:** Stage A of [docs/before-coding.md](docs/before-coding.md) (docs, decisions, manual checks, working process); B1 (baseline, rebuild recipe); B2 (CI).
+- **Next:** step B3 (driver spike S-5), then B4 (inventory tooling and progress board).
 - **Open questions:** none.
 
 ## Working with the user
@@ -37,3 +37,4 @@ Pharo 15 image in `/Users/sebas/Documents/PharoCliImages/calypso-on-steroids`, w
 | Tests | [docs/testing-plan.md](docs/testing-plan.md), [docs/progress.md](docs/progress.md) |
 | Rules for code, commits, docs | [docs/coding-guidelines.md](docs/coding-guidelines.md) |
 | Issues and PRs in other repositories | [docs/upstream.md](docs/upstream.md) |
+| Rebuilding the image | [docs/rebuild.md](docs/rebuild.md) |

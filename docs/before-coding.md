@@ -53,21 +53,20 @@ Written in [coding-guidelines.md](coding-guidelines.md) (commits, code tours, wo
 
 ### B1. Rebuild recipe and baseline (PR 0.2)
 
-- **Why.** The image must be reproducible: anyone (CI, you, me in a new session) must get the same environment. Iceberg and the MCP must know the packages before any code exists.
+- **Why.** The image must be reproducible: anyone (CI, you, me in a new session) must get the same environment.
 - **What.**
-  - `BaselineOfCalypsoOnSteroids` with empty packages named per D-01 (e.g. `Calypso-Spec-Core`, `Calypso-Spec-Core-Tests`, `Calypso-Spec-AcceptanceTests`, `CalypsoOnSteroids-Inventory`) and groups (`default`, `tests`, `acceptance`).
-  - The rebuild recipe in `docs/rebuild.md`: Pharo version and build, how to create the image with Pharo Launcher, Pharo MCP revision and how it is loaded and started, the baseline load expression.
-  - Packages registered in the Iceberg repository through the MCP.
-- **Produces.** PR 0.2 (baseline, empty packages, recipe).
-- **Done when.** A fresh image built from the recipe loads the baseline without errors, and the repository status is clean.
+  - `BaselineOfCalypsoOnSteroids`, registered in the Iceberg repository through the MCP. It starts empty: **no empty packages are created**; each package (named per D-01) is added to the baseline in the commit that creates its first class, so the baseline never lists code that does not exist.
+  - The rebuild recipe in [rebuild.md](rebuild.md): Pharo build, VM, Pharo MCP commit, the commands, how to start the MCP server.
+- **Produces.** PR 0.2 (baseline, recipe).
+- **Done when.** A fresh image built from the recipe loads the baseline without errors (checked on 2026-11-23), and the repository status is clean.
 - **Effort.** 1 day.
 
 ### B2. Continuous integration
 
 - **Why.** Every PR must show green tests without you having to run them.
-- **What.** GitHub Actions with smalltalkCI on Pharo 15 (the dev image changes daily: the workflow pins the image build used, updated on purpose). Two jobs: unit tests; acceptance tests (allowed to fail at the beginning, reported).
-- **Produces.** `.github/workflows/ci.yml`, `.smalltalk.ston`; part of PR 0.2 or a follow-up.
-- **Done when.** CI runs on a PR and reports.
+- **What.** GitHub Actions with smalltalkCI (`.github/workflows/ci.yml`, `.smalltalk.ston`). It loads the baseline on the **latest** Pharo 15 build (smalltalkCI's `Pharo64-15`), like the development image ([rebuild.md](rebuild.md)), so changes in Calypso show up early. It runs Calypso's own test packages (`Calypso-.*Tests.*`) as the safety net, and our tests as they are added.
+- **Produces.** `.github/workflows/ci.yml`, `.smalltalk.ston`; part of PR 0.2.
+- **Done when.** CI runs on GitHub and reports. Checked locally with smalltalkCI on 2026-11-23: Pharo 15 build 145, 2,753 Calypso tests green, UI tests included, in 17 s.
 - **Effort.** 0.5–1 day.
 
 ### B3. Driver spike: what SUnit tests can drive (PR 0.3, spike S-5)

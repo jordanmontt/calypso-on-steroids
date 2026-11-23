@@ -99,7 +99,7 @@ driver ──┬── Morphic driver : today's ClyFullBrowserMorph, through its
 ## Where tests run and live
 
 - **In the image:** the Test Runner (or the MCP `test_run`), during development.
-- **On CI:** smalltalkCI on Pharo 15 (GitHub Actions), every PR. The Pharo image build is pinned and updated on purpose (the dev image changes daily).
+- **On CI:** smalltalkCI on Pharo 15 (GitHub Actions), every PR. It uses the latest Pharo 15 build, like the development image.
 - **Once integrated in Pharo** (decision D-03): the tests move with the code into the Pharo repository and run in Pharo's CI. This is possible because they are plain SUnit (T-03).
 
 ## Points to agree
