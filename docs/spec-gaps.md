@@ -39,7 +39,7 @@ This document lists what the Spec version of Calypso needs from Spec, and what S
 | G-22 | Window groups (several browsers in a tabbed window) | BRW-06 | Not in `SpWindowPresenter` | Gap, low priority. Decide whether to keep the feature. |
 | G-23 | Window title updated from the presenter, `okToChange` on close | BRW-03, BRW-04 | `withWindowDo:` `title:`, `askOkToClose`, `whenWillCloseDo:` | OK |
 | G-24 | UI updates coming from a background process (deferred, batched) | UPD-01 | Spec runs on the UI thread; `application defer:`-style APIs | Calypso-side: keep `ClyDataSourceUpdateScheduler`, adapt its sink. |
-| G-25 | Testing support: find presenters by label, click, type, select in lists/trees, open context menus, press keys | All acceptance tests | `SpPresenter` test helpers; acceptance tests use our own Spec driver (no Hera, D-09) | Partial: verify Hera can select in trees, open context menus and press shortcuts; missing steps become Hera PRs. |
+| G-25 | Testing support: find presenters by label, click, type, select in lists/trees, open context menus, press keys | All acceptance tests | `SpPresenter` test helpers; acceptance tests use our own Spec driver (no Hera, D-09) | Partial: selecting in trees, building context menus and pressing keys work through presenters and adapters (spike S-5, see the testing plan); missing helpers become Spec PRs when a test needs them. |
 
 ## Spikes to run first (Phase 1)
 

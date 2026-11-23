@@ -63,6 +63,21 @@ driver ──┬── Morphic driver : today's ClyFullBrowserMorph, through its
 - A test that only makes sense in one browser lives only in that browser's class.
 - No interface class: a test checks that both drivers understand the same selectors.
 
+**What the drivers can do** (spike S-5, 2026-11-23; the spike tests are `ClySpMorphicSpikeTest` and `ClySpSpecSpikeTest`, removed once the drivers exist):
+
+| Interaction | Morphic driver | Spec driver | By hand |
+|---|---|---|---|
+| Select in a pane | `selectClass:`, `selectMethod:`…, read back with `methodSelection actualObjects` | `selectPath:`, `selectedItem`, without opening the window | — |
+| Read what a pane shows | `methodView dataSource allElements` | the table's data source `numberOfRows` (open window) | look and feel |
+| See a system change | read again: reading forces the pending update (`ClyDataSource>>itemCursor`), no waiting | to be decided with the Spec browser's update design (P-08) | — |
+| Read the tabs | `tabManager tools` | — (no Spec browser yet) | — |
+| Context menu | **select the row first**, as a right click does, then `menuColumn:row:` on the view and `doButtonAction` on the entry (commands such as Browse act on the browser's selection, not on the row) | same: `menuColumn:row:` on the table's data source | that the right click opens it |
+| Shortcut | a synthetic `KeyboardEvent` sent to the table reaches `ClyKMDispatcher` | `adapter keyDown:shift:meta:control:option:` | the real key press (T-09) |
+| Command logic | through `ClyCommandRegistry` | `actions allCommands`, `execute`, without the UI | — |
+| Drag and drop | not tried | not tried | yes (T-09) |
+
+Both menus are built by a data source's `menuColumn:row:`, so the two drivers can share the code that finds and runs a menu entry. The test base class `ClySpTestCase` fails a test that leaves a window open or a process running; processes get up to 2 s to end, which costs nothing when there are none. No "wait until idle" helper is needed yet: it comes with the first test that needs deferred UI work (keyboard focus, scrolling).
+
 **Linking scenarios and tests.** **T-07.** The link goes from the docs to the code, never the reverse: each scenario in a feature sheet names the test that implements it (`ClySpSelectionTest>>testSameSelectorStaysSelectedWhenChangingClass`). The tests carry no doc IDs and no pragmas. The test class groups an area (its comment says in a sentence or two what the area does for the user), the selector says the behaviour, and a one-line comment is added only when it says something the code does not, usually why the behaviour matters. So the tests stay meaningful when the docs are gone. The [progress board](progress.md) is generated from the sheets by dev-only tooling, which also lists agreed scenarios with no test and sheet links to tests that no longer exist.
 
 **Scenarios first, as text.** **T-08.** Before tests are written for an area, the scenarios are listed in plain English (in the [feature sheet](features/sheets/README.md) of the area, e.g. "Given a class with a selected method, when I select a subclass, then the same method is selected"). You review them: is this the behaviour we want to keep? Each scenario then becomes a test, written first (red) in the PR that implements it.
@@ -80,7 +95,7 @@ driver ──┬── Morphic driver : today's ClyFullBrowserMorph, through its
 
 ### 5. Manual checks by you
 
-**T-09. Keyboard bindings and drag and drop are checked by you, by hand, for every PR that affects them.** Synthetic key events sent to the world did not reach Calypso's key dispatcher, and simulated drags are not reliable.
+**T-09. Keyboard bindings and drag and drop are checked by you, by hand, for every PR that affects them.** A synthetic key event sent to the focused table does reach the key dispatcher (spike S-5), so drivers test shortcuts, but only a real key press proves the binding works for you. Simulated drags were not tried.
 
 - Automated tests still cover the *logic*: which command a key resolves to in a given context is asked to the dispatcher or the registry directly; what a drop does is tested through the command. What only you check is that the real key press or drag reaches it.
 - For each PR, I write the exact steps in the PR description ("open a browser on `ClyClass1FromP1Mock`, select `tag1Method1`, press ⌘T, expect: the test runs and the method icon turns green"). You do them, and tell me the result. A failed check blocks the commit.
