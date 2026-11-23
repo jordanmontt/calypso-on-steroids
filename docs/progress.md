@@ -1,6 +1,6 @@
 # Progress board
 
-The board below the preparation table is **not generated yet**: it needs the feature sheets (C1) and the generator (B4). It will be written by code, never by hand, so it cannot drift from reality.
+The board below the preparation table is **not generated yet**: it needs the feature sheets and its generator (C1). It will be written by code, never by hand, so it cannot drift from reality.
 
 ## Preparation (kept by hand until the board exists)
 
@@ -14,8 +14,8 @@ Steps of [before-coding.md](before-coding.md). Updated in the commit that starts
 | B1 Rebuild recipe and baseline | done 2026-11-23 | `44ce30c`, `14ad5d9` |
 | B2 CI on the latest Pharo 15 | done 2026-11-23, green on every push since | `5a5c6de` |
 | B3 Driver spike S-5 | done 2026-11-23 | `512c364`, `3d53a63`, `be96c4c`, `c04f24b` |
-| B4 Inventory tooling and board generator | **next** | — |
-| C1 Feature sheets per area | not started | — |
+| B4 Command catalogue generator and check | done 2026-11-23; the board generator moved to C1, the screenshot harness dropped | `fafa99c`, `a9c0091`, `01001c3`, `7518748` |
+| C1 Feature sheets per area, and the board generator with the first sheet | **next** | — |
 | C2 Morphic driver and first scenarios | not started (needs B3, C1) | — |
 | C3 Command placement parity | not started (needs B4) | — |
 | D1 Spikes S-1..S-4 | not started | — |
