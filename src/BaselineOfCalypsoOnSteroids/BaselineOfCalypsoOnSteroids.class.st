@@ -1,5 +1,5 @@
 "
-Loads the Spec version of Calypso. It is empty until the first package exists: a package is added here in the commit that creates its first class.
+Loads the Spec version of Calypso.
 "
 Class {
 	#name : 'BaselineOfCalypsoOnSteroids',
@@ -12,5 +12,5 @@ Class {
 BaselineOfCalypsoOnSteroids >> baseline: spec [
 
 	<baseline>
-	spec for: #common do: [ ]
+	spec for: #common do: [ spec package: 'Calypso-Spec-Tests' ]
 ]
