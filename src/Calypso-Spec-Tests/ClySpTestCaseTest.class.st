@@ -21,6 +21,16 @@ ClySpTestCaseTest >> testClosesTheWindowATestLeavesOpen [
 ]
 
 { #category : 'tests' }
+ClySpTestCaseTest >> testFailsWhenATestLeavesAProcessRunning [
+
+	| testCase process |
+	testCase := ClySpTestCase new.
+	testCase setUp.
+	process := [ Semaphore new wait ] fork.
+	[ self should: [ testCase tearDown ] raise: TestFailure ] ensure: [ process terminate ]
+]
+
+{ #category : 'tests' }
 ClySpTestCaseTest >> testFailsWhenATestLeavesAWindowOpen [
 
 	| testCase |
@@ -37,5 +47,25 @@ ClySpTestCaseTest >> testPassesWhenATestClosesItsWindow [
 	testCase := ClySpTestCase new.
 	testCase setUp.
 	SystemWindow new openInWorld close.
+	self shouldnt: [ testCase tearDown ] raise: TestFailure
+]
+
+{ #category : 'tests' }
+ClySpTestCaseTest >> testPassesWhenATestMakesCalypsoUpdateItsBrowsers [
+
+	| testCase |
+	testCase := ClySpTestCase new.
+	testCase setUp.
+	ClyDataSource scheduleUpdateOf: ClyDataSource empty.
+	self shouldnt: [ testCase tearDown ] raise: TestFailure
+]
+
+{ #category : 'tests' }
+ClySpTestCaseTest >> testPassesWhenTheProcessesOfATestEndSoon [
+
+	| testCase |
+	testCase := ClySpTestCase new.
+	testCase setUp.
+	[ (Delay forMilliseconds: 50) wait ] forkAt: Processor userBackgroundPriority.
 	self shouldnt: [ testCase tearDown ] raise: TestFailure
 ]
