@@ -29,8 +29,10 @@ curl -L https://get.pharo.org/64/150+vm | bash
 ```
 
 ```bash
-./pharo calypso-on-steroids.image metacello install --strict github://jordanmontt/calypso-on-steroids:main/src CalypsoOnSteroids
+./pharo calypso-on-steroids.image metacello install --strict --groups dev github://jordanmontt/calypso-on-steroids:main/src CalypsoOnSteroids
 ```
+
+The `dev` group adds the development tools (`CalypsoOnSteroids-Inventory`), which never ship.
 
 Then open the image with `./pharo-ui calypso-on-steroids.image`, evaluate `MCP startOnPort: 4001` in a Playground, and save the image. The agent connects to `http://localhost:4001/`.
 

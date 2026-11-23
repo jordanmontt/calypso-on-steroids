@@ -3,12 +3,13 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'CalypsoOnSteroids',
       #directory : 'src',
+      #load : [ 'dev' ],
       #platforms : [ #pharo ]
     }
   ],
   #testing : {
     #include : {
-      #packages : [ 'Calypso-.*Tests.*' ]
+      #packages : [ 'Calypso-.*Tests.*', 'CalypsoOnSteroids-.*Tests.*' ]
     }
   }
 }

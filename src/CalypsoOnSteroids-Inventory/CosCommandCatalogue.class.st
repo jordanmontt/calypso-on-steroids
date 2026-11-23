@@ -11,6 +11,17 @@ Class {
 	#package : 'CalypsoOnSteroids-Inventory'
 }
 
+{ #category : 'accessing' }
+CosCommandCatalogue class >> committedFile [
+	"On GitHub Actions the checkout is the workspace; in the development image it is registered in Iceberg"
+
+	| checkout |
+	checkout := (OSEnvironment current at: 'GITHUB_WORKSPACE' ifAbsent: [ nil ])
+		            ifNil: [ (IceRepository registry detect: [ :each | each name = 'calypso-on-steroids' ]) location ]
+		            ifNotNil: [ :path | path asFileReference ].
+	^ checkout / 'docs' / 'features' / 'command-catalogue.md'
+]
+
 { #category : 'instance creation' }
 CosCommandCatalogue class >> entries: aCollection [
 
@@ -206,9 +217,13 @@ CosCommandCatalogue >> writeRegeneratingOn: aStream [
 		lf;
 		nextPutAll: '```smalltalk';
 		lf;
-		nextPutAll: 'CosCommandCatalogue ofImage writeTo: ''docs/features/command-catalogue.md'' asFileReference';
+		nextPutAll: 'CosCommandCatalogue ofImage writeTo: CosCommandCatalogue committedFile';
 		lf;
 		nextPutAll: '```';
+		lf;
+		lf;
+		nextPutAll:
+			'`CosCommandCatalogueTest>>#testCommittedCatalogueMatchesTheImage` fails in CI when this file no longer matches the image.';
 		lf
 ]
 

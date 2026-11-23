@@ -578,5 +578,7 @@ Columns: **Interaction** (how the entry is reached), **Command / tool**, **Group
 In the development image, with the `dev` group of `BaselineOfCalypsoOnSteroids` loaded:
 
 ```smalltalk
-CosCommandCatalogue ofImage writeTo: 'docs/features/command-catalogue.md' asFileReference
+CosCommandCatalogue ofImage writeTo: CosCommandCatalogue committedFile
 ```
+
+`CosCommandCatalogueTest>>#testCommittedCatalogueMatchesTheImage` fails in CI when this file no longer matches the image.
