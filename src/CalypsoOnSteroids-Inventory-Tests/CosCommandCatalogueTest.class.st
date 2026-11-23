@@ -29,8 +29,14 @@ CosCommandCatalogueTest >> testCatalogueOfTheImageLeavesOutTestPackages [
 { #category : 'tests' }
 CosCommandCatalogueTest >> testCountsEntriesByInteraction [
 
-	self assert: (self markdown includesSubstring: '5 entries, 1 anchors.').
+	self assert: (self markdown includesSubstring: '8 entries, 1 anchors.').
 	self assert: (self markdown includesSubstring: '| `shortcuts` | 1 |')
+]
+
+{ #category : 'tests' }
+CosCommandCatalogueTest >> testEndsLinesWithLineFeeds [
+
+	self deny: (self markdown includes: Character cr)
 ]
 
 { #category : 'tests' }
@@ -44,6 +50,17 @@ CosCommandCatalogueTest >> testRowOfAMenuEntry [
 
 	self assert: (self markdown includesSubstring:
 		 '| contextMenu | `ClySpawnFullBrowserCommand` | `ClyQueryMenuGroup` | 10 | Browse |  | `CosCatalogueTestAnchor class>>#inventoryTestCommandsIn:` |')
+]
+
+{ #category : 'tests' }
+CosCommandCatalogueTest >> testSortsEntriesByInteractionGroupOrderAndCommand [
+
+	| rows |
+	rows := (self markdown lines select: [ :each | each beginsWith: '| contextMenu |' ]) collect: [ :each |
+		        (each substrings: '|') second trimBoth ].
+	self
+		assert: rows asArray
+		equals: #( '`ClySpawnFullBrowserCommand`' '`ClyCloseBrowserCommand`' '`SycCopyClassNameCommand`' '`SycFileOutClassCommand`' )
 ]
 
 { #category : 'tests' }

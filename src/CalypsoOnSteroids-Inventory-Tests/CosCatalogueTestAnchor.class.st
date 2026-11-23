@@ -12,6 +12,9 @@ Class {
 CosCatalogueTestAnchor class >> inventoryTestCommandsIn: aCommandMap [
 
 	<calypsoCommands>
+	(aCommandMap contextMenu add: SycFileOutClassCommand order: 20) group: SycClassExtraMenuGroup.
+	(aCommandMap contextMenu add: SycCopyClassNameCommand order: 10) group: SycClassExtraMenuGroup.
+	aCommandMap contextMenu add: ClyCloseBrowserCommand.
 	(aCommandMap contextMenu add: ClySpawnFullBrowserCommand order: 10) group: ClyQueryMenuGroup.
 	aCommandMap shortcuts add: ClyCloseBrowserCommand key: $w meta.
 	aCommandMap doubleClick add: ClySpawnFullBrowserCommand.
