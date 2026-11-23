@@ -51,6 +51,20 @@ ClySpTestCaseTest >> testPassesWhenATestClosesItsWindow [
 ]
 
 { #category : 'tests' }
+ClySpTestCaseTest >> testPassesWhenATestMakesAnImageServiceStart [
+
+	| testCase service |
+	service := TKTParameterizableService new
+		           name: 'Service started by ClySpTestCaseTest';
+		           step: [ ];
+		           yourself.
+	testCase := ClySpTestCase new.
+	testCase setUp.
+	service start.
+	[ self shouldnt: [ testCase tearDown ] raise: TestFailure ] ensure: [ service stop ]
+]
+
+{ #category : 'tests' }
 ClySpTestCaseTest >> testPassesWhenATestMakesCalypsoUpdateItsBrowsers [
 
 	| testCase |

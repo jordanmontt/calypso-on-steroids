@@ -31,9 +31,16 @@ ClySpTestCase >> processesLeftRunning [
 	| deadline running |
 	deadline := Time millisecondClockValue + 2000.
 	[
-		running := self liveProcesses copyWithoutAll: processesBefore.
+		running := (self liveProcesses copyWithoutAll: processesBefore) copyWithoutAll: self serviceProcesses.
 		running isNotEmpty and: [ Time millisecondClockValue < deadline ] ] whileTrue: [ (Delay forMilliseconds: 10) wait ].
 	^ running
+]
+
+{ #category : 'private' }
+ClySpTestCase >> serviceProcesses [
+	"The services of the image run for as long as something needs them, by design: a test may make one start, like the refresh of an open inspector when its window becomes active again"
+
+	^ TKTConfiguration serviceManager services collect: [ :each | each process process ]
 ]
 
 { #category : 'running' }
