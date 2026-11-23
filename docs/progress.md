@@ -1,8 +1,30 @@
 # Progress board
 
-Status: **not generated yet**. This file will be written by code (PR 0.4), never by hand, so it cannot drift from reality.
+The board below the preparation table is **not generated yet**: it needs the feature sheets (C1) and the generator (B4). It will be written by code, never by hand, so it cannot drift from reality.
 
-## What it will show
+## Preparation (kept by hand until the board exists)
+
+Steps of [before-coding.md](before-coding.md). Updated in the commit that starts or finishes a step.
+
+| Step | Status | Commits on `main` |
+|---|---|---|
+| A1 Review and commit the docs | done 2026-11-19 | `1072310` |
+| A2 Decisions D-01..D-09 | done 2026-11-23 | `08f0ee4` |
+| A3 Working process | done 2026-11-23 | `08f0ee4` |
+| B1 Rebuild recipe and baseline | done 2026-11-23 | `44ce30c`, `14ad5d9` |
+| B2 CI on the latest Pharo 15 | done 2026-11-23, green on every push since | `5a5c6de` |
+| B3 Driver spike S-5 | done 2026-11-23 | `512c364`, `3d53a63`, `be96c4c`, `c04f24b` |
+| B4 Inventory tooling and board generator | **next** | — |
+| C1 Feature sheets per area | not started | — |
+| C2 Morphic driver and first scenarios | not started (needs B3, C1) | — |
+| C3 Command placement parity | not started (needs B4) | — |
+| D1 Spikes S-1..S-4 | not started | — |
+| D2 Design notes | not started (needs D1) | — |
+| E1 Calypso bug fixes B-01..B-05 | not started | — |
+| E2 Spec issues for confirmed gaps | not started (needs D1) | — |
+
+
+## What the board will show
 
 One row per scenario of the [feature sheets](features/sheets/README.md), grouped by area and feature, with these columns:
 

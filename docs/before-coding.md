@@ -51,7 +51,7 @@ Written in [coding-guidelines.md](coding-guidelines.md) (commits, code tours, wo
 
 ## Stage B — Infrastructure
 
-### B1. Rebuild recipe and baseline (PR 0.2)
+### B1. Rebuild recipe and baseline (PR 0.2) — done
 
 - **Why.** The image must be reproducible: anyone (CI, you, me in a new session) must get the same environment.
 - **What.**
@@ -61,7 +61,7 @@ Written in [coding-guidelines.md](coding-guidelines.md) (commits, code tours, wo
 - **Done when.** A fresh image built from the recipe loads the baseline without errors (checked on 2026-11-23), and the repository status is clean.
 - **Effort.** 1 day.
 
-### B2. Continuous integration
+### B2. Continuous integration — done
 
 - **Why.** Every PR must show green tests without you having to run them.
 - **What.** GitHub Actions with smalltalkCI (`.github/workflows/ci.yml`, `.smalltalk.ston`). It loads the baseline on the **latest** Pharo 15 build (smalltalkCI's `Pharo64-15`), like the development image ([rebuild.md](rebuild.md)), so changes in Calypso show up early. It runs Calypso's own test packages (`Calypso-.*Tests.*`) as the safety net, and our tests as they are added.
@@ -69,18 +69,9 @@ Written in [coding-guidelines.md](coding-guidelines.md) (commits, code tours, wo
 - **Done when.** CI runs on GitHub and reports. Checked locally with smalltalkCI on 2026-11-23: Pharo 15 build 145, 2,753 Calypso tests green, UI tests included, in 17 s.
 - **Effort.** 0.5–1 day.
 
-### B3. Driver spike: what SUnit tests can drive (PR 0.3, spike S-5)
+### B3. Driver spike S-5 — done
 
-- **Why.** The acceptance tests go through two drivers (see the [testing plan](testing-plan.md)). Before writing them we must know what each driver can do reliably, especially for trees, context menus and keys.
-- **What.**
-  1. **Morphic:** with today's browser, select in each pane through the API, open a context menu and run an item, run a shortcut by asking the key dispatcher, read pane contents and tabs.
-  2. **Spec:** on a small throw-away presenter with a tree table, a Commander2 context menu and a key binding, do the same through the presenters.
-  3. A helper that waits until the UI is idle (deferred updates, background tool building), and the leak check (windows, processes) for the test base class.
-  4. List what cannot be automated reliably: it goes to the manual checks (T-09).
-- **Produces.** PR 0.3 (test base class, idle helper, leak check); `docs/spikes/S-5-drivers.md`.
-- **Done when.** The note says, for each kind of interaction, how it is tested: by a driver, through the registry, or by hand.
-- **Effort.** 1.5–2 days.
-- **You.** Review the note and the manual-check list.
+Committed to `main` on 2026-11-23 (`512c364`..`c04f24b`): the test base class `ClySpTestCase` (window and process checks) and the Morphic and Spec spike tests. Findings in the [testing plan](testing-plan.md#3-acceptance-tests) under "What the drivers can do", instead of a separate note (your choice). The idle helper is postponed until a test needs it. Manual checks done by you: Alt+Left in the Morphic browser, ⌘R and the menu in the Spec spike presenter.
 
 ### B4. Inventory tooling (PR 0.4)
 

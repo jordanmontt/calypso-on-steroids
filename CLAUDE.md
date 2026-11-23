@@ -4,8 +4,7 @@ Goal: a Spec version of Calypso (the Pharo system browser) with every feature of
 
 ## Current state (update at the end of each session)
 
-- **Done:** Stage A of [docs/before-coding.md](docs/before-coding.md) (docs, decisions, manual checks, working process); B1 (baseline, rebuild recipe); B2 (CI).
-- **Next:** step B3 (driver spike S-5), then B4 (inventory tooling and progress board).
+- **Where the project stands:** the preparation table in [docs/progress.md](docs/progress.md) (done steps, next step, commits).
 - **Open questions:** none.
 
 ## Working with the user
