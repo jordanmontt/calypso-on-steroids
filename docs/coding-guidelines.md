@@ -63,7 +63,7 @@ You do not know Calypso's code yet, and the goal is that by the end of the proje
 - **Branches.** One branch per PR, named after the PR id (`pr-0.2-baseline`). You may ask to merge straight to `main` instead of opening a PR (as for the docs on 2026-11-23).
 - **Review.** For each commit: the code tour, your review in the image (Obscure Code Reviewer), the manual checks with exact steps (testing plan, T-09), then your OK and the commit.
 - **Upstream.** Every issue or PR to Pharo or Spec is tracked in [upstream.md](upstream.md) with its status and the step it blocks. You open them, from your accounts, after reviewing them. Temporary workarounds are listed in [workarounds.md](workarounds.md).
-- **Syncing with Pharo 15.** Pharo 15 changes daily. The image is rebuilt from the recipe (`docs/rebuild.md`, step B1) every week and whenever an upstream PR we need is merged; then the catalogue and the baseline tests are re-run to detect changes in Calypso.
+- **Syncing with Pharo 15.** We use the latest Pharo 15 build, which changes daily. The image is rebuilt from the recipe (`docs/rebuild.md`, step B1) every week and whenever an upstream PR we need is merged; then the catalogue and the baseline tests are re-run to detect changes in Calypso.
 - **Handing over between sessions.** At the end of a session, the "Current state" section of [CLAUDE.md](../CLAUDE.md) is updated (what was done, the next step, open questions), and committed with your OK. A new session starts from there.
 
 ## Documentation
