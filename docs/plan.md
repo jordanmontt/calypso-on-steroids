@@ -26,7 +26,7 @@ Related documents:
 - Calypso's UI test suites pass (159 tests, 1 skipped).
 - **Senders, implementors and references already open `StMethodBrowser`** (NewTools, Spec), not `ClyQueryBrowserMorph`. The old route to Calypso's query browser is broken (bug B-02). The query browser is therefore mostly out of scope (D-08).
 - Dialogs used by Calypso (find class, choose package, confirmations) are already Spec.
-- Using the browser revealed four bugs of today's Calypso (B-01..B-04, see the walkthrough). They become acceptance scenarios and small Pharo PRs.
+- Using the browser revealed four bugs of today's Calypso (B-01..B-05, see the walkthrough). They become acceptance scenarios and small Pharo PRs.
 
 ## Strategy
 
@@ -76,11 +76,11 @@ Detailed step by step in **[before-coding.md](before-coding.md)** (why, what, ou
 
 | Stage | Steps | Main outputs |
 |---|---|---|
-| A — Agree | A1 review and commit the docs (PR 0.1) and run 8 manual keyboard/drag checks; A2 decisions; A3 working process | Agreed docs, decisions, `process.md`, `upstream.md` |
+| A — Agree | A1 review and commit the docs (PR 0.1) and run 8 manual keyboard/drag checks; A2 decisions; A3 working process | Agreed docs, decisions, working process, `upstream.md` (done) |
 | B — Infrastructure | B1 baseline + rebuild recipe (PR 0.2); B2 CI; B3 driver spike S-5 (PR 0.3); B4 inventory tooling and progress board (PR 0.4) | Reproducible image, CI, drivers proven, catalogue guarded by a test |
 | C — Specify | C1 feature sheets per area, with scenarios (PRs 0.6a–h); C2 Morphic driver + first scenarios (PR 0.7); C3 command placement parity check | Reviewed scenarios, safety net on today's browser |
 | D — Unknowns | D1 spikes S-1..S-4; D2 design notes: architecture, browser protocol, R-01..R-05, query browser | Spike notes, approved designs, D-02 and D-08 decided |
-| E — Upstream first | E1 Pharo PRs for bugs B-01..B-04; E2 Spec issues for the confirmed gaps (fixed iteratively, when a step needs them) | Bug PRs and Spec issues open |
+| E — Upstream first | E1 Pharo PRs for bugs B-01..B-05; E2 Spec issues for the confirmed gaps (fixed iteratively, when a step needs them) | Bug PRs and Spec issues open |
 
 Estimated 6–7 weeks for one developer, less in parallel. Phase 2 PRs 2.1–2.2 may start earlier (after B1, B2, S-4 and the architecture note) if you want the first deliverable sooner.
 
@@ -160,17 +160,17 @@ Opened from its own menu entry "System Browser (Spec preview)" until parity.
 | M4 | 4.12 | Spec full browser usable for daily work |
 | M5 | Phase 5 | Parity, default browser |
 
-## Decisions needed from you
+## Decisions
 
 | Id | Question | Proposal |
 |---|---|---|
-| D-01 | Package and class naming | Packages `Calypso-Spec-*`, class prefix `ClySp` |
+| D-01 | Package and class naming | **Decided (2026-11-23):** packages `Calypso-Spec-*`, class prefix `ClySp` |
 | D-02 | Panes: embed in the Morphic browser too, or only in the new shell | **Decided (2026-11-19):** the cheapest option with the least throw-away code. Embedding exists only to ship small Spec pieces early; if spike S-1 shows that embedding a pane needs glue code, panes are not embedded and go only into the new shell. The main goal is a good Calypso in Spec. |
 | D-03 | Where acceptance tests live once in Pharo | **Decided (2026-11-19):** they are plain SUnit, so they move into Pharo with the code |
 | D-04 | Write the Morphic driver to pin behaviour before refactoring Calypso | **Decided (2026-11-19):** yes, limited to SEL, HIS, TAB and the areas R-0x touch. Always TDD: the pinning test is written and green before the refactoring starts. |
 | D-05 | Target Pharo version | **Decided (2026-11-19):** Pharo 15 |
-| D-06 | Features we may drop | Candidates: window groups (BRW-06), legacy class annotations (CMD-11, removed in Pharo 16 anyway). Nothing is dropped without your decision, recorded in the inventory. |
-| D-07 | MVP scope (M tier) | As marked in the inventory; review it |
+| D-06 | Features we may drop | **Decided (2026-11-23):** drop BRW-06 (window groups) and CMD-11 (legacy class annotations). Listed in the inventory's [Dropped features](features/README.md#dropped-features) with what it takes to add them back. |
+| D-07 | MVP scope (M tier) | **Decided (2026-11-23):** as marked in the inventory, plus BRW-10, PKG-09, PKG-10, TAB-13 and ENT-04 moved to M. ENT-05 stays an external feature (X). |
 | D-08 | `ClyQueryBrowserMorph`: port it, or retire it in favour of `StMethodBrowser` (already used for senders/implementors/references) | **Decided (2026-11-19):** retire it: route its remaining entry points to `StMethodBrowser`, port nothing |
 | D-09 | Acceptance test framework | **Decided (2026-11-19):** SUnit with a browser driver, no Hera for now (see [testing-plan.md](testing-plan.md)) |
 

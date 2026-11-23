@@ -31,13 +31,40 @@ The code browser is the most used tool of Pharo, and it will be maintained by pe
 - Tests use fixtures, not the live image contents.
 - UI tests close every window they open and leave no extra processes.
 
-## Pull requests
+## Commits and pull requests
 
-- **Small:** one concern per PR, aim for under ~400 changed lines of code (generated files and docs excluded). Split refactoring from behaviour change.
-- **Described:** the PR description lists the feature IDs covered, the acceptance scenarios added, the upstream PRs it depends on, and how to try it in the image.
+- **One commit, one goal.** Each commit does one thing you can review on its own (a refactoring, one behaviour, one test fixture…), and leaves everything green. Refactoring and behaviour change are never in the same commit.
+- **A PR is a small set of such commits:** one concern, under ~400 changed lines of code (generated files and docs excluded).
+- **Described:** the PR description lists the feature IDs and scenarios covered, the upstream PRs it depends on, how to try it in the image, the manual checks, and the code tour of each commit (template: `.github/pull_request_template.md`).
 - **Green:** CI green, existing Calypso suites green.
-- **Reviewable in the image:** changes are reviewed in Pharo (the code reviewer tool) before the PR is opened.
 - **Usable:** when a PR adds something user-visible, it is reachable behind the experimental setting so it can be tried.
+
+## Code tour of each commit
+
+You do not know Calypso's code yet, and the goal is that by the end of the project you understand its model, its interactions and the ideas behind them (less so its Morphic code, which is dropped). So each commit comes with a **code tour**, given in the chat when the commit is ready for review and copied into the PR description. You learn by doing and thinking, so the tour is mostly code and pointers, very little prose:
+
+````markdown
+### <commit title>
+**Goal.** One line.
+**Read, in this order.** `Class>>selector` (a few words at most), senders/implementors to follow, the test that shows the behaviour.
+**Try.** Playground snippets to evaluate, inspect or debug step by step:
+    browser := ClyFullBrowserMorph openOnClass: Point.
+    browser navigationEnvironment inspect.
+**Think.** One to three questions to answer by yourself ("why is the query built before the scope?", "what breaks if this method answers nil?"). Answers only when you ask.
+````
+
+- No paragraph of explanation where a snippet or a pointer does the job: too much text gives the illusion of learning.
+- Tours favour Calypso's model and interactions (environments, scopes, queries, results, contexts, commands, tools) over Morphic details.
+- You take your time: the next commit waits until you are done with this one.
+
+## Working process
+
+- **You are in control.** I propose, you decide: each step starts with your go, each commit waits for your OK after your review and manual checks, nothing is pushed without your OK. No new document is created without your OK (the list is in [CLAUDE.md](../CLAUDE.md)).
+- **Branches.** One branch per PR, named after the PR id (`pr-0.2-baseline`). You may ask to merge straight to `main` instead of opening a PR (as for the docs on 2026-11-23).
+- **Review.** For each commit: the code tour, your review in the image (Obscure Code Reviewer), the manual checks with exact steps (testing plan, T-09), then your OK and the commit.
+- **Upstream.** Every issue or PR to Pharo or Spec is tracked in [upstream.md](upstream.md) with its status and the step it blocks. You open them, from your accounts, after reviewing them. Temporary workarounds are listed in [workarounds.md](workarounds.md).
+- **Syncing with Pharo 15.** Pharo 15 changes daily. The image is rebuilt from the recipe (`docs/rebuild.md`, step B1) every week and whenever an upstream PR we need is merged; then the catalogue and the baseline tests are re-run to detect changes in Calypso.
+- **Handing over between sessions.** At the end of a session, the "Current state" section of [CLAUDE.md](../CLAUDE.md) is updated (what was done, the next step, open questions), and committed with your OK. A new session starts from there.
 
 ## Documentation
 

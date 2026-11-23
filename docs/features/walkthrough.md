@@ -177,20 +177,21 @@ Closing the window with a dirty editor: Spec modal "Please confirm — Changes h
 | B-02 | `spawnQueryBrowserOn:` opens a debugger (`StMethodBrowser class` DNU `#on:systemScope:`) | Editor menu Code search ▸ "class names containing it"; or `aBrowser spawnQueryBrowserOn: (ClyMessageSendersQuery of: #x)` | `ClyBrowserMorph>>spawnBrowser:withState:` |
 | B-03 | Duplicate "Inst. side method" tab after running tests from the class icon | Select a test class, click the test circle of the class | tool recycling (`ClyNotebookManager`) |
 | B-04 | Debugger on right click in the empty area of the method pane | Right click below the last method | `ClyBrowseCoveringTestCaseCommand>>canBeExecuted` |
+| B-05 | ⌘F (Find class) in the class pane lists every class of the image, not only those of the selected package | Select a package, press ⌘F in the class pane | `ClyFindClassCommand>>prepareFullExecution` asks `ClySystemBrowserContext>>requestSingleClass:`, which runs `ClyAllClassesQuery` on the browser's whole system scope. That method is shared with other commands (move methods to class, migrate references), so a fix belongs in `ClyFindClassCommand`. **A bug (decided with you on 2026-11-23): the Spec browser must list only the classes of the selected package(s)**, and the fix is also proposed to Pharo (step E1). |
 
 These are bugs of today's Calypso. Fixing them is not this project's goal, but each one is an **acceptance scenario the Spec version must pass** (and a candidate small PR to Pharo, see the plan's Phase 0).
 
 ## Manual checks (keyboard, drag and drop)
 
-These could not be exercised with synthetic events. Please check them by hand; each takes seconds.
+These could not be exercised with synthetic events. You checked them by hand on 2026-11-23.
 
-| # | Check | Feature |
-|---|---|---|
-| K-1 | In a pane, Right / Left arrow moves the focus to the next / previous pane | BRW-11 |
-| K-2 | Typing letters in a pane selects the first matching item (type-ahead) | FLT-02 |
-| K-3 | Enter in a filter field moves to the list; Escape clears the filter | FLT-04 |
-| K-4 | ⌘T on a method runs its tests, on a class opens the refactoring menu, … (shared shortcuts) | CMD-02 |
-| K-5 | ⌘F in the class pane finds a class; in the method pane finds a method | CLS-09, MTH-06 |
-| K-6 | Alt+Left / Alt+Right navigate history, also from inside the editor | HIS-01 |
-| K-7 | Drag a class onto a tag; drag methods onto a protocol, onto a class, onto a package; hover a collapsed package during a drag | CMD-06 |
-| K-8 | Accept ⌘S and Cancel ⌘L in the method editor | EDT-01 |
+| # | Check | Feature | Result |
+|---|---|---|---|
+| K-1 | In a pane, Right / Left arrow moves the focus to the next / previous pane | BRW-11 | Works |
+| K-2 | Typing letters in a pane selects the first matching item (type-ahead) | FLT-02 | Works **only in the method-group and method panes** |
+| K-3 | Enter in a filter field moves to the list; Escape clears the filter | FLT-04 | Works |
+| K-4 | ⌘T on a method runs its tests, on a class opens the refactoring menu, … (shared shortcuts) | CMD-02 | Works; a hidden feature even for long-time users |
+| K-5 | ⌘F in the class pane finds a class; in the method pane finds a method | CLS-09, MTH-06 | Works, but Find class lists every class of the image (bug B-05) |
+| K-6 | Alt+Left / Alt+Right navigate history, also from inside the editor | HIS-01 | Works |
+| K-7 | Drag a class onto a tag; drag methods onto a protocol, onto a class, onto a package; hover a collapsed package during a drag | CMD-06 | Works |
+| K-8 | Accept ⌘S and Cancel ⌘L in the method editor | EDT-01 | Works |

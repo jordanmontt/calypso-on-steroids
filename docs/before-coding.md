@@ -8,7 +8,7 @@ Each step says: **why** it is needed, **what** is done, what it **produces**, **
 
 ```mermaid
 flowchart TD
-  A1[A1 Review and commit the docs] --> A2[A2 Decisions D-01..D-08]
+  A1[A1 Review and commit the docs] --> A2[A2 Decisions D-01..D-09]
   A1 --> A3[A3 Working process]
   A3 --> B1[B1 Rebuild recipe and baseline]
   B1 --> B2[B2 CI]
@@ -21,7 +21,7 @@ flowchart TD
   A1 --> D1[D1 Spikes S-1..S-4]
   D1 --> D2[D2 Design notes: architecture, browser protocol, R-01..R-05]
   D1 --> E2[E2 Spec issues for confirmed gaps]
-  A1 --> E1[E1 Calypso bug fixes B-01..B-04]
+  A1 --> E1[E1 Calypso bug fixes B-01..B-05]
   C2 --> G{Ready-to-code gate}
   C3 --> G
   D2 --> G
@@ -35,47 +35,17 @@ Stages A to E overlap: B, D and E can run in parallel once A1 is done.
 
 ## Stage A — Agree
 
-### A1. Review and commit the documentation (PR 0.1)
+### A1. Review and commit the documentation (PR 0.1) — done
 
-- **Why.** Everything else refers to the feature IDs, the gaps and the plan. They must be agreed before they are used as a reference.
-- **What.** You read [features/README.md](features/README.md), [walkthrough.md](features/walkthrough.md), [calypso-architecture.md](calypso-architecture.md), [spec-gaps.md](spec-gaps.md), [pain-points.md](pain-points.md), [testing-plan.md](testing-plan.md), [coding-guidelines.md](coding-guidelines.md), this file and the plan. You also run the 8 manual keyboard and drag-and-drop checks at the end of the walkthrough (a few minutes) and tell me what differs. I update the documents, then commit them as the first PR of the repository.
-- **Produces.** PR 0.1 (docs only).
-- **Done when.** You approved the PR; the manual checks K-1..K-8 are recorded as "click" or corrected in the inventory.
-- **Effort.** Review: your time. Updates: 0.5 day.
-- **You.** Review; tell me which features are missing, wrong, or that you would like to drop.
+Committed to `main` on 2026-11-19 (`1072310`); manual checks K-1..K-8 done by you on 2026-11-23 (results in the [walkthrough](features/walkthrough.md#manual-checks-keyboard-drag-and-drop)).
 
-### A2. Decisions
+### A2. Decisions — done
 
-- **Why.** Some choices change the work. They are cheap to take now and expensive to change later.
-- **What.** The decisions of the plan, with when each is needed:
+All decisions D-01..D-09 are taken (2026-11-19 and 2026-11-23); see the [plan](plan.md#decisions). D-02 is applied after spike S-1.
 
-| Id | Decision | Needed before | Proposal |
-|---|---|---|---|
-| D-01 | Package and class naming | B1 | packages `Calypso-Spec-*`, class prefix `ClySp` |
-| D-02 | Panes embedded in the Morphic browser, or only in a new Spec shell | after S-1 | new shell only, unless S-1 shows it is cheap |
-| D-03 | Where the acceptance tests live once integrated in Pharo | decided | in Pharo with the code (plain SUnit) |
-| D-04 | Write the Morphic driver (pin today's behaviour) | C2 | yes, limited to the areas the refactorings touch |
-| D-05 | Target Pharo version | decided | Pharo 15 |
-| D-06 | Features to drop | C1 | candidates: window groups (BRW-06), legacy annotations (CMD-11) |
-| D-07 | MVP scope (M tier) | C1 | as marked in the inventory |
-| D-08 | `ClyQueryBrowserMorph`: port to Spec, or retire it in favour of `StMethodBrowser` | D2 | retire it: route the remaining entry points to `StMethodBrowser` (fixing bug B-02), port nothing |
+### A3. Working process — done
 
-- **Produces.** A "Decisions" section in the plan with your answers and the date.
-- **Done when.** D-01, D-04, D-05, D-06, D-07 answered (D-02, D-03, D-08 can wait for their step).
-- **You.** Decide.
-
-### A3. Working process
-
-- **Why.** We will work for weeks with many small PRs in three repositories (this one, Pharo, Spec). The process must be clear before the first PR.
-- **What.** Agree on:
-  - **Branches and PRs here:** one branch per PR, named after the PR id (`pr-0.2-baseline`), PR template with feature IDs, scenarios, upstream dependencies, "how to try".
-  - **Review:** you review the change in the image first (the code reviewer tool), then on GitHub. Nothing is committed or pushed without your go.
-  - **Upstream tracking:** every upstream issue/PR (Pharo, Spec) is listed in `docs/upstream.md` with its status and the step it blocks; workarounds in `docs/workarounds.md`.
-  - **Syncing with Pharo:** Pharo 15 is a moving development version. We rebuild the image from the recipe (B1) at a fixed rhythm (proposal: weekly, and whenever an upstream PR we need is merged) and re-run the catalogue and baseline tests to detect changes in Calypso.
-  - **Who opens upstream PRs:** you, from your accounts, after reviewing them.
-- **Produces.** `docs/process.md`, `docs/upstream.md`, a PR template in `.github/`.
-- **Done when.** You approved the three files (in PR 0.1 or a follow-up).
-- **Effort.** 0.5 day.
+Written in [coding-guidelines.md](coding-guidelines.md) (commits, code tours, working process), [upstream.md](upstream.md) and `.github/pull_request_template.md`. Kept out of a separate `process.md` to keep the number of documents small.
 
 ---
 
@@ -132,7 +102,7 @@ Stages A to E overlap: B, D and E can run in parallel once A1 is done.
 ### C1. Feature sheets, area by area (PRs 0.6a–h)
 
 - **Why.** The inventory says *what* exists in one line per feature. Before coding we need, for every feature, the exact behaviour, the code behind it and the agreed scenarios. Reviewing these sheets is how you understand the code and approve the behaviour we keep; it is also the agent's full specification (decided 2026-11-19).
-- **What.** One [feature sheet](features/sheets/README.md) per area, following the template: behaviour, how to trigger, code entry points (checked in the image), edge cases, existing tests, scenarios with IDs (`SEL-01.a`), manual check, notes. All tiers are described; scenarios are required for M-tier features first. One text-only PR per one or two areas, in order of need: TAB+EDT (first deliverable, Phase 2), SEL+HIS (refactorings), PKG+CLS, MGP+MTH, CMD, DEC+FLT, BRW+QRY+UPD, ENT+SET, plus the bugs B-01..B-04 (expected behaviour) in the sheet of their area.
+- **What.** One [feature sheet](features/sheets/README.md) per area, following the template: behaviour, how to trigger, code entry points (checked in the image), edge cases, existing tests, scenarios with IDs (`SEL-01.a`), manual check, notes. All tiers are described; scenarios are required for M-tier features first. One text-only PR per one or two areas, in order of need: TAB+EDT (first deliverable, Phase 2), SEL+HIS (refactorings), PKG+CLS, MGP+MTH, CMD, DEC+FLT, BRW+QRY+UPD, ENT+SET, plus the bugs B-01..B-05 (expected behaviour) in the sheet of their area.
 - **Produces.** `docs/features/sheets/<AREA>.md`, reviewed.
 - **Done when.** Every area has a reviewed sheet, and every M-tier feature has at least one scenario you approved.
 - **Effort.** 8–10 days.
@@ -190,7 +160,7 @@ Throw-away code on branches that are never merged. Each ends with a note in `doc
 
 ### E1. Calypso bug fixes (first Pharo PRs)
 
-- **Why.** The four bugs found (B-01..B-04) are small, real, and fixing them first teaches us the Pharo contribution path (issue, PR, CI, review, merge timing) on low-risk changes, before the larger refactorings.
+- **Why.** The four bugs found (B-01..B-05) are small, real, and fixing them first teaches us the Pharo contribution path (issue, PR, CI, review, merge timing) on low-risk changes, before the larger refactorings.
 - **What.** One Pharo issue + PR per bug, each with a test: B-04 (`canBeExecuted` on empty selection, a one-line guard and a test), B-02 (route `spawnQueryBrowserOn:` users to `StMethodBrowser`, or decide per D-08), B-01 (status bar rebuilt instead of appended on update), B-03 (duplicate creation tab).
 - **Produces.** Up to four Pharo PRs, listed in `docs/upstream.md`.
 - **Done when.** The PRs are open and reviewed (merging may take longer; it does not block coding).
@@ -211,7 +181,7 @@ Throw-away code on branches that are never merged. Each ends with a note in `doc
 
 Coding of Phase 2 (Spec tools inside the Morphic browser) starts when all of these hold:
 
-- [ ] Docs merged (A1), decisions D-01, D-06, D-07 taken (D-02..D-05, D-08, D-09 decided) (A2), process agreed (A3).
+- [x] Docs merged (A1), decisions taken (A2), process agreed (A3).
 - [ ] The image is reproducible from the recipe; CI runs (B1, B2).
 - [ ] Testing plan agreed (T-01..T-09); driver spike done and manual-check list known (B3).
 - [ ] The catalogue is regenerated by code and guarded by a test (B4).

@@ -24,7 +24,7 @@ Calypso is the tool every Pharo developer uses all day, and this code goes to th
 
 ### 1. Existing Calypso suites
 
-They are not changed by us, except to add tests. A Calypso refactoring PR (R-01..R-05) or bug fix (B-01..B-04) to Pharo must keep all of them green.
+They are not changed by us, except to add tests. A Calypso refactoring PR (R-01..R-05) or bug fix (B-01..B-05) to Pharo must keep all of them green.
 
 ### 2. Unit tests
 
@@ -67,7 +67,7 @@ driver ──┬── Morphic driver : today's ClyFullBrowserMorph, through its
 
 **Scenarios first, as text.** **T-08.** Before tests are written for an area, the scenarios are listed in plain English (in the [feature sheet](features/sheets/README.md) of the area, e.g. "Given a class with a selected method, when I select a subclass, then the same method is selected"). You review them: is this the behaviour we want to keep? Each scenario then becomes a test, written first (red) in the PR that implements it.
 
-**Known bugs.** The four bugs found (B-01..B-04) get tests describing the *correct* behaviour. On Morphic they are marked as expected failures until the Pharo fix is merged; the Spec browser must pass them.
+**Known bugs.** The four bugs found (B-01..B-05) get tests describing the *correct* behaviour. On Morphic they are marked as expected failures until the Pharo fix is merged; the Spec browser must pass them.
 
 ### 4. Command placement parity (generated)
 

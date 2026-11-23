@@ -15,8 +15,8 @@ This is the reference list of what the Calypso system browser does, so that the 
 | Feature | What the user can do or see. |
 | Hidden behaviour / notes | The non-obvious part, the one easy to lose in a rewrite. |
 | Implementation | Where it lives today, to read before reimplementing. |
-| Seen | How the feature was verified: **click** = exercised in the running browser (see walkthrough), **code** = read in the code only, **manual** = needs a manual check (keyboard and drag and drop could not be simulated, see the walkthrough's last table). |
-| Tier | **M** = needed for the minimum usable Spec browser, **P** = needed for parity, **X** = contributed by a package outside Calypso. |
+| Seen | How the feature was verified: **click** = exercised in the running browser (see walkthrough), **code** = read in the code only, **hand** = checked by hand by you on 2026-11-23 (keyboard and drag and drop, which could not be simulated; see the walkthrough's last table), **manual** = still to check by hand. |
+| Tier | **M** = needed for the minimum usable Spec browser, **P** = needed for parity, **X** = contributed by a package outside Calypso and not needed for the minimum browser (external features you chose for it are **M**), **Dropped** = not in the Spec browser, see [Dropped features](#dropped-features). Decided with you on 2026-11-23 (D-07). |
 
 ## What the full browser is
 
@@ -39,12 +39,12 @@ In Pharo 15, **Senders / Implementors / References open `StMethodBrowser`** (New
 | BRW-03 | Window title follows the selection | "Package: X", "Class: X", "Class: X class", "Method: X>>y", "Current image" when nothing is selected in projects mode. | `buildTitleFromSelections` | click | M |
 | BRW-04 | Close the browser; confirm when there are unsaved edits | Spec modal "Please confirm — Changes have not been saved. Is it OK to discard changes?" No / Yes. ⌘W closes too. | `okToChange`, `confirmDiscardChanges` | click | M |
 | BRW-05 | Spawn a browser from the current state (⌘B, "Browse", double click on a class) | Opens at +20 px with the default size, with the selection of the source. Its history starts with an across-window state (HIS-04). | `ClySpawnFullBrowserCommand`, `spawnBrowser:withState:` | click | M |
-| BRW-06 | Window groups (several browsers in one tabbed window) | Only created by `ClyQueryBrowserMorph>>openInWindow:`, which normal use no longer reaches in Pharo 15. **Candidate to drop** (decision D-06). | `ClyGroupWindowMorph`, `createWindowGroupFrom:` | code | P? |
+| BRW-06 | Window groups (several browsers in one tabbed window) | Only created by `ClyQueryBrowserMorph>>openInWindow:`, which normal use no longer reaches in Pharo 15. **Candidate to drop** (decision D-06). | `ClyGroupWindowMorph`, `createWindowGroupFrom:` | code | Dropped |
 | BRW-07 | Resizable panes and tool area | Splitters between panes and between panes and tools. | `ClyBrowserMorph>>layoutChildren` | click | M |
 | BRW-08 | Browser plugins | Auto-activated `ClyBrowserPlugin` subclasses decorate tools (critics panel) and enable families of decorators. | `ClyBrowserPlugin` and subclasses | code | P |
 | BRW-09 | Scoped View | **Scopes the browser immediately to the selected packages** (no dialog); only they stay in the package list. "Set up scope" / "Create scope from selected package(s)" / "Scopes ▸" in menus manage named scopes. | `ClySwitchToScopedViewCommand`, `ClySwitchToScopedModeCommand`, `setUpScopedModeWith:` | click | P |
-| BRW-10 | Browse another environment (Ring) | Iceberg "Browse repository / commit / package" opens Calypso on a Ring model. | `ClyRing2Environment` | code | X |
-| BRW-11 | Keyboard focus between panes | Right / Left arrows move to the next / previous pane. | `ClySwitchFocusTo*BrowserPaneCommand` | manual | M |
+| BRW-10 | Browse another environment (Ring) | Iceberg "Browse repository / commit / package" opens Calypso on a Ring model. | `ClyRing2Environment` | code | M |
+| BRW-11 | Keyboard focus between panes | Right / Left arrows move to the next / previous pane. | `ClySwitchFocusTo*BrowserPaneCommand` | hand | M |
 | BRW-12 | Toolbar depends on the selection | No class selected: only package modes and meta-level. Class selected: + Flat/Hier., Methods/Vars, Class refs. Method selected: + Implementors, Senders. Rendered as radio-like labels and link-style buttons with icons. | `ClyToolbarMorph` | click | M |
 
 ## 2. Package pane (PKG)
@@ -57,10 +57,10 @@ In Pharo 15, **Senders / Implementors / References open `StMethodBrowser`** (New
 | PKG-04 | Regex filter, remembered across browsers | Applied after a short typing delay; keeps the selection. The text is stored in the class variable `DefaultPackageFilter` on each change and **new browsers start with it**. | `enableFilterUsing: ClyRegexPattern new`, `updateDefaultPackageFilter` | click | M |
 | PKG-05 | Package commands | New package (⌘K,P), rename (⌘R), remove (⌘X), duplicate (⌘C), new tag, commit (⌘S), browse critiques, browse dependencies, run tests (⌘T and icon), Scopes, Extras (promote/demote tag, file out, recompile, inspect). | catalogue: `Package`, `ClyFullBrowserPackageContext` | click (menu) | M |
 | PKG-06 | Tag commands | Browse, Rename, New tag, Remove, Extras ▸. | `ClyRenamePackageTagCommand`, `ClyRemoveClassGroupCommand` | click (menu) | P |
-| PKG-07 | Drop classes on a package or tag | Hover a collapsed node during a drag to expand it after a delay (SET-04). | `ClyMoveClassToGroupCommand`, `isReadyToExpandForDrop:` | manual | P |
-| PKG-08 | Drop methods or protocols on a package (make extension) | `SycMoveMethodsToPackageCommand`, `ClyMoveMethodGroupsToPackageCommand`. | catalogue | manual | P |
-| PKG-09 | Package comment tab | Rich text (BeautifulComments). | `ClyPackageRichTextCommentEditorToolMorph` | click | X |
-| PKG-10 | Dependencies tab | Dependency analyser, first tab (order -10), kept when a class of the package is selected. | `DABrowserToolMorph` | click | X |
+| PKG-07 | Drop classes on a package or tag | Hover a collapsed node during a drag to expand it after a delay (SET-04). | `ClyMoveClassToGroupCommand`, `isReadyToExpandForDrop:` | hand | P |
+| PKG-08 | Drop methods or protocols on a package (make extension) | `SycMoveMethodsToPackageCommand`, `ClyMoveMethodGroupsToPackageCommand`. | catalogue | hand | P |
+| PKG-09 | Package comment tab | Rich text (BeautifulComments). | `ClyPackageRichTextCommentEditorToolMorph` | click | M |
+| PKG-10 | Dependencies tab | Dependency analyser, first tab (order -10), kept when a class of the package is selected. | `DABrowserToolMorph` | click | M |
 | PKG-11 | Selecting a package opens the class-creation tab | The "New class" tab is selected, template with `package:` (and `tag:`) filled. In projects mode with nothing selected the package is `_Unpackaged`. | `ClyClassCreationToolMorph` | click | M |
 
 ## 3. Class pane (CLS)
@@ -75,8 +75,8 @@ In Pharo 15, **Senders / Implementors / References open `StMethodBrowser`** (New
 | CLS-06 | Class row display | `systemIcon` (`C`, `Σ`…), abstract classes italic, deprecated struck out, extended classes gray, test classes show their **test result circle instead of the icon**. | decorators, `specifyClassItemNameOn:for:` | click | M |
 | CLS-07 | Class filter | Substring filter under the pane. | `enableFilter` | code | M |
 | CLS-08 | Class commands | See the captured menu (walkthrough §12): Browse, Browse test class, Class refs. (⌘N), Show trait users, rename (⌘R, two variants), Migrate references, Scopes ▸, Realize class, Abstract inst vars (⌘A,A), Generate accessors (⌘G,A), New trait / class / test class, Jump to test class (⌘G,J), Remove (⌘X), Refactorings ▸, Extras ▸. | catalogue `ClyClass`, `ClyFullBrowserClassContext` | click (menu) | M |
-| CLS-09 | Find class (⌘F) | **Spec** modal "Choose class": filter with Substring / Regexp / Exact / Match case. | `ClyFindClassCommand` | click | M |
-| CLS-10 | Drag classes onto packages/tags | | `ClyMoveClassToGroupCommand` | manual | P |
+| CLS-09 | Find class (⌘F) | **Spec** modal "Choose class": filter with Substring / Regexp / Exact / Match case. Today it lists every class of the image (bug B-05); the Spec browser lists only the classes of the selected package(s). | `ClyFindClassCommand` | click | M |
+| CLS-10 | Drag classes onto packages/tags | | `ClyMoveClassToGroupCommand` | hand | P |
 | CLS-11 | Double click spawns a browser on the class | First click selects, second spawns. | `ClySpawnFullBrowserCommand` | click | P |
 
 ## 4. Method-group pane: protocols, virtual groups, inherited methods, variables (MGP)
@@ -90,8 +90,8 @@ In Pharo 15, **Senders / Implementors / References open `StMethodBrowser`** (New
 | MGP-05 | Variables mode ("Vars") | "instance side" row, then per defining class a gray header and its variables. Selecting a variable shows the methods referencing it. The variables used by the selected method are highlighted. Order of classes: setting SET-05. | `ClySwitchToVariablesCommand`, `ClyGroupedInstanceVariablesResult` | click | M |
 | MGP-06 | Variable commands | Rename ⌘R, remove ⌘X, references ⌘N, writers ⌘M, inspect value ⌘I / double click, push up/down, accessors, protect, merge, move to class side, debug points (break/watch on read/write/access). | catalogue `ClyFullBrowserVariableContext` | code | P |
 | MGP-07 | Protocol commands | Browse, Show in method browser (also double click), Rename, New protocol, Convert to extension, Categorize all uncategorized, Remove empty protocols, Remove. | catalogue `ClyFullBrowserMethodGroupContext` | click (menu) | M |
-| MGP-08 | Drop methods on a protocol / extension group / all-methods group | Reclassify. | `ClyMoveMethodsToGroupCommand` | manual | P |
-| MGP-09 | Drop a protocol on a class | Moves group and methods. | `ClyMoveMethodGroupToClassCommand` | manual | P |
+| MGP-08 | Drop methods on a protocol / extension group / all-methods group | Reclassify. | `ClyMoveMethodsToGroupCommand` | hand | P |
+| MGP-09 | Drop a protocol on a class | Moves group and methods. | `ClyMoveMethodGroupToClassCommand` | hand | P |
 | MGP-10 | "see class side" link | Protocols/methods named "see class side" get a forward-arrow **button** that switches to the class side. | `ClyClassSideLinkTableDecorator` | code | P |
 | MGP-11 | Invert hierarchy | Reverses the order of the visibility / variable class list (menu "Extras ▸ Invert hierarchy"). | `ClyInvert*Command` | code | P |
 
@@ -104,8 +104,8 @@ In Pharo 15, **Senders / Implementors / References open `StMethodBrowser`** (New
 | MTH-03 | Method commands | Captured menu, walkthrough §3. Shortcut labels including chords (⌘H,⌘J). | catalogue `ClyMethod` | click (menu) | M |
 | MTH-04 | Run / debug tests | Click the circle: runs, turns green/yellow/red, notification. ⌘T, ⌘D, ⇧⌘D. Covering tests for non-test methods. | `ClySUnit*` | click | P |
 | MTH-05 | Run class scripts from the row | Icon on `initialize`, `<script>`, `<example>`, `<sampleInstance>` class-side methods. | `ClyRunClassScriptCommand` | click | P |
-| MTH-06 | Find method (⌘F) | | `ClyFindMethodInBrowserCommand` | manual | P |
-| MTH-07 | Drag methods | Onto class, package, protocol. | catalogue | manual | P |
+| MTH-06 | Find method (⌘F) | | `ClyFindMethodInBrowserCommand` | hand | P |
+| MTH-07 | Drag methods | Onto class, package, protocol. | catalogue | hand | P |
 | MTH-08 | Multi-selection | Two methods: first editor kept, Diff tab added last (TAB-08). | `ClyDataSourceSelection` | click | M |
 
 ## 6. Selection semantics (SEL) — hidden, critical
@@ -146,7 +146,7 @@ In Pharo 15, **Senders / Implementors / References open `StMethodBrowser`** (New
 | TAB-10 | Tools are built in background | | `ClyBrowserToolMorph` | code | P |
 | TAB-11 | Tool decorations by plugins | Critics panel. | `ClyBrowserToolDecorator` | click | P |
 | TAB-12 | Per-tool status bar | Method editors only (the class definition has none). | `ClyStatusBarMorph` | click | M |
-| TAB-13 | Third-party tabs | Dependencies, baseline map, rich comments: Morphic tools from other projects. | — | click | X |
+| TAB-13 | Third-party tabs | Dependencies, baseline map, rich comments: Morphic tools from other projects. | — | click | M |
 | TAB-14 | **Maximize the tools** | **Double-click a tab header**: the panes disappear and the tools take the whole window; double-click again restores. | `toggleFullWindowTabs` | click | P |
 
 ## 9. Editors (EDT)
@@ -178,16 +178,16 @@ The 397 entries are in [command-catalogue.md](command-catalogue.md). Command *be
 | ID | Feature | Hidden behaviour / notes | Implementation | Seen | Tier |
 |---|---|---|---|---|---|
 | CMD-01 | Context menus | Groups as sub-menus or inlined between lines; shortcut labels with chords; commands that cannot run are hidden. Pane menus are normal pop-ups; **the editor menu is modal**. | `ClyCommandGroupBuilder`, `ClyCommandGroupMenuRenderer` | click | M |
-| CMD-02 | Shortcuts | **Shared keys** chosen by context and priority (⌘T, ⌘R, ⌘F, ⌘E,M); chords. | `ClyKMDispatcher` | manual | M |
+| CMD-02 | Shortcuts | **Shared keys** chosen by context and priority (⌘T, ⌘R, ⌘F, ⌘E,M); chords. Little known even by long-time users (K-4): worth making discoverable later. | `ClyKMDispatcher` | hand | M |
 | CMD-03 | Toolbar commands | BRW-12. | `ClyToolbarMorph` | click | M |
 | CMD-04 | Table icons | Run tests, run script, critique actions. | `ClyCommandBasedTableDecorator` | click | P |
 | CMD-05 | Double click | Spawn browser (class), show in method browser (protocol), inspect value (variable). | `ClyMouseInteractionHandler` | click (class) | P |
-| CMD-06 | Drag and drop | | `ClyDragPassenger` | manual | P |
+| CMD-06 | Drag and drop | | `ClyDragPassenger` | hand | P |
 | CMD-07 | Tab actions | TAB-07. | | click | P |
 | CMD-08 | Open a sub-menu from a key or tab action | ⌘T on methods, the class tab's red "!". | `ClyOpenMenuGroupCommand` | click (tab action) | P |
 | CMD-09 | Refactoring preview and failures | | `SycRefactoringCommand`s | code | M |
 | CMD-10 | Commands declared by other packages | `<calypsoCommands>`, `remove:`, `rebind:to:`. | `ClyCommandMap` | code | M |
-| CMD-11 | Legacy class annotations | Deprecated, removed in Pharo 16. | `Commander-Calypso-Compatibility` | code | P? |
+| CMD-11 | Legacy class annotations | Deprecated, removed in Pharo 16. | `Commander-Calypso-Compatibility` | code | Dropped |
 
 ## 11. Table decorations (DEC)
 
@@ -212,9 +212,9 @@ The 397 entries are in [command-catalogue.md](command-catalogue.md). Command *be
 | ID | Feature | Seen | Tier |
 |---|---|---|---|
 | FLT-01 | Filter fields: packages (regex, delayed, remembered), classes (substring) | click | M |
-| FLT-02 | Type-ahead search in panes | manual | M |
+| FLT-02 | Type-ahead search in panes. **Works only in the method-group and method panes**, not in the package and class panes (K-2); whether this is intended is to find out in the FLT sheet | hand | M |
 | FLT-03 | Filtering keeps the selection | click | M |
-| FLT-04 | Enter / Escape in filter fields | manual | P |
+| FLT-04 | Enter / Escape in filter fields | hand | P |
 | FLT-05 | Query browser filter on several columns | code | P |
 
 ## 13. Query results (QRY)
@@ -244,7 +244,7 @@ In Pharo 15 the user-visible query browser is **`StMethodBrowser`** (NewTools, S
 | ENT-01 | Default system browser (`Smalltalk tools browser` = `ClyFullBrowserMorph`) | click | M |
 | ENT-02 | "Browse" from everywhere opens Calypso | code | M |
 | ENT-03 | Senders/implementors from everywhere → `StMethodBrowser` (not Calypso) | click | — |
-| ENT-04 | Iceberg integration: browse repo/commit/package, commit (⌘S), method commit history | code | X |
+| ENT-04 | Iceberg integration: browse repo/commit/package, commit (⌘S), method commit history | code | M |
 | ENT-05 | Hera integration commands (external) | code | X |
 
 ## 16. Settings (SET)
@@ -269,6 +269,16 @@ Details and reproduction in the [walkthrough](walkthrough.md#bugs-found-during-t
 | B-02 | `spawnQueryBrowserOn:` opens a debugger (`StMethodBrowser class` does not understand `#on:systemScope:`) |
 | B-03 | Duplicate method-creation tab after running tests from a class icon |
 | B-04 | Debugger on right click in the empty area of the method pane |
+| B-05 | ⌘F (Find class) in the class pane lists every class of the image, not only the classes of the selected package (found by you, K-5). **To fix in the Spec browser**: list only the classes of the selected package(s) |
+
+## Dropped features
+
+Decided with you on 2026-11-23 (D-06). A dropped feature can come back later: its ID is kept, and this table says what it would take.
+
+| ID | Feature | Why dropped | To add it back |
+|---|---|---|---|
+| BRW-06 | Window groups | Only created by the retired query browser (`ClyQueryBrowserMorph>>openInWindow:`, D-08); no normal path reaches it in Pharo 15. | A Spec window that hosts several browsers as tabs; read `ClyGroupWindowMorph` and `createWindowGroupFrom:`. Needs gap G-22. |
+| CMD-11 | Legacy class annotations (Commander 1 style) | Nothing real uses it in Pharo 15 (27 `<classAnnotation>` pragmas, all in tests except one in `Commander-Activators-TextView`); the package is removed in Pharo 16. | Read the converted annotations through `ClyAnnotationConversion` (package `Commander-Calypso-Compatibility`) when building the command map. |
 
 ## Counts
 
