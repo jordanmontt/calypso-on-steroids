@@ -38,7 +38,7 @@ So the UI can be replaced without rewriting commands or the model. The pain is c
 
 Every tab is a `ClyBrowserToolMorph` subclass: Calypso's editors, but also BeautifulComments, the dependency analyser and the Roassal baseline map, which live in other projects. `ClyTabEntry` holds the tool *class*.
 
-**Impact:** the Spec browser must host Morphic tools for a long time. **Plan:** a Spec tool contract (a presenter class registered with `tabs add:` like today, with the same lifecycle: `shouldBeActivatedInContext:`, `isSimilarTo:`, `belongsToCurrentBrowserContext`, dirty state...) plus an adapter that hosts any existing `ClyBrowserToolMorph` in the Spec notebook through `SpMorphPresenter` (G-02). External tools migrate when their owners want.
+**Impact:** the Spec browser must host Morphic tools for a long time. **Plan:** a Spec tool contract (a presenter class registered with `tabs add:` like today, with the same lifecycle: `shouldBeActivatedInContext:`, `isSimilarTo:`, `belongsToCurrentBrowserContext`, dirty state...) plus an adapter that hosts any existing `ClyBrowserToolMorph` in the Spec notebook through `SpMorphPresenter` (G-02). Hosting is temporary: the Spec browser will eventually accept only presenters, so every Morphic tool, external ones included, must be replaced by a Spec presenter (by its owners, or by us).
 
 ## P-06: Spec widgets already subclassed inside Calypso
 

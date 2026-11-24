@@ -182,7 +182,7 @@ Opened from its own menu entry "System Browser (Spec preview)" until parity.
 | Upstream PRs (Spec, Pharo) take long to merge | Start them early (Phase 1), keep them small, keep a documented local workaround only while waiting |
 | Calypso refactorings break the Morphic browser | Design notes first, Morphic acceptance scenarios (0.7), Calypso suites, small PRs |
 | Performance of Spec trees on large results | Measure in S-1/S-2; lazy children and query cursors; budgets in Phase 5 |
-| Morphic tools from other projects (BeautifulComments, DA, Roassal) | Host them through `SpMorphPresenter`; their owners migrate later |
+| Morphic tools from other projects (BeautifulComments, DA, Roassal) | Host them through `SpMorphPresenter` until they are replaced by Spec presenters (P-05) |
 | Scope creep (redesigning the browser) | Parity first; improvements are listed as separate, later proposals |
 | Background processes, flaky UI tests | UI updates only on the UI thread; test helpers wait for quiescence; process-leak checks |
 
