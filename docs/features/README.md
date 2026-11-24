@@ -118,7 +118,7 @@ In Pharo 15, **Senders / Implementors / References open `StMethodBrowser`** (New
 | SEL-04 | Silent selection | Changes without navigation events or history entries (`ignoreNavigationDuring:`), used by CLS-04, history restore, system updates. | `ignoreNavigationDuring:` | code | M |
 | SEL-05 | Selection drives everything downstream | Package → classes; class → groups (scope = classes × meta-level × visibility); groups → methods; any → tabs, toolbar, title, history. | `*SelectionChanged`, `changeStateBy:` | click | M |
 | SEL-06 | Deselection | Allowed where "nothing" has a meaning (no group = all methods). | `allowsDeselection:` | code | M |
-| SEL-07 | Ensure selection after updates | `ensureSelectedItemIfNeeded` when a view becomes non-empty after a change. | `ClyQueryViewMorph` | code | M |
+| SEL-07 | Ensure selection after updates | `ensureSelectedItemIfNeeded` when a view becomes non-empty after a change. | `ClyQueryViewMorph` | code | Dropped |
 
 ## 7. Navigation history (HIS)
 
@@ -128,7 +128,7 @@ In Pharo 15, **Senders / Implementors / References open `StMethodBrowser`** (New
 | HIS-02 | What is recorded | Not the silent changes, not the restores. | `recordNavigationState:` | code | M |
 | HIS-03 | History holds no query results | | `ClyNavigationHistory` | code | P |
 | HIS-04 | Across-window history | "Back" in a spawned browser **closes it and re-activates the original window** (re-creates it if closed). | `ClyAccrossWindowNavigationState` | click | P |
-| HIS-05 | Pluggable history class | Setting. | `settingsNavigationHistoryOn:` | code | P |
+| HIS-05 | Pluggable history class | Setting. | `settingsNavigationHistoryOn:` | code | Dropped |
 
 ## 8. Tools and tabs (TAB)
 
@@ -188,6 +188,8 @@ The 397 entries are in [command-catalogue.md](command-catalogue.md). Command *be
 | CMD-09 | Refactoring preview and failures | | `SycRefactoringCommand`s | code | M |
 | CMD-10 | Commands declared by other packages | `<calypsoCommands>`, `remove:`, `rebind:to:`. | `ClyCommandMap` | code | M |
 | CMD-11 | Legacy class annotations | Deprecated, removed in Pharo 16. | `Commander-Calypso-Compatibility` | code | Dropped |
+| SEL-07 | Ensure a selection after updates | Only panes that forbid deselection select an item by themselves, and every pane of the full browser allows it; only the retired query browser (D-08) used it. | Deny deselection on a pane and call `ensureSelectedItemIfNeeded` when it gets items (`ClyQueryViewMorph`). |
+| HIS-05 | Pluggable history class | `ClyNavigationHistory` has no subclass, so the setting offers a single choice. | A class-side setting naming the history class (`ClyBrowserMorph class>>settingsNavigationHistoryOn:`). |
 
 ## 11. Table decorations (DEC)
 
@@ -273,7 +275,7 @@ Details and reproduction in the [walkthrough](walkthrough.md#bugs-found-during-t
 
 ## Dropped features
 
-Decided with you on 2026-11-23 (D-06). A dropped feature can come back later: its ID is kept, and this table says what it would take.
+Decided with you on 2026-11-23 and 2026-11-24 (D-06). A dropped feature can come back later: its ID is kept, and this table says what it would take.
 
 | ID | Feature | Why dropped | To add it back |
 |---|---|---|---|

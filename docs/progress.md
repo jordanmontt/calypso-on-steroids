@@ -15,7 +15,7 @@ Steps of [before-coding.md](before-coding.md). Updated in the commit that starts
 | B2 CI on the latest Pharo 15 | done 2026-11-23, green on every push since | `5a5c6de` |
 | B3 Driver spike S-5 | done 2026-11-23 | `512c364`, `3d53a63`, `be96c4c`, `c04f24b` |
 | B4 Command catalogue generator and check | done 2026-11-23; the board generator moved to C1, the screenshot harness dropped | `fafa99c`, `a9c0091`, `01001c3`, `7518748` |
-| C1 Feature sheets per area, and the board generator with the first sheet | **in progress**: TAB and EDT reviewed, board generated; SEL and HIS next | `0231fd0`, `a8fb5a0`, `6f6f369` |
+| C1 Feature sheets per area, and the board generator with the first sheet | **in progress**: TAB, EDT, SEL and HIS reviewed, board generated; PKG and CLS next | `0231fd0`, `a8fb5a0`, `6f6f369`, `269c045` |
 | C2 Morphic driver and first scenarios | not started (needs B3, C1) | — |
 | C3 Command placement parity | not started (needs B4) | — |
 | D1 Spikes S-1..S-4 | not started | — |
@@ -36,8 +36,8 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 | CLS | 11 | 8 | 3 | 0 | — | — | — | — |
 | MGP | 11 | 6 | 5 | 0 | — | — | — | — |
 | MTH | 8 | 4 | 4 | 0 | — | — | — | — |
-| SEL | 7 | 6 | 1 | 0 | — | — | — | — |
-| HIS | 5 | 2 | 3 | 0 | — | — | — | — |
+| SEL | 6 | 5 | 1 | 0 | reviewed 2026-11-24 | 14 | 0 | 2 of 3 |
+| HIS | 4 | 2 | 2 | 0 | reviewed 2026-11-24 | 11 | 0 | 1 of 1 |
 | TAB | 14 | 9 | 5 | 0 | reviewed 2026-11-23 | 27 | 0 | 3 of 4 |
 | EDT | 17 | 10 | 7 | 0 | reviewed 2026-11-24 | 34 | 0 | 7 of 7 |
 | CMD | 10 | 5 | 5 | 0 | — | — | — | — |
@@ -47,6 +47,26 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 | UPD | 5 | 3 | 2 | 0 | — | — | — | — |
 | ENT | 4 | 3 | 0 | 1 | — | — | — | — |
 | SET | 5 | 0 | 5 | 0 | — | — | — | — |
+
+### SEL
+
+| Feature | Tier | Scenarios | With a test | Manual check |
+|---|---|---:|---:|---|
+| SEL-01 | M | 5 | 0 | to do |
+| SEL-02 | M | 3 | 0 | — |
+| SEL-03 | P | 1 | 0 | done |
+| SEL-04 | M | 1 | 0 | — |
+| SEL-05 | M | 3 | 0 | — |
+| SEL-06 | M | 1 | 0 | done |
+
+### HIS
+
+| Feature | Tier | Scenarios | With a test | Manual check |
+|---|---|---:|---:|---|
+| HIS-01 | M | 4 | 0 | done |
+| HIS-02 | M | 3 | 0 | — |
+| HIS-03 | P | 1 | 0 | — |
+| HIS-04 | P | 3 | 0 | — |
 
 ### TAB
 

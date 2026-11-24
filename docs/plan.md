@@ -169,7 +169,7 @@ Opened from its own menu entry "System Browser (Spec preview)" until parity.
 | D-03 | Where acceptance tests live once in Pharo | **Decided (2026-11-19):** they are plain SUnit, so they move into Pharo with the code |
 | D-04 | Write the Morphic driver to pin behaviour before refactoring Calypso | **Decided (2026-11-19):** yes, limited to SEL, HIS, TAB and the areas R-0x touch. Always TDD: the pinning test is written and green before the refactoring starts. |
 | D-05 | Target Pharo version | **Decided (2026-11-19):** Pharo 15 |
-| D-06 | Features we may drop | **Decided (2026-11-23):** drop BRW-06 (window groups) and CMD-11 (legacy class annotations). Listed in the inventory's [Dropped features](features/README.md#dropped-features) with what it takes to add them back. |
+| D-06 | Features we may drop | **Decided (2026-11-23):** drop BRW-06 (window groups) and CMD-11 (legacy class annotations); **(2026-11-24)** also SEL-07 (ensure a selection, unused in the full browser) and HIS-05 (pluggable history class, no alternative exists). Listed in the inventory's [Dropped features](features/README.md#dropped-features) with what it takes to add them back. |
 | D-07 | MVP scope (M tier) | **Decided (2026-11-23):** as marked in the inventory, plus BRW-10, PKG-09, PKG-10, TAB-13 and ENT-04 moved to M. ENT-05 stays an external feature (X). |
 | D-08 | `ClyQueryBrowserMorph`: port it, or retire it in favour of `StMethodBrowser` (already used for senders/implementors/references) | **Decided (2026-11-19):** retire it: route its remaining entry points to `StMethodBrowser`, port nothing |
 | D-09 | Acceptance test framework | **Decided (2026-11-19):** SUnit with a browser driver, no Hera for now (see [testing-plan.md](testing-plan.md)) |
