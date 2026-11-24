@@ -50,7 +50,7 @@ Every tab is a `ClyBrowserToolMorph` subclass: Calypso's editors, but also Beaut
 
 `ClyTextEditor < RubSmalltalkEditor` and `ClyTextEditingMode` override navigation (senders, implementors, browse) so the browser answers them; status-bar morphs poke into the text morph; the left bar and the critique segments are Rubric morphs.
 
-**Impact:** the method editor is the hardest tool to port. **Plan:** port it late (Phase 4), after the panes; use `SpCodePresenter` interaction models and upstream the missing hooks (G-17, G-18, G-19).
+**Impact:** the method editor is the hardest tool to port. **Plan:** port it late (Phase 4), after the panes; build it on `SpCodePresenter` and the shared method editor, upstreaming what is missing (G-17, G-18, G-19), so it is the same editor as everywhere in Pharo (plan, sub-goal).
 
 ## P-08: Background processes and deferred updates
 

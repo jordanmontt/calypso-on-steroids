@@ -1,6 +1,6 @@
 # Plan: Calypso in Spec
 
-**Goal:** replace the Morphic UI of Calypso (the system browser; the query browser is already mostly replaced by NewTools' `StMethodBrowser`, see decision D-08) with a Spec UI, keeping every feature, without changing the model except through agreed refactorings merged in Pharo. **Sub-goal:** improve Spec where it cannot host Calypso.
+**Goal:** replace the Morphic UI of Calypso (the system browser; the query browser is already mostly replaced by NewTools' `StMethodBrowser`, see decision D-08) with a Spec UI, keeping every feature, without changing the model except through agreed refactorings merged in Pharo. **Sub-goal:** improve Spec where it cannot host Calypso. In particular, Pharo gets one code editor everywhere, in three layers *(decided 2026-11-24)*: what any code needs goes into `SpCodePresenter` upstream; what any tool editing a method needs (Calypso, `StMethodBrowser`, the debugger: protocol and extension, breakpoints, critiques, edit conflict) goes into one shared method editor built on it, upstream in NewTools; only what depends on the browser's selection (e.g. "Expand class definition", method creation) stays in Calypso. The [EDT sheet](features/sheets/EDT.md) says where each editor feature goes.
 
 This is a living plan. It is complete in scope (it covers every requirement of the project brief, listed at the end with where each is handled), but its details will change as spikes answer questions and as bugs appear. Update it in the same PR as the change that makes it wrong.
 
