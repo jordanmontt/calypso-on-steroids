@@ -14,8 +14,6 @@ Each command has one of four marks:
 | **retired** | only in the old query browser, which is no longer opened (senders and implementors use the new method browser); candidate to drop | 5 |
 | | **Total** | **177** |
 
-What this list cannot say is **which commands people actually use**: that takes measuring, by counting command runs in a few images for some weeks. Until then, "useless" means only the duplicates and the retired ones.
-
 The 397 entries of the catalogue are these 177 commands reached in several ways, plus 10 tabs and 21 list decorations (end of this page).
 
 ## At a glance
