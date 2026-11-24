@@ -15,7 +15,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 | Selection | Tools, in tab order |
 |---|---|
 | Package, no class | Dependencies (−10), Package comment (−10), Class creation (1) |
-| Class | Class creation (1, see TAB-03), Class definition (10), Comment (10.5), `setUp` (11, test classes only), Baseline map (`BaselineOf` subclasses), Method creation (1000) |
+| Class | Class creation (1), Class definition (10), Comment (10.5), `setUp` (11, test classes only), Baseline map (`BaselineOf` subclasses), Method creation (1000) |
 | One method | the class tools + Method editor (20) |
 | Two or more methods | + Diff (10000, of the first two) |
 | Protocol or variable | Method creation (1000) is added for that group |
@@ -36,7 +36,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 - `TAB-01.b` Given a class, when I select it, then there is a class definition tab, a comment tab and a method-creation tab ("+ Inst. side method"), and no method editor.
 - `TAB-01.c` Given a class with a method, when I select the method, then a method editor tab, titled with the method's icon and name, is added to the class tabs.
 - `TAB-01.d` Given two methods selected, then a diff tab is added.
-- `TAB-01.e` Given a test class with a `setUp`, when I select it, then a `setUp` tab is shown and selected; when I select one of its test methods, both the method editor and the `setUp` tab are shown; when I select its `setUp` method, only the method editor on `setUp` is shown.
+- `TAB-01.e` Given a test class with a `setUp`, when I select it, then a `setUp` tab is shown; when I select one of its test methods, both the method editor and the `setUp` tab are shown; when I select its `setUp` method, only the method editor on `setUp` is shown.
 
 **Manual check.** None.
 
@@ -60,10 +60,10 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 
 **Behaviour.** After each change the manager selects the tool with the highest **activation priority**. A tool's priority is its tab order, multiplied by 1000 when its class is in the **desired selection**: the tools the last *manual* selection in a pane asked for. So:
 
-- a class opens on its **comment** (10.5 beats the definition's 10), a test class with a `setUp` on its **`setUp`** tab (11);
+- a class opens on its **comment** (10.5 beats the definition's 10);
 - a method opens its **editor** (20);
 - selecting a protocol or a variable **by hand** selects the method-creation tab, even when a method stays selected (`methodGroupSelectionChanged` sends `skipCurrentDesiredSelection`);
-- the class-creation tab has priority 0 when no method group is selected, so it never wins over the class tabs;
+- the method-creation tab has priority 0 when no method group is selected, so it never wins over the class tabs (11 otherwise); the `setUp` tab has −100, so it is never selected automatically;
 - a tab the user selected by hand stays selected when another item is selected, if the new item has that tab too: clicking a tab **swaps the priorities** of the new and the old tab, for as long as the browser is open (method editors opt out).
 
 **How to trigger.** Click in a pane; navigation (history, `selectMethod:`) is not manual and does not change the desired selection.
@@ -75,7 +75,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** None on the choice of tab.
 
 **Scenarios.**
-- `TAB-03.a` Given a class that is not a test class, when I select it by hand, then the Comment tab is selected.
+- `TAB-03.a` Given a class, when I select it by hand, then the Comment tab is selected.
 - `TAB-03.b` Given a class with a method, when I select the method by hand, then its method editor is selected.
 - `TAB-03.c` Given a method selected, when I select a protocol by hand, then the method-creation tab is selected.
 - `TAB-03.d` Given I selected the class definition tab by hand, when I select another class, then the class definition tab stays selected.
