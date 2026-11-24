@@ -191,7 +191,7 @@ Opened from its own menu entry "System Browser (Spec preview)" until parity.
 Two tools, decided on 2026-11-19, keep the work understandable and verifiable:
 
 - **[Feature sheets](features/sheets/README.md)**, one per area: the complete specification of every feature (behaviour, code entry points, edge cases, scenarios). You review each sheet before any code for that area; the agent works only from reviewed sheets.
-- **The [progress board](progress.md)**, generated from the code at every PR: for each scenario, whether it has a test, passes on Morphic, passes on Spec, and was checked by you. It answers "where are we?" without trusting anyone's summary.
+- **The [progress board](progress.md)**, generated from the inventory and the sheets, and checked at every PR: per area and feature, the scenarios, those with a test, and the manual checks you did. Whether the tests pass on Morphic and on Spec is added with the drivers (C2). It answers "where are we?" without trusting anyone's summary.
 
 ## Working agreement
 

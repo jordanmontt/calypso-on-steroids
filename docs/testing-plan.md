@@ -108,7 +108,7 @@ Both menus are built by a data source's `menuColumn:row:`, so the two drivers ca
 3. **Green.** I write the code until the new tests pass.
 4. **Everything else still green.** I run, in the image: our unit and acceptance tests, the parity test, and the Calypso suites.
 5. **Your review.** I open the changes for you in the image (Obscure Code Reviewer) and give you the list of manual checks with exact steps.
-6. **Your manual checks.** You run them and report; the result goes to `docs/manual-checks.md`, which feeds the progress board. Problems go back to step 3.
+6. **Your manual checks.** You run them and report; the result goes into the feature's sheet ("Checked <date>" in its manual check), which feeds the progress board. Problems go back to step 3.
 7. **Commit only on your explicit OK.** Then push and open the PR; CI must be green before merge.
 
 ## Where tests run and live

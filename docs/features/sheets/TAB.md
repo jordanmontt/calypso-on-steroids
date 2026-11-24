@@ -100,7 +100,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 - `TAB-04.c` Given then, when I select `x` again, then the `y` editor is gone and the `x` editor is no longer marked.
 - `TAB-04.d` Given a dirty editor, when I close its tab and refuse to discard, then the tab stays.
 
-**Manual check.** The orange triangle and the "!" icon (look).
+**Manual check.** The orange triangle and the "!" icon (look). Checked 2026-11-23.
 
 ## TAB-05: Tabs close when their model is removed (M)
 
@@ -143,7 +143,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Scenarios.**
 - `TAB-07.a` Given a method editor, then its tab offers the actions declared for `ClyMethod` in `tabActions`.
 
-**Manual check.** That the icons show and react to a click.
+**Manual check.** That the icons show and react to a click. Checked 2026-11-23.
 
 ## TAB-08: Diff tool (P)
 
