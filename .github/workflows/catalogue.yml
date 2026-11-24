@@ -1,0 +1,22 @@
+name: Command catalogue
+
+# Weekly, apart from the build: tells when the commands of Calypso changed in the latest Pharo 15
+# since docs/features/command-catalogue.md was generated. A red run lists the changed lines.
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    name: Catalogue matches Pharo 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hpi-swa/setup-smalltalkCI@1.6.3
+        id: smalltalkci
+        with:
+          smalltalk-image: Pharo64-15
+      - run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-image }} .smalltalk-catalogue.ston
+        shell: bash
+        timeout-minutes: 30

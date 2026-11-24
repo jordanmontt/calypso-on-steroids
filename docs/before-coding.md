@@ -75,7 +75,7 @@ Committed to `main` on 2026-11-23 (`512c364`..`c04f24b`): the test base class `C
 
 ### B4. Command catalogue — done
 
-Committed to `main` on 2026-11-23 (`fafa99c`..`7518748`): `CosCommandCatalogue`, in the dev-only package `CalypsoOnSteroids-Inventory` (baseline group `dev`), regenerates [command-catalogue.md](features/command-catalogue.md), and a test fails in CI when the file no longer matches the image. No command changed between Pharo 15 build 126 and build 145. Decided with you: the progress board generator is built with the first feature sheet (C1), and the screenshot harness is dropped (spike S-5 already shows how to drive the browser).
+Committed to `main` on 2026-11-23 (`fafa99c`..`7518748`): `CosCommandCatalogue`, in the dev-only package `CalypsoOnSteroids-Inventory` (baseline group `dev`), regenerates [command-catalogue.md](features/command-catalogue.md), and a weekly CI job reports when the file no longer matches the image (first a test in the build; moved out of it on 2026-11-24 so that Calypso changing on its own never breaks the build). No command changed between Pharo 15 build 126 and build 145. Decided with you: the progress board generator is built with the first feature sheet (C1), and the screenshot harness is dropped (spike S-5 already shows how to drive the browser).
 
 ---
 

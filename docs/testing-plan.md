@@ -91,7 +91,7 @@ Both menus are built by a data source's `menuColumn:row:`, so the two drivers ca
 - For a set of fixture contexts (a package, a class, a class side, a protocol, a method, several methods…), the test asks `ClyCommandRegistry` what each interaction should offer (context menu tree, toolbar, shortcuts, table icons, tab actions, double click, drop targets), and compares it with what the browser under test offers.
 - It is written first against the Morphic browser, where it must pass, then runs on Spec.
 - Each kind of interaction also gets one hand-written acceptance test (open a menu and run an item, run a shortcut, click a table icon, double-click, drop, tab action), plus one per shared shortcut (CMD-02, pain point P-11).
-- The catalogue generator (PR 0.4) fails when Calypso adds or removes a command, so a new command never silently goes missing from the Spec UI.
+- A weekly CI job, apart from the build, reports when Calypso adds or removes a command (the catalogue no longer matches the latest Pharo 15), so a new command never silently goes missing from the Spec UI.
 
 ### 5. Manual checks by you
 

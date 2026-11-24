@@ -581,4 +581,4 @@ In the development image, with the `dev` group of `BaselineOfCalypsoOnSteroids` 
 CosCommandCatalogue ofImage writeTo: CosCommandCatalogue committedFile
 ```
 
-`CosCommandCatalogueTest>>#testCommittedCatalogueMatchesTheImage` fails in CI when this file no longer matches the image.
+Every week, the CI workflow "Command catalogue" runs `CosCommandCatalogueCheck`, which fails and lists the changed lines when this file no longer matches the latest Pharo 15. The build does not depend on it.

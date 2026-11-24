@@ -77,7 +77,7 @@ Detailed step by step in **[before-coding.md](before-coding.md)** (why, what, ou
 | Stage | Steps | Main outputs |
 |---|---|---|
 | A — Agree | A1 review and commit the docs (PR 0.1) and run 8 manual keyboard/drag checks; A2 decisions; A3 working process | Agreed docs, decisions, working process, `upstream.md` (done) |
-| B — Infrastructure | B1 baseline + rebuild recipe (PR 0.2); B2 CI; B3 driver spike S-5 (PR 0.3); B4 inventory tooling and progress board (PR 0.4) | Reproducible image, CI, drivers proven, catalogue guarded by a test |
+| B — Infrastructure | B1 baseline + rebuild recipe (PR 0.2); B2 CI; B3 driver spike S-5 (PR 0.3); B4 inventory tooling and progress board (PR 0.4) | Reproducible image, CI, drivers proven, catalogue checked weekly |
 | C — Specify | C1 feature sheets per area, with scenarios (PRs 0.6a–h); C2 Morphic driver + first scenarios (PR 0.7); C3 command placement parity check | Reviewed scenarios, safety net on today's browser |
 | D — Unknowns | D1 spikes S-1..S-4; D2 design notes: architecture, browser protocol, R-01..R-05, query browser | Spike notes, approved designs, D-02 and D-08 decided |
 | E — Upstream first | E1 Pharo PRs for bugs B-01..B-05; E2 Spec issues for the confirmed gaps (fixed iteratively, when a step needs them) | Bug PRs and Spec issues open |

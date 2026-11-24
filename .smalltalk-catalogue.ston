@@ -1,0 +1,15 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'CalypsoOnSteroids',
+      #directory : 'src',
+      #load : [ 'dev' ],
+      #platforms : [ #pharo ]
+    }
+  ],
+  #testing : {
+    #include : {
+      #classes : [ #CosCommandCatalogueCheck ]
+    }
+  }
+}

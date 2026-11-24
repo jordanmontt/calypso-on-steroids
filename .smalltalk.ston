@@ -10,6 +10,9 @@ SmalltalkCISpec {
   #testing : {
     #include : {
       #packages : [ 'Calypso-.*Tests.*', 'CalypsoOnSteroids-.*Tests.*' ]
+    },
+    #exclude : {
+      #classes : [ #CosCommandCatalogueCheck ]
     }
   }
 }

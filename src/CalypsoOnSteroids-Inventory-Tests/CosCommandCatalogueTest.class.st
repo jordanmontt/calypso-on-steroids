@@ -27,15 +27,6 @@ CosCommandCatalogueTest >> testCatalogueOfTheImageLeavesOutTestPackages [
 ]
 
 { #category : 'tests' }
-CosCommandCatalogueTest >> testCommittedCatalogueMatchesTheImage [
-
-	self
-		assert: CosCommandCatalogue committedFile contents = CosCommandCatalogue ofImage markdown
-		description:
-		'The commands of Calypso changed: regenerate docs/features/command-catalogue.md as its last section says, and commit it'
-]
-
-{ #category : 'tests' }
 CosCommandCatalogueTest >> testCountsEntriesByInteraction [
 
 	self assert: (self markdown includesSubstring: '8 entries, 1 anchors.').
