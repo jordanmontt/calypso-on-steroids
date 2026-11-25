@@ -40,3 +40,15 @@ ClySpMorphicBrowserDriver >> selectedMethods [
 
 	^ browser methodSelection actualObjects
 ]
+
+{ #category : 'switching' }
+ClySpMorphicBrowserDriver >> switchToClassSide [
+
+	browser switchToMetaLevelScope: ClyClassSideScope
+]
+
+{ #category : 'switching' }
+ClySpMorphicBrowserDriver >> switchToInstanceSide [
+
+	browser switchToMetaLevelScope: ClyInstanceSideScope
+]

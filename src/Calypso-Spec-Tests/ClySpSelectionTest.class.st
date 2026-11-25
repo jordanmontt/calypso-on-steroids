@@ -38,6 +38,18 @@ ClySpSelectionTest >> tearDown [
 ]
 
 { #category : 'tests' }
+ClySpSelectionTest >> testMethodComesBackAfterARoundTripToTheClassSide [
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	browser selectMethod: ClyClass1FromP1Mock >> #tag1Method1.
+
+	browser switchToClassSide.
+	browser switchToInstanceSide.
+
+	self assert: browser selectedMethods equals: { (ClyClass1FromP1Mock >> #tag1Method1) }
+]
+
+{ #category : 'tests' }
 ClySpSelectionTest >> testSameSelectorStaysSelectedWhenChangingClass [
 	"Lets the user compare the implementations of one selector along a hierarchy"
 
