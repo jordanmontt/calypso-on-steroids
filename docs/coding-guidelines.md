@@ -28,6 +28,7 @@ The code browser is the most used tool of Pharo, and it will be maintained by pe
 - Every PR comes with tests: unit tests for the code it adds, and acceptance tests for the scenarios it claims.
 - **The code never refers to the docs.** No feature, scenario, gap or decision IDs, links or file names in classes, methods, comments or tests: the docs are not shipped. The docs point to the code, not the reverse. PR descriptions may reference the docs.
 - **Comments add, never repeat.** A comment is welcome when it says what the code cannot: why, a non-obvious rule, a pitfall. It never restates the selector or the code, and stays short (one or two lines). Every class has a short class comment.
+- Acceptance tests are grouped in protocols named after their feature's title in the sheet, without its ID: `tests - Desired selection`.
 - Tests use fixtures, not the live image contents.
 - UI tests close every window they open and leave no extra processes.
 

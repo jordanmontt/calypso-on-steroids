@@ -37,7 +37,7 @@ ClySpSelectionTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests - Desired selection' }
 ClySpSelectionTest >> testMethodComesBackAfterARoundTripToTheClassSide [
 
 	browser openOnClass: ClyClass1FromP1Mock.
@@ -49,7 +49,7 @@ ClySpSelectionTest >> testMethodComesBackAfterARoundTripToTheClassSide [
 	self assert: browser selectedMethods equals: { (ClyClass1FromP1Mock >> #tag1Method1) }
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests - Desired selection' }
 ClySpSelectionTest >> testPackageComesBackAfterProjectsMode [
 
 	| package |
@@ -64,7 +64,7 @@ ClySpSelectionTest >> testPackageComesBackAfterProjectsMode [
 	self assert: browser selectedPackages equals: { package }
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests - Desired selection' }
 ClySpSelectionTest >> testProtocolIsDroppedWhenChangingClass [
 	"Unlike the other panes, the protocol pane never restores the user's selection"
 
@@ -78,7 +78,7 @@ ClySpSelectionTest >> testProtocolIsDroppedWhenChangingClass [
 	self assert: browser shownMethods asSet equals: ClySubclassN1OfClass1FromP1Mock methods asSet
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests - Desired selection' }
 ClySpSelectionTest >> testSameSelectorStaysSelectedWhenChangingClass [
 	"Lets the user compare the implementations of one selector along a hierarchy"
 
@@ -90,7 +90,7 @@ ClySpSelectionTest >> testSameSelectorStaysSelectedWhenChangingClass [
 	self assert: browser selectedMethods equals: { (ClySubclassN1OfClass1FromP1Mock >> #tag1Method1) }
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests - Desired selection' }
 ClySpSelectionTest >> testSelectorComesBackAfterAClassWithoutIt [
 
 	browser openOnClass: ClyClass1FromP1Mock.
