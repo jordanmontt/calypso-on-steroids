@@ -109,6 +109,12 @@ ClySpMorphicBrowserDriver >> shownMethods [
 	^ self inUIProcess: [ browser methodView dataSource allElements collect: [ :each | each actualObject ] ]
 ]
 
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> shownProtocolNames [
+
+	^ self inUIProcess: [ browser methodGroupView dataSource allElements collect: [ :each | each name ] ]
+]
+
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToClassSide [
 

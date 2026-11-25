@@ -77,9 +77,9 @@ How the four panes select, what they keep when their items change, and how a sel
 **Code.** `ClyFullBrowserMorph>>packageSelectionChanged` (`switchToFlatClasses`), `classSelectionChanged` (`changeMethodGroupQueryBy:`, `selectCurrentExtensionMethodGroup`), `methodGroupSelectionChanged` (`showQueries:as:`, `showAllMethods`), `methodSelectionChanged`; `ClyBrowserMorph>>changeStateBy:` (one title, history and tools update per change).
 
 **Scenarios.**
-- `SEL-05.a` Given a package, when I select it, then the class pane lists its classes.
-- `SEL-05.b` Given a class, when I select it, then the group pane lists its protocols and the method pane all its methods, sorted by selector.
-- `SEL-05.c` Given a class selected, when I select a protocol, then the method pane lists only its methods.
+- `SEL-05.a` Given a package, when I select it, then the class pane lists its classes. → `ClySpSelectionTest>>testClassPaneListsTheClassesOfTheSelectedPackage`
+- `SEL-05.b` Given a class, when I select it, then the group pane lists its protocols and the method pane all its methods, sorted by selector. → `ClySpSelectionTest>>testGroupAndMethodPanesShowTheSelectedClass`
+- `SEL-05.c` Given a class selected, when I select a protocol, then the method pane lists only its methods. → `ClySpSelectionTest>>testMethodPaneShowsOnlyTheMethodsOfTheSelectedProtocol`
 
 **Manual check.** None.
 

@@ -33,6 +33,17 @@ ClySpSelectionTest >> newClassWithMethods: selectors [
 	^ class
 ]
 
+{ #category : 'private' }
+ClySpSelectionTest >> newClassWithProtocols [
+
+	| class |
+	class := factory newClass.
+	class compile: 'b ^ nil' classified: 'beta'.
+	class compile: 'a ^ nil' classified: 'alpha'.
+	class compile: '+ x ^ nil' classified: 'alpha'.
+	^ class
+]
+
 { #category : 'running' }
 ClySpSelectionTest >> setUp [
 
@@ -49,6 +60,37 @@ ClySpSelectionTest >> tearDown [
 	super tearDown
 ]
 
+{ #category : 'tests - Selection drives the panes to its right' }
+ClySpSelectionTest >> testClassPaneListsTheClassesOfTheSelectedPackage [
+
+	| classA classB |
+	classA := factory newClass.
+	classB := factory newClass.
+	browser openOnClass: ClyClass1FromP1Mock.
+
+	browser selectPackage: classA package.
+
+	self assert: browser shownClasses asSet equals: {
+		classA.
+		classB } asSet
+]
+
+{ #category : 'tests - Selection drives the panes to its right' }
+ClySpSelectionTest >> testGroupAndMethodPanesShowTheSelectedClass [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: factory newClass.
+
+	browser selectClass: class.
+
+	self assert: (browser shownProtocolNames includesAll: #( 'alpha' 'beta' )).
+	self assert: browser shownMethods asArray equals: {
+		(class >> #+).
+		(class >> #a).
+		(class >> #b) }
+]
+
 { #category : 'tests - Desired selection' }
 ClySpSelectionTest >> testMethodComesBackAfterARoundTripToTheClassSide [
 
@@ -59,6 +101,18 @@ ClySpSelectionTest >> testMethodComesBackAfterARoundTripToTheClassSide [
 	browser switchToInstanceSide.
 
 	self assert: browser selectedMethods equals: { (ClyClass1FromP1Mock >> #tag1Method1) }
+]
+
+{ #category : 'tests - Selection drives the panes to its right' }
+ClySpSelectionTest >> testMethodPaneShowsOnlyTheMethodsOfTheSelectedProtocol [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+
+	browser selectProtocolNamed: 'beta'.
+
+	self assert: browser shownMethods asArray equals: { (class >> #b) }
 ]
 
 { #category : 'tests - Desired selection' }
