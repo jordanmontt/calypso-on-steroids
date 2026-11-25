@@ -27,7 +27,7 @@ ClySpMorphicBrowserDriverTest >> testRaisesInTheTestAnErrorOfABrowserAction [
 
 { #category : 'tests' }
 ClySpMorphicBrowserDriverTest >> testRunsBrowserActionsInTheUIProcess [
-	"Calypso updates its browsers in the UI process; acting from another process races with those updates"
+	"Calypso updates its browsers in the Morphic UI process; acting from another process races with those updates. Without a UI, as in CI, UIManager default does not know that process."
 
-	self assert: (driver inUIProcess: [ Processor activeProcess ]) identicalTo: UIManager default uiProcess
+	self assert: (driver inUIProcess: [ Processor activeProcess ]) identicalTo: MorphicUIManager uiProcess
 ]

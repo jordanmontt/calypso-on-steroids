@@ -24,14 +24,14 @@ ClySpMorphicBrowserDriver >> inUIProcess: aBlock [
 	| call |
 	self isInUIProcess ifTrue: [ ^ aBlock value ].
 	call := ClySpUIProcessCall of: aBlock.
-	UIManager default defer: [ call run ].
+	self currentWorld defer: [ call run ].
 	^ call waitForResult
 ]
 
 { #category : 'running' }
 ClySpMorphicBrowserDriver >> isInUIProcess [
 
-	^ Processor activeProcess == UIManager default uiProcess
+	^ Processor activeProcess == MorphicUIManager uiProcess
 ]
 
 { #category : 'opening' }
