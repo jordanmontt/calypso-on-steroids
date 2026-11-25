@@ -75,6 +75,24 @@ ClySpSelectionTest >> testClassPaneListsTheClassesOfTheSelectedPackage [
 		classB } asSet
 ]
 
+{ #category : 'tests - Deselection' }
+ClySpSelectionTest >> testDeselectingTheProtocolShowsAllMethods [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectProtocolNamed: 'beta'.
+	self assert: browser shownMethods asArray equals: { (class >> #b) }.
+
+	browser deselectProtocol.
+
+	self assert: browser selectedProtocolNames isEmpty.
+	self assert: browser shownMethods asArray equals: {
+		(class >> #+).
+		(class >> #a).
+		(class >> #b) }
+]
+
 { #category : 'tests - Selection drives the panes to its right' }
 ClySpSelectionTest >> testGroupAndMethodPanesShowTheSelectedClass [
 

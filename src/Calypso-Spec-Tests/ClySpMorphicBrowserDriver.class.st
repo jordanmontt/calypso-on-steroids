@@ -17,6 +17,13 @@ ClySpMorphicBrowserDriver >> close [
 	browser ifNotNil: [ self inUIProcess: [ browser window close ] ]
 ]
 
+{ #category : 'selecting' }
+ClySpMorphicBrowserDriver >> deselectProtocol [
+	"As a cmd-click on the selected protocol: the table selection becomes empty."
+
+	self inUIProcess: [ browser methodGroupSelection beEmpty ]
+]
+
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> highlightedProtocolNames [
 	"The group pane keeps no readable highlighting: it is only in its table."

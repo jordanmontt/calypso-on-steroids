@@ -90,7 +90,7 @@ How the four panes select, what they keep when their items change, and how a sel
 **Code.** `ClyQueryViewMorph>>initializeTable` (`allowsDeselection: true`); only the retired query browser denies it.
 
 **Scenarios.**
-- `SEL-06.a` Given a protocol selected, when I deselect it, then all methods of the class are shown.
+- `SEL-06.a` Given a protocol selected, when I deselect it, then all methods of the class are shown. → `ClySpSelectionTest>>testDeselectingTheProtocolShowsAllMethods`
 
 **Manual check.** ⌘-click deselects (T-09). Checked 2026-11-24.
 
