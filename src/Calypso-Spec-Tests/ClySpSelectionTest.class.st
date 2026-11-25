@@ -3,11 +3,7 @@ I check what the browser selects while the user navigates: what it keeps, what i
 "
 Class {
 	#name : 'ClySpSelectionTest',
-	#superclass : 'ClySpTestCase',
-	#instVars : [
-		'browser',
-		'factory'
-	],
+	#superclass : 'ClySpBrowserTest',
 	#category : 'Calypso-Spec-Tests',
 	#package : 'Calypso-Spec-Tests'
 }
@@ -16,48 +12,6 @@ Class {
 ClySpSelectionTest class >> isAbstract [
 
 	^ self == ClySpSelectionTest
-]
-
-{ #category : 'running' }
-ClySpSelectionTest >> newBrowserDriver [
-
-	^ self subclassResponsibility
-]
-
-{ #category : 'private' }
-ClySpSelectionTest >> newClassWithMethods: selectors [
-
-	| class |
-	class := factory newClass.
-	selectors do: [ :each | class compile: each , ' ^ nil' ].
-	^ class
-]
-
-{ #category : 'private' }
-ClySpSelectionTest >> newClassWithProtocols [
-
-	| class |
-	class := factory newClass.
-	class compile: 'b ^ nil' classified: 'beta'.
-	class compile: 'a ^ nil' classified: 'alpha'.
-	class compile: '+ x ^ nil' classified: 'alpha'.
-	^ class
-]
-
-{ #category : 'running' }
-ClySpSelectionTest >> setUp [
-
-	super setUp.
-	factory := ClassFactoryForTestCase environment: Smalltalk globals.
-	browser := self newBrowserDriver
-]
-
-{ #category : 'running' }
-ClySpSelectionTest >> tearDown [
-
-	browser close.
-	factory cleanUp.
-	super tearDown
 ]
 
 { #category : 'tests - Selection drives the panes to its right' }
