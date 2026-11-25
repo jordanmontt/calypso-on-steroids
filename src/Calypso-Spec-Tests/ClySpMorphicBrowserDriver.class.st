@@ -52,8 +52,13 @@ ClySpMorphicBrowserDriver >> openOnClass: aClass [
 
 { #category : 'selecting' }
 ClySpMorphicBrowserDriver >> selectClass: aClass [
+	"Clicks the class in the class pane. The browser's own selectClass: navigates instead: it may change the package and leave hierarchy mode."
 
-	self inUIProcess: [ browser selectClass: aClass ]
+	self inUIProcess: [
+		| items |
+		items := browser classView findItemsWith: { aClass }.
+		items ifEmpty: [ self error: aClass name , ' is not shown in the class pane' ].
+		browser classSelection selectItems: items ]
 ]
 
 { #category : 'selecting' }
