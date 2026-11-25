@@ -1,6 +1,6 @@
 # SEL: selection
 
-Status: **reviewed** 2026-11-24 (manual checks done for SEL-03, 06). Code read on Pharo 15 build 145, 2026-11-24.
+Status: **reviewed** 2026-11-24 (manual checks done for SEL-01, 03, 06). Code read on Pharo 15 build 145, 2026-11-24.
 
 How the four panes select, what they keep when their items change, and how a selection drives the rest of the browser. These rules are invisible but the browser feels wrong without them; refactoring R-02 moves them out of the Morphic views so a Spec pane can use them.
 
@@ -31,7 +31,7 @@ How the four panes select, what they keep when their items change, and how a sel
 - `SEL-01.d` Given a package selected, when I switch to Projects and back to All Packages, then the package is selected again. → `ClySpSelectionTest>>testPackageComesBackAfterProjectsMode`
 - `SEL-01.e` Given a protocol selected in class A, when I select class B which has the same protocol, then no protocol is selected and all methods of B are shown. → `ClySpSelectionTest>>testProtocolIsDroppedWhenChangingClass`
 
-**Manual check.** `SEL-01.e` in the image (read from the code only).
+**Manual check.** `SEL-01.e` in the image (read from the code only). Checked 2026-11-25.
 
 ## SEL-02: Selection survives item changes (M)
 

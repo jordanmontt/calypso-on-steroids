@@ -36,7 +36,7 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 | CLS | 11 | 8 | 3 | 0 | reviewed 2026-11-25 | 10 | 0 | 2 of 3 |
 | MGP | 11 | 6 | 5 | 0 | — | — | — | — |
 | MTH | 8 | 4 | 4 | 0 | — | — | — | — |
-| SEL | 6 | 5 | 1 | 0 | reviewed 2026-11-24 | 14 | 14 | 2 of 3 |
+| SEL | 6 | 5 | 1 | 0 | reviewed 2026-11-24 | 14 | 14 | 3 of 3 |
 | HIS | 4 | 2 | 2 | 0 | reviewed 2026-11-24 | 11 | 0 | 1 of 1 |
 | TAB | 14 | 9 | 5 | 0 | reviewed 2026-11-23 | 27 | 0 | 3 of 4 |
 | EDT | 17 | 10 | 7 | 0 | reviewed 2026-11-24 | 34 | 0 | 7 of 7 |
@@ -84,7 +84,7 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 
 | Feature | Tier | Scenarios | With a test | Manual check |
 |---|---|---:|---:|---|
-| SEL-01 | M | 5 | 5 | to do |
+| SEL-01 | M | 5 | 5 | done |
 | SEL-02 | M | 3 | 3 | — |
 | SEL-03 | P | 1 | 1 | done |
 | SEL-04 | M | 1 | 1 | — |
