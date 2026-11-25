@@ -17,6 +17,16 @@ ClySpMorphicBrowserDriver >> close [
 	browser ifNotNil: [ self inUIProcess: [ browser window close ] ]
 ]
 
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> highlightedProtocolNames [
+	"The group pane keeps no readable highlighting: it is only in its table."
+
+	^ self inUIProcess: [
+		  | view |
+		  view := browser methodGroupView.
+		  view table highlightedIndexes collect: [ :each | (view itemAt: each) name ] ]
+]
+
 { #category : 'running' }
 ClySpMorphicBrowserDriver >> inUIProcess: aBlock [
 	"A click runs in the UI process, and Calypso updates its browsers there too. So aBlock runs there, and I wait until it is done. Run from the test's own process, it would clash with those updates."

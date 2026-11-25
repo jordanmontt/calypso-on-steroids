@@ -90,6 +90,16 @@ ClySpSelectionTest >> testProtocolIsDroppedWhenChangingClass [
 	self assert: browser shownMethods asSet equals: ClySubclassN1OfClass1FromP1Mock methods asSet
 ]
 
+{ #category : 'tests - Highlighting' }
+ClySpSelectionTest >> testProtocolOfTheSelectedMethodIsHighlighted [
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	browser selectMethod: ClyClass1FromP1Mock >> #tag1Method1.
+
+	self assert: (browser highlightedProtocolNames includes: 'tag1').
+	self assert: browser selectedProtocolNames isEmpty
+]
+
 { #category : 'tests - Desired selection' }
 ClySpSelectionTest >> testSameSelectorStaysSelectedWhenChangingClass [
 	"Lets the user compare the implementations of one selector along a hierarchy"

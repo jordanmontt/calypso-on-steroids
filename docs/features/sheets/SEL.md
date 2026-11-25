@@ -55,7 +55,7 @@ How the four panes select, what they keep when their items change, and how a sel
 **Code.** `ClyFullBrowserMorph>>methodSelectionChanged` → `methodGroupView highlightItemsWhich:` (`includesMethod:`); `ClyHighlightingSelection`.
 
 **Scenarios.**
-- `SEL-03.a` Given method `x` in protocol `accessing` selected with no protocol selected, then `accessing` is highlighted and not selected.
+- `SEL-03.a` Given method `x` in protocol `accessing` selected with no protocol selected, then `accessing` is highlighted and not selected. → `ClySpSelectionTest>>testProtocolOfTheSelectedMethodIsHighlighted`
 
 **Manual check.** The highlight colour (look). Checked 2026-11-24.
 
