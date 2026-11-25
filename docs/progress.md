@@ -16,7 +16,7 @@ Steps of [before-coding.md](before-coding.md). Updated in the commit that starts
 | B3 Driver spike S-5 | done 2026-11-23 | `512c364`, `3d53a63`, `be96c4c`, `c04f24b` |
 | B4 Command catalogue generator and check | done 2026-11-23; the board generator moved to C1, the screenshot harness dropped | `fafa99c`, `a9c0091`, `01001c3`, `7518748` |
 | C1 Feature sheets per area, and the board generator with the first sheet | **in progress**: TAB, EDT, SEL, HIS, PKG and CLS reviewed, board generated; MGP and MTH next | `0231fd0`, `a8fb5a0`, `6f6f369`, `269c045`, `9e68fd7` |
-| C2 Morphic driver and first scenarios | **in progress**: the driver and the first selection scenarios | `cb8c64f`, `88d3477`, `40ab1e2` |
+| C2 Morphic driver and first scenarios | **in progress**: the driver and the first selection scenarios | `cb8c64f` … `81527f5` |
 | C3 Command placement parity | not started (needs B4) | — |
 | D1 Spikes S-1..S-4 | not started | — |
 | D2 Design notes | not started (needs D1) | — |
@@ -36,7 +36,7 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 | CLS | 11 | 8 | 3 | 0 | reviewed 2026-11-25 | 10 | 0 | 2 of 3 |
 | MGP | 11 | 6 | 5 | 0 | — | — | — | — |
 | MTH | 8 | 4 | 4 | 0 | — | — | — | — |
-| SEL | 6 | 5 | 1 | 0 | reviewed 2026-11-24 | 14 | 5 | 2 of 3 |
+| SEL | 6 | 5 | 1 | 0 | reviewed 2026-11-24 | 14 | 8 | 2 of 3 |
 | HIS | 4 | 2 | 2 | 0 | reviewed 2026-11-24 | 11 | 0 | 1 of 1 |
 | TAB | 14 | 9 | 5 | 0 | reviewed 2026-11-23 | 27 | 0 | 3 of 4 |
 | EDT | 17 | 10 | 7 | 0 | reviewed 2026-11-24 | 34 | 0 | 7 of 7 |
@@ -85,7 +85,7 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 | Feature | Tier | Scenarios | With a test | Manual check |
 |---|---|---:|---:|---|
 | SEL-01 | M | 5 | 5 | to do |
-| SEL-02 | M | 3 | 0 | — |
+| SEL-02 | M | 3 | 3 | — |
 | SEL-03 | P | 1 | 0 | done |
 | SEL-04 | M | 1 | 0 | — |
 | SEL-05 | M | 3 | 0 | — |

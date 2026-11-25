@@ -5,7 +5,8 @@ Class {
 	#name : 'ClySpSelectionTest',
 	#superclass : 'ClySpTestCase',
 	#instVars : [
-		'browser'
+		'browser',
+		'factory'
 	],
 	#category : 'Calypso-Spec-Tests',
 	#package : 'Calypso-Spec-Tests'
@@ -23,10 +24,20 @@ ClySpSelectionTest >> newBrowserDriver [
 	^ self subclassResponsibility
 ]
 
+{ #category : 'private' }
+ClySpSelectionTest >> newClassWithMethods: selectors [
+
+	| class |
+	class := factory newClass.
+	selectors do: [ :each | class compile: each , ' ^ nil' ].
+	^ class
+]
+
 { #category : 'running' }
 ClySpSelectionTest >> setUp [
 
 	super setUp.
+	factory := ClassFactoryForTestCase environment: Smalltalk globals.
 	browser := self newBrowserDriver
 ]
 
@@ -34,6 +45,7 @@ ClySpSelectionTest >> setUp [
 ClySpSelectionTest >> tearDown [
 
 	browser close.
+	factory cleanUp.
 	super tearDown
 ]
 
@@ -88,6 +100,50 @@ ClySpSelectionTest >> testSameSelectorStaysSelectedWhenChangingClass [
 	browser selectClass: ClySubclassN1OfClass1FromP1Mock.
 
 	self assert: browser selectedMethods equals: { (ClySubclassN1OfClass1FromP1Mock >> #tag1Method1) }
+]
+
+{ #category : 'tests - Selection survives item changes' }
+ClySpSelectionTest >> testSelectionComesBackWhenTheMethodIsCompiledAgain [
+	"The browser keeps what the user chose even while it is gone"
+
+	| class |
+	class := self newClassWithMethods: #( #x #y ).
+	browser openOnClass: class.
+	browser selectMethod: class >> #x.
+	class removeSelector: #x.
+	self assert: browser selectedMethods isEmpty.
+
+	class compile: 'x ^ nil'.
+
+	self assert: browser selectedMethods equals: { (class >> #x) }
+]
+
+{ #category : 'tests - Selection survives item changes' }
+ClySpSelectionTest >> testSelectionIsDroppedWhenTheMethodIsRemovedElsewhere [
+
+	| class |
+	class := self newClassWithMethods: #( #x #y ).
+	browser openOnClass: class.
+	browser selectMethod: class >> #x.
+
+	class removeSelector: #x.
+
+	self assert: browser shownMethods equals: { (class >> #y) }.
+	self assert: browser selectedMethods isEmpty
+]
+
+{ #category : 'tests - Selection survives item changes' }
+ClySpSelectionTest >> testSelectionSurvivesAMethodAddedElsewhere [
+
+	| class |
+	class := self newClassWithMethods: #( #x #y ).
+	browser openOnClass: class.
+	browser selectMethod: class >> #x.
+
+	class compile: 'z ^ nil'.
+
+	self assert: (browser shownMethods includes: class >> #z).
+	self assert: browser selectedMethods equals: { (class >> #x) }
 ]
 
 { #category : 'tests - Desired selection' }

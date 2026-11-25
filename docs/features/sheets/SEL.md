@@ -42,9 +42,9 @@ How the four panes select, what they keep when their items change, and how a sel
 **Existing tests.** `ClyQueryViewStateTest`, `ClyQueryViewMorphShouldExpandTest` (expansion, not selection after an update).
 
 **Scenarios.**
-- `SEL-02.a` Given method `x` selected, when another method is added to the class elsewhere, then `x` is still selected.
-- `SEL-02.b` Given method `x` selected, when `x` is removed elsewhere, then no method is selected.
-- `SEL-02.c` Given then, when `x` is compiled again elsewhere, then `x` is selected again.
+- `SEL-02.a` Given method `x` selected, when another method is added to the class elsewhere, then `x` is still selected. → `ClySpSelectionTest>>testSelectionSurvivesAMethodAddedElsewhere`
+- `SEL-02.b` Given method `x` selected, when `x` is removed elsewhere, then no method is selected. → `ClySpSelectionTest>>testSelectionIsDroppedWhenTheMethodIsRemovedElsewhere`
+- `SEL-02.c` Given then, when `x` is compiled again elsewhere, then `x` is selected again. → `ClySpSelectionTest>>testSelectionComesBackWhenTheMethodIsCompiledAgain`
 
 **Manual check.** None.
 
