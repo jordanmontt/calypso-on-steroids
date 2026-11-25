@@ -41,6 +41,12 @@ ClySpMorphicBrowserDriver >> selectPackage: aPackage [
 	browser selectPackage: aPackage
 ]
 
+{ #category : 'selecting' }
+ClySpMorphicBrowserDriver >> selectProtocolNamed: aString [
+
+	browser selectMethodGroupNamed: aString
+]
+
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedMethods [
 
@@ -51,6 +57,18 @@ ClySpMorphicBrowserDriver >> selectedMethods [
 ClySpMorphicBrowserDriver >> selectedPackages [
 
 	^ browser packageSelection actualObjects
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> selectedProtocolNames [
+
+	^ browser methodGroupSelection items collect: [ :each | each name ]
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> shownMethods [
+
+	^ browser methodView dataSource allElements collect: [ :each | each actualObject ]
 ]
 
 { #category : 'switching' }

@@ -65,6 +65,20 @@ ClySpSelectionTest >> testPackageComesBackAfterProjectsMode [
 ]
 
 { #category : 'tests' }
+ClySpSelectionTest >> testProtocolIsDroppedWhenChangingClass [
+	"Unlike the other panes, the protocol pane never restores the user's selection"
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	browser selectProtocolNamed: 'tag1'.
+	self assert: browser selectedProtocolNames asArray equals: #( 'tag1' ).
+
+	browser selectClass: ClySubclassN1OfClass1FromP1Mock.
+
+	self assert: browser selectedProtocolNames isEmpty.
+	self assert: browser shownMethods asSet equals: ClySubclassN1OfClass1FromP1Mock methods asSet
+]
+
+{ #category : 'tests' }
 ClySpSelectionTest >> testSameSelectorStaysSelectedWhenChangingClass [
 	"Lets the user compare the implementations of one selector along a hierarchy"
 
