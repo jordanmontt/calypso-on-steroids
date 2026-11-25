@@ -1,5 +1,9 @@
 "
-I am an action handed from a test to the UI process. I run there and keep the action's result or its error; the test waits for me and gets them back, the error raised again in the test's process.
+I carry one action from a test to the UI process, and bring back what it did.
+
+Why: a test runs in its own process, but Calypso changes its browsers in the UI process, where it also applies system changes a bit later. When a test changed a browser from its own process, the UI process could interrupt it halfway and change the same browser; each broke the other's work, and tests failed at random. So the test does not act itself: it hands me to the UI process and waits.
+
+How: the UI process sends me #run, which runs the action and keeps its result or its error. The test waits in #waitForResult until #run is done, then gets the result, or the error raised again in its own process, so that a failing action fails the test.
 "
 Class {
 	#name : 'ClySpUIProcessCall',

@@ -19,7 +19,7 @@ ClySpMorphicBrowserDriver >> close [
 
 { #category : 'running' }
 ClySpMorphicBrowserDriver >> inUIProcess: aBlock [
-	"Runs aBlock as a user gesture runs, in the UI process, and waits for it: Calypso updates its browsers there, so acting from another process races with those updates."
+	"A click runs in the UI process, and Calypso updates its browsers there too. So aBlock runs there, and I wait until it is done. Run from the test's own process, it would clash with those updates."
 
 	| call |
 	self isInUIProcess ifTrue: [ ^ aBlock value ].
