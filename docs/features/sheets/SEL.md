@@ -26,7 +26,7 @@ How the four panes select, what they keep when their items change, and how a sel
 
 **Scenarios.**
 - `SEL-01.a` Given method `x` selected by hand in class A, when I select class B which has `x`, then `x` is selected in B. → `ClySpSelectionTest>>testSameSelectorStaysSelectedWhenChangingClass`
-- `SEL-01.b` Given then, when I select class C which has no `x`, then no method is selected; when I select class D which has `x`, then `x` is selected in D.
+- `SEL-01.b` Given then, when I select class C which has no `x`, then no method is selected; when I select class D which has `x`, then `x` is selected in D. → `ClySpSelectionTest>>testSelectorComesBackAfterAClassWithoutIt`
 - `SEL-01.c` Given a method selected on the instance side, when I switch to the class side and back, then the method is selected again.
 - `SEL-01.d` Given a package selected, when I switch to Projects and back to All Packages, then the package is selected again.
 - `SEL-01.e` Given a protocol selected in class A, when I select class B which has the same protocol, then no protocol is selected and all methods of B are shown.

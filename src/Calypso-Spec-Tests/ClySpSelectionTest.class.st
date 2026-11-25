@@ -48,3 +48,17 @@ ClySpSelectionTest >> testSameSelectorStaysSelectedWhenChangingClass [
 
 	self assert: browser selectedMethods equals: { (ClySubclassN1OfClass1FromP1Mock >> #tag1Method1) }
 ]
+
+{ #category : 'tests' }
+ClySpSelectionTest >> testSelectorComesBackAfterAClassWithoutIt [
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	browser selectMethod: ClyClass1FromP1Mock >> #tag1Method1.
+
+	"Unselects the class"
+	browser selectClass: ClyClass2FromP1Mock.
+	self assert: browser selectedMethods isEmpty.
+
+	browser selectClass: ClySubclassN1OfClass1FromP1Mock.
+	self assert: browser selectedMethods equals: { (ClySubclassN1OfClass1FromP1Mock >> #tag1Method1) }
+]
