@@ -15,7 +15,7 @@ Steps of [before-coding.md](before-coding.md). Updated in the commit that starts
 | B2 CI on the latest Pharo 15 | done 2026-11-23, green on every push since | `5a5c6de` |
 | B3 Driver spike S-5 | done 2026-11-23 | `512c364`, `3d53a63`, `be96c4c`, `c04f24b` |
 | B4 Command catalogue generator and check | done 2026-11-23; the board generator moved to C1, the screenshot harness dropped | `fafa99c`, `a9c0091`, `01001c3`, `7518748` |
-| C1 Feature sheets per area, and the board generator with the first sheet | **in progress**: TAB, EDT, SEL and HIS reviewed, board generated; PKG and CLS next | `0231fd0`, `a8fb5a0`, `6f6f369`, `269c045` |
+| C1 Feature sheets per area, and the board generator with the first sheet | **in progress**: TAB, EDT, SEL, HIS, PKG and CLS reviewed, board generated; MGP and MTH next | `0231fd0`, `a8fb5a0`, `6f6f369`, `269c045`, `9e68fd7` |
 | C2 Morphic driver and first scenarios | not started (needs B3, C1) | — |
 | C3 Command placement parity | not started (needs B4) | — |
 | D1 Spikes S-1..S-4 | not started | — |
@@ -32,8 +32,8 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 | Area | Features | M | P | X | Sheet | Scenarios | With a test | Manual checks done |
 |---|---:|---:|---:|---:|---|---:|---:|---:|
 | BRW | 11 | 9 | 2 | 0 | — | — | — | — |
-| PKG | 11 | 7 | 4 | 0 | — | — | — | — |
-| CLS | 11 | 8 | 3 | 0 | — | — | — | — |
+| PKG | 11 | 7 | 4 | 0 | reviewed 2026-11-25 | 10 | 0 | 3 of 3 |
+| CLS | 11 | 8 | 3 | 0 | reviewed 2026-11-25 | 10 | 0 | 2 of 3 |
 | MGP | 11 | 6 | 5 | 0 | — | — | — | — |
 | MTH | 8 | 4 | 4 | 0 | — | — | — | — |
 | SEL | 6 | 5 | 1 | 0 | reviewed 2026-11-24 | 14 | 0 | 2 of 3 |
@@ -47,6 +47,38 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 | UPD | 5 | 3 | 2 | 0 | — | — | — | — |
 | ENT | 4 | 3 | 0 | 1 | — | — | — | — |
 | SET | 5 | 0 | 5 | 0 | — | — | — | — |
+
+### PKG
+
+| Feature | Tier | Scenarios | With a test | Manual check |
+|---|---|---:|---:|---|
+| PKG-01 | M | 1 | 0 | — |
+| PKG-02 | M | 2 | 0 | — |
+| PKG-03 | P | 1 | 0 | — |
+| PKG-04 | M | 2 | 0 | done |
+| PKG-05 | M | 0 | 0 | — |
+| PKG-06 | P | 0 | 0 | — |
+| PKG-07 | P | 1 | 0 | done |
+| PKG-08 | P | 1 | 0 | done |
+| PKG-09 | M | 1 | 0 | — |
+| PKG-10 | M | 0 | 0 | — |
+| PKG-11 | M | 1 | 0 | — |
+
+### CLS
+
+| Feature | Tier | Scenarios | With a test | Manual check |
+|---|---|---:|---:|---|
+| CLS-01 | M | 2 | 0 | — |
+| CLS-02 | M | 1 | 0 | — |
+| CLS-03 | P | 2 | 0 | — |
+| CLS-04 | M | 0 | 0 | — |
+| CLS-05 | M | 1 | 0 | — |
+| CLS-06 | M | 0 | 0 | to do |
+| CLS-07 | M | 1 | 0 | — |
+| CLS-08 | M | 0 | 0 | — |
+| CLS-09 | M | 2 | 0 | done |
+| CLS-10 | P | 0 | 0 | — |
+| CLS-11 | P | 1 | 0 | done |
 
 ### SEL
 
