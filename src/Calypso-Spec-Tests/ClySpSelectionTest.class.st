@@ -50,6 +50,21 @@ ClySpSelectionTest >> testMethodComesBackAfterARoundTripToTheClassSide [
 ]
 
 { #category : 'tests' }
+ClySpSelectionTest >> testPackageComesBackAfterProjectsMode [
+
+	| package |
+	package := ClyClass1FromP1Mock package.
+	browser openOnClass: ClyClass1FromP1Mock.
+	browser selectPackage: package.
+
+	browser switchToProjects.
+	self assert: browser selectedPackages isEmpty.
+
+	browser switchToPackages.
+	self assert: browser selectedPackages equals: { package }
+]
+
+{ #category : 'tests' }
 ClySpSelectionTest >> testSameSelectorStaysSelectedWhenChangingClass [
 	"Lets the user compare the implementations of one selector along a hierarchy"
 

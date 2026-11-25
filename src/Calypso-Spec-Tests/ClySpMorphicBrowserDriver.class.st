@@ -35,10 +35,22 @@ ClySpMorphicBrowserDriver >> selectMethod: aMethod [
 	browser selectMethod: aMethod
 ]
 
+{ #category : 'selecting' }
+ClySpMorphicBrowserDriver >> selectPackage: aPackage [
+
+	browser selectPackage: aPackage
+]
+
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedMethods [
 
 	^ browser methodSelection actualObjects
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> selectedPackages [
+
+	^ browser packageSelection actualObjects
 ]
 
 { #category : 'switching' }
@@ -51,4 +63,16 @@ ClySpMorphicBrowserDriver >> switchToClassSide [
 ClySpMorphicBrowserDriver >> switchToInstanceSide [
 
 	browser switchToMetaLevelScope: ClyInstanceSideScope
+]
+
+{ #category : 'switching' }
+ClySpMorphicBrowserDriver >> switchToPackages [
+
+	browser switchToPackages
+]
+
+{ #category : 'switching' }
+ClySpMorphicBrowserDriver >> switchToProjects [
+
+	browser switchToProjects
 ]
