@@ -76,6 +76,18 @@ ClySpSelectionTest >> testPackageComesBackAfterProjectsMode [
 	self assert: browser selectedPackages equals: { package }
 ]
 
+{ #category : 'tests - Silent selection' }
+ClySpSelectionTest >> testPackageOfAClassFollowsInHierarchyMode [
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	browser switchToFullHierarchy.
+
+	browser selectClass: ClySubclassMOfClass1FromP2Mock.
+
+	self assert: browser selectedPackages equals: { ClySubclassMOfClass1FromP2Mock package }.
+	self assert: (browser shownClasses includes: ProtoObject)
+]
+
 { #category : 'tests - Desired selection' }
 ClySpSelectionTest >> testProtocolIsDroppedWhenChangingClass [
 	"Unlike the other panes, the protocol pane never restores the user's selection"

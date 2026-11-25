@@ -98,6 +98,12 @@ ClySpMorphicBrowserDriver >> selectedProtocolNames [
 ]
 
 { #category : 'reading' }
+ClySpMorphicBrowserDriver >> shownClasses [
+
+	^ self inUIProcess: [ browser classView dataSource allElements collect: [ :each | each actualObject ] ]
+]
+
+{ #category : 'reading' }
 ClySpMorphicBrowserDriver >> shownMethods [
 
 	^ self inUIProcess: [ browser methodView dataSource allElements collect: [ :each | each actualObject ] ]
@@ -107,6 +113,12 @@ ClySpMorphicBrowserDriver >> shownMethods [
 ClySpMorphicBrowserDriver >> switchToClassSide [
 
 	self inUIProcess: [ browser switchToMetaLevelScope: ClyClassSideScope ]
+]
+
+{ #category : 'switching' }
+ClySpMorphicBrowserDriver >> switchToFullHierarchy [
+
+	self inUIProcess: [ browser switchToFullClassHierarchy ]
 ]
 
 { #category : 'switching' }

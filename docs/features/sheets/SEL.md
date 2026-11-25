@@ -66,7 +66,7 @@ How the four panes select, what they keep when their items change, and how a sel
 **Code.** `ClyQueryViewMorph>>ignoreNavigationDuring:` (sets `navigationSelector` to nil for the block); `ClyBrowserMorph>>ignoreNavigationDuring:` (no history); senders `silentlySelectPackageOfSelectedClass`, `itemsChangedIn:`.
 
 **Scenarios.**
-- `SEL-04.a` Given hierarchy mode, when I select a class of another package, then its package is selected in the package pane and the class pane still shows the hierarchy.
+- `SEL-04.a` Given hierarchy mode, when I select a class of another package, then its package is selected in the package pane and the class pane still shows the hierarchy. → `ClySpSelectionTest>>testPackageOfAClassFollowsInHierarchyMode`
 
 **Manual check.** None.
 
