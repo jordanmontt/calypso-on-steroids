@@ -14,83 +14,100 @@ Class {
 { #category : 'opening' }
 ClySpMorphicBrowserDriver >> close [
 
-	browser ifNotNil: [ browser window close ]
+	browser ifNotNil: [ self inUIProcess: [ browser window close ] ]
+]
+
+{ #category : 'running' }
+ClySpMorphicBrowserDriver >> inUIProcess: aBlock [
+	"Runs aBlock as a user gesture runs, in the UI process, and waits for it: Calypso updates its browsers there, so acting from another process races with those updates."
+
+	| call |
+	self isInUIProcess ifTrue: [ ^ aBlock value ].
+	call := ClySpUIProcessCall of: aBlock.
+	UIManager default defer: [ call run ].
+	^ call waitForResult
+]
+
+{ #category : 'running' }
+ClySpMorphicBrowserDriver >> isInUIProcess [
+
+	^ Processor activeProcess == UIManager default uiProcess
 ]
 
 { #category : 'opening' }
 ClySpMorphicBrowserDriver >> openOnClass: aClass [
 
-	browser := ClyFullBrowserMorph openOnClass: aClass
+	self inUIProcess: [ browser := ClyFullBrowserMorph openOnClass: aClass ]
 ]
 
 { #category : 'selecting' }
 ClySpMorphicBrowserDriver >> selectClass: aClass [
 
-	browser selectClass: aClass
+	self inUIProcess: [ browser selectClass: aClass ]
 ]
 
 { #category : 'selecting' }
 ClySpMorphicBrowserDriver >> selectMethod: aMethod [
 
-	browser selectMethod: aMethod
+	self inUIProcess: [ browser selectMethod: aMethod ]
 ]
 
 { #category : 'selecting' }
 ClySpMorphicBrowserDriver >> selectPackage: aPackage [
 
-	browser selectPackage: aPackage
+	self inUIProcess: [ browser selectPackage: aPackage ]
 ]
 
 { #category : 'selecting' }
 ClySpMorphicBrowserDriver >> selectProtocolNamed: aString [
 
-	browser selectMethodGroupNamed: aString
+	self inUIProcess: [ browser selectMethodGroupNamed: aString ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedMethods [
 
-	^ browser methodSelection actualObjects
+	^ self inUIProcess: [ browser methodSelection actualObjects ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedPackages [
 
-	^ browser packageSelection actualObjects
+	^ self inUIProcess: [ browser packageSelection actualObjects ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedProtocolNames [
 
-	^ browser methodGroupSelection items collect: [ :each | each name ]
+	^ self inUIProcess: [ browser methodGroupSelection items collect: [ :each | each name ] ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> shownMethods [
 
-	^ browser methodView dataSource allElements collect: [ :each | each actualObject ]
+	^ self inUIProcess: [ browser methodView dataSource allElements collect: [ :each | each actualObject ] ]
 ]
 
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToClassSide [
 
-	browser switchToMetaLevelScope: ClyClassSideScope
+	self inUIProcess: [ browser switchToMetaLevelScope: ClyClassSideScope ]
 ]
 
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToInstanceSide [
 
-	browser switchToMetaLevelScope: ClyInstanceSideScope
+	self inUIProcess: [ browser switchToMetaLevelScope: ClyInstanceSideScope ]
 ]
 
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToPackages [
 
-	browser switchToPackages
+	self inUIProcess: [ browser switchToPackages ]
 ]
 
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToProjects [
 
-	browser switchToProjects
+	self inUIProcess: [ browser switchToProjects ]
 ]
