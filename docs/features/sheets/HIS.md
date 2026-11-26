@@ -23,10 +23,10 @@ Back and forward through what the user looked at, like a web browser, also acros
 **Existing tests.** `ClyBrowserStateTest`, `ClyFullBrowserStateTest`, `ClyQueryViewStateTest` (taking and applying states); none on back and forward.
 
 **Scenarios.**
-- `HIS-01.a` Given class A selected, then class B, when I go back, then A is selected; when I go forward, then B is selected.
-- `HIS-01.b` Given method `x` selected, then method `y`, when I go back, then `x` is selected and its editor is shown.
-- `HIS-01.c` Given the class side shown, when I go back, then the instance side is shown.
-- `HIS-01.d` Given I went back, when I select another class, then going forward does nothing.
+- `HIS-01.a` Given class A selected, then class B, when I go back, then A is selected; when I go forward, then B is selected. → `ClySpNavigationHistoryTest>>testBackAndForwardBetweenTwoClasses`
+- `HIS-01.b` Given method `x` selected, then method `y`, when I go back, then `x` is selected and its editor is shown. → `ClySpNavigationHistoryTest>>testBackShowsTheEditorOfThePreviousMethod`
+- `HIS-01.c` Given the class side shown, when I go back, then the instance side is shown. → `ClySpNavigationHistoryTest>>testBackReturnsToTheInstanceSide`
+- `HIS-01.d` Given I went back, when I select another class, then going forward does nothing. → `ClySpNavigationHistoryTest>>testANewStepClearsForward`
 
 **Manual check.** Alt+Left / Alt+Right in a pane and in an editor (T-09). Checked 2026-11-23 (walkthrough, K-6).
 

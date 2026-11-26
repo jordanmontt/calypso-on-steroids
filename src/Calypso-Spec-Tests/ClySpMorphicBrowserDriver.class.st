@@ -25,6 +25,25 @@ ClySpMorphicBrowserDriver >> deselectProtocol [
 ]
 
 { #category : 'reading' }
+ClySpMorphicBrowserDriver >> editedMethod [
+	"The method of the selected tab, which must be a method editor"
+
+	^ self inUIProcess: [ browser tabManager selectedTools first editingMethod ]
+]
+
+{ #category : 'navigating' }
+ClySpMorphicBrowserDriver >> goBack [
+
+	self inUIProcess: [ browser navigateBack ]
+]
+
+{ #category : 'navigating' }
+ClySpMorphicBrowserDriver >> goForward [
+
+	self inUIProcess: [ browser navigateForward ]
+]
+
+{ #category : 'reading' }
 ClySpMorphicBrowserDriver >> highlightedProtocolNames [
 	"The group pane keeps no readable highlighting: it is only in its table."
 
@@ -87,6 +106,12 @@ ClySpMorphicBrowserDriver >> selectProtocolNamed: aString [
 ]
 
 { #category : 'reading' }
+ClySpMorphicBrowserDriver >> selectedClasses [
+
+	^ self inUIProcess: [ browser classSelection actualObjects ]
+]
+
+{ #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedMethods [
 
 	^ self inUIProcess: [ browser methodSelection actualObjects ]
@@ -120,6 +145,12 @@ ClySpMorphicBrowserDriver >> shownMethods [
 ClySpMorphicBrowserDriver >> shownProtocolNames [
 
 	^ self inUIProcess: [ browser methodGroupView dataSource allElements collect: [ :each | each name ] ]
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> showsClassSide [
+
+	^ self inUIProcess: [ browser metaLevelScope = ClyClassSideScope ]
 ]
 
 { #category : 'switching' }
