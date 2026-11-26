@@ -47,6 +47,65 @@ ClySpTabsTest >> testAClickedTabStaysSelectedForTheNextClass [
 	self assert: browser selectedTabTitle equals: classB name
 ]
 
+{ #category : 'tests - Tabs close when their model is removed' }
+ClySpTabsTest >> testADirtyEditorStaysMarkedDirtyWhenItsClassIsRemoved [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+	browser type: ' ^ 1'.
+
+	factory delete: class.
+
+	self assert: (browser tabTitles includes: '*a')
+]
+
+{ #category : 'tests - Tabs close when their model is removed' }
+ClySpTabsTest >> testADirtyEditorStaysWhenItsClassIsRemoved [
+	"The user would lose their edits otherwise"
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+	browser type: ' ^ 1'.
+
+	factory delete: class.
+
+	self assert: (browser isTabOutOfContext: 'a')
+]
+
+{ #category : 'tests - Dirty tabs stay' }
+ClySpTabsTest >> testADirtyEditorStaysWhenSelectingAnotherMethod [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+	browser type: ' ^ 1'.
+
+	browser selectMethod: class >> #b.
+
+	self assert: (browser tabTitles includesAll: #( '*a' 'b' )).
+	self assert: (browser isTabOutOfContext: '*a').
+	self assert: browser selectedTabTitle equals: 'b'
+]
+
+{ #category : 'tests - Dirty tabs stay' }
+ClySpTabsTest >> testADirtyTabStaysWhenIRefuseToDiscardItsEdits [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+	browser type: ' ^ 1'.
+
+	browser closeTabTitled: '*a' answeringDiscard: false.
+
+	self assert: (browser tabTitles includes: '*a')
+]
+
 { #category : 'tests - Tabs chosen from the selection' }
 ClySpTabsTest >> testAMethodAddsItsEditor [
 
@@ -107,6 +166,49 @@ ClySpTabsTest >> testATestClassShowsItsSetUp [
 	self assert: browser editedMethod equals: testClass >> #setUp
 ]
 
+{ #category : 'tests - Tabs close when their model is removed' }
+ClySpTabsTest >> testAnEditorClosesWhenItsMethodOrClassIsRemoved [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+
+	class removeSelector: #a.
+	self deny: (browser tabTitles includes: 'a').
+
+	browser selectMethod: class >> #b.
+	factory delete: class.
+	self deny: (browser tabTitles includes: 'b')
+]
+
+{ #category : 'tests - Tabs are live' }
+ClySpTabsTest >> testAnEditorShowsTheNewSourceOfItsMethod [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+
+	class compile: 'a ^ 2' classified: 'alpha'.
+
+	self assert: browser editorText equals: 'a ^ 2'
+]
+
+{ #category : 'tests - Tabs close when their model is removed' }
+ClySpTabsTest >> testAnEditorStaysWhenItsMethodIsRecompiled [
+
+	| class editor |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+	editor := browser toolTitled: 'a'.
+
+	class compile: 'a ^ 2' classified: 'alpha'.
+
+	self assert: (browser toolTitled: 'a') identicalTo: editor
+]
+
 { #category : 'tests - Which tab is selected' }
 ClySpTabsTest >> testSelectingAClassSelectsItsComment [
 
@@ -144,6 +246,22 @@ ClySpTabsTest >> testSelectingAProtocolSelectsMethodCreation [
 	self assert: browser selectedTabTitle equals: 'Inst. side method'
 ]
 
+{ #category : 'tests - Dirty tabs stay' }
+ClySpTabsTest >> testSelectingTheDirtyMethodAgainDropsTheOtherEditor [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+	browser type: ' ^ 1'.
+	browser selectMethod: class >> #b.
+
+	browser selectMethod: class >> #a.
+
+	self deny: (browser tabTitles includes: 'b').
+	self deny: (browser isTabOutOfContext: '*a')
+]
+
 { #category : 'tests - Similar tabs are reused' }
 ClySpTabsTest >> testTheClassDefinitionIsReusedForItsMethods [
 
@@ -169,4 +287,17 @@ ClySpTabsTest >> testTwoMethodsAddADiff [
 		(class >> #b) }.
 
 	self assert: (browser tabTitles includes: 'Diff')
+]
+
+{ #category : 'tests - Dirty tabs stay' }
+ClySpTabsTest >> testTypingMarksTheEditorDirty [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+
+	browser type: ' ^ 1'.
+
+	self assert: browser selectedTabTitle equals: '*a'
 ]

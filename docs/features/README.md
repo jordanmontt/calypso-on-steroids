@@ -267,7 +267,7 @@ Details and reproduction in the [walkthrough](walkthrough.md#bugs-found-during-t
 
 | Id | Bug |
 |---|---|
-| B-01 | After an edit conflict the tab loses its `*` and the status bar is duplicated |
+| B-01 | After an edit conflict the tab loses its `*` and the status bar is duplicated; the `*` is also lost when the class of a dirty editor is removed (TAB-05.d) |
 | B-02 | `spawnQueryBrowserOn:` opens a debugger (`StMethodBrowser class` does not understand `#on:systemScope:`) |
 | B-03 | Duplicate method-creation tab after running tests from a class icon |
 | B-04 | Debugger on right click in the empty area of the method pane |

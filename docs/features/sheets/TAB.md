@@ -95,10 +95,10 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** None.
 
 **Scenarios.**
-- `TAB-04.a` Given a method editor, when I type without accepting, then its tab title starts with `*`.
-- `TAB-04.b` Given a dirty editor on `x`, when I select `y`, then the `x` editor stays, marked as not in the current context, and a `y` editor is selected.
-- `TAB-04.c` Given then, when I select `x` again, then the `y` editor is gone and the `x` editor is no longer marked.
-- `TAB-04.d` Given a dirty editor, when I close its tab and refuse to discard, then the tab stays.
+- `TAB-04.a` Given a method editor, when I type without accepting, then its tab title starts with `*`. → `ClySpTabsTest>>testTypingMarksTheEditorDirty`
+- `TAB-04.b` Given a dirty editor on `x`, when I select `y`, then the `x` editor stays, marked as not in the current context, and a `y` editor is selected. → `ClySpTabsTest>>testADirtyEditorStaysWhenSelectingAnotherMethod`
+- `TAB-04.c` Given then, when I select `x` again, then the `y` editor is gone and the `x` editor is no longer marked. → `ClySpTabsTest>>testSelectingTheDirtyMethodAgainDropsTheOtherEditor`
+- `TAB-04.d` Given a dirty editor, when I close its tab and refuse to discard, then the tab stays. → `ClySpTabsTest>>testADirtyTabStaysWhenIRefuseToDiscardItsEdits`
 
 **Manual check.** The orange triangle and the "!" icon (look). Checked 2026-11-23.
 
@@ -113,9 +113,10 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** None.
 
 **Scenarios.**
-- `TAB-05.a` Given a method editor, when the method or its class is removed from another tool, then its tab closes.
-- `TAB-05.b` Given a method editor, when the method is recompiled elsewhere, then the editor stays and shows the new source.
-- `TAB-05.c` Given a method editor with unaccepted edits, when its class is removed, then its tab stays, marked as not in the current context.
+- `TAB-05.a` Given a method editor, when the method or its class is removed from another tool, then its tab closes. → `ClySpTabsTest>>testAnEditorClosesWhenItsMethodOrClassIsRemoved`
+- `TAB-05.b` Given a method editor, when the method is recompiled elsewhere, then the editor stays: the same tool, not a new one (its new source is TAB-06.a). → `ClySpTabsTest>>testAnEditorStaysWhenItsMethodIsRecompiled`
+- `TAB-05.c` Given a method editor with unaccepted edits, when its class is removed, then its tab stays, marked as not in the current context. → `ClySpTabsTest>>testADirtyEditorStaysWhenItsClassIsRemoved`
+- `TAB-05.d` Given then, its tab title still starts with `*` (B-01: fails on Morphic today). → `ClySpTabsTest>>testADirtyEditorStaysMarkedDirtyWhenItsClassIsRemoved`
 
 **Manual check.** None.
 
@@ -130,7 +131,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** None.
 
 **Scenarios.**
-- `TAB-06.a` Given a method editor on `x`, when `x` is recompiled elsewhere with another source, then the editor shows the new source.
+- `TAB-06.a` Given a method editor on `x`, when `x` is recompiled elsewhere with another source, then the editor shows the new source. → `ClySpTabsTest>>testAnEditorShowsTheNewSourceOfItsMethod`
 
 **Manual check.** None.
 

@@ -9,6 +9,13 @@ Class {
 	#tag : 'Morphic driver'
 }
 
+{ #category : 'testing' }
+ClySpMorphicTabsTest >> expectedFailures [
+	"Today's browser drops the * of a dirty editor when it updates the editor"
+
+	^ #( #testADirtyEditorStaysMarkedDirtyWhenItsClassIsRemoved )
+]
+
 { #category : 'running' }
 ClySpMorphicTabsTest >> newBrowserDriver [
 

@@ -173,7 +173,7 @@ Closing the window with a dirty editor: Spec modal "Please confirm — Changes h
 
 | Id | Bug | How to reproduce | Where |
 |---|---|---|---|
-| B-01 | After an edit conflict, the tab loses its `*` and the status bar is duplicated | Edit a method without accepting; recompile it from elsewhere | `ClyBrowserToolMorph>>update` / `rebuildStatusBar` |
+| B-01 | After an edit conflict, the tab loses its `*` and the status bar is duplicated | Edit a method without accepting; recompile it, or remove its class, from elsewhere | `ClyBrowserToolMorph>>update` / `rebuildStatusBar` |
 | B-02 | `spawnQueryBrowserOn:` opens a debugger (`StMethodBrowser class` DNU `#on:systemScope:`) | Editor menu Code search ▸ "class names containing it"; or `aBrowser spawnQueryBrowserOn: (ClyMessageSendersQuery of: #x)` | `ClyBrowserMorph>>spawnBrowser:withState:` |
 | B-03 | Duplicate "Inst. side method" tab after running tests from the class icon | Select a test class, click the test circle of the class | tool recycling (`ClyNotebookManager`) |
 | B-04 | Debugger on right click in the empty area of the method pane | Right click below the last method | `ClyBrowseCoveringTestCaseCommand>>canBeExecuted` |

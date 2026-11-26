@@ -20,6 +20,29 @@ ClySpMorphicBrowserDriver class >> onWindow: aWindow [
 	^ self new setWindow: aWindow
 ]
 
+{ #category : 'private' }
+ClySpMorphicBrowserDriver >> answerConfirm: aBoolean [
+	"Answers whether a confirm dialog was open"
+
+	| dialog label |
+	dialog := self currentWorld systemWindows detect: [ :each | each label = 'Please confirm' ] ifNone: [ ^ false ].
+	label := aBoolean
+		         ifTrue: [ SpConfirmDialog defaultAcceptLabel ]
+		         ifFalse: [ SpConfirmDialog defaultCancelLabel ].
+	(dialog model buttons detect: [ :each | each label = label ]) click.
+	^ true
+]
+
+{ #category : 'running' }
+ClySpMorphicBrowserDriver >> applyPendingUpdates [
+	"A system change reaches the panes through Calypso's own update process, which may not have run yet. A user only acts once it has."
+
+	| shownBrowser |
+	shownBrowser := window ifNotNil: [ window model ].
+	shownBrowser ifNil: [ ^ self ].
+	shownBrowser navigationViews do: [ :each | each dataSource itemCursor ]
+]
+
 { #category : 'accessing' }
 ClySpMorphicBrowserDriver >> browser [
 	"The browser shown in my window: going back to a closed browser reopens its window with a new browser"
@@ -29,8 +52,22 @@ ClySpMorphicBrowserDriver >> browser [
 
 { #category : 'opening' }
 ClySpMorphicBrowserDriver >> close [
+	"Discards unaccepted edits without asking: a test that leaves an editor dirty still closes its window"
 
-	window ifNotNil: [ self inUIProcess: [ window close ] ]
+	window ifNotNil: [ self inUIProcess: [ window deleteDiscardingChanges ] ]
+]
+
+{ #category : 'editing' }
+ClySpMorphicBrowserDriver >> closeTabTitled: aString answeringDiscard: aBoolean [
+	"Clicks the tab's close button, then Yes or No in the dialog asking to discard its edits. The dialog is modal: its own UI loop runs the click queued before it opened."
+
+	self inUIProcess: [
+		| tab answered |
+		tab := (self toolTitled: aString) containerTab.
+		answered := false.
+		self currentWorld defer: [ answered := self answerConfirm: aBoolean ].
+		self browser tabManager closeTab: tab.
+		answered ifFalse: [ self error: 'Closing the tab asked nothing' ] ]
 ]
 
 { #category : 'selecting' }
@@ -45,6 +82,13 @@ ClySpMorphicBrowserDriver >> editedMethod [
 	"The method of the selected tab, which must be a method editor"
 
 	^ self inUIProcess: [ self browser tabManager selectedTools first editingMethod ]
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> editorText [
+	"The text of the selected tab's editor, accepted or not"
+
+	^ self inUIProcess: [ self browser tabManager selectedTools first pendingText asString ]
 ]
 
 { #category : 'navigating' }
@@ -75,7 +119,9 @@ ClySpMorphicBrowserDriver >> inUIProcess: aBlock [
 
 	| call |
 	self isInUIProcess ifTrue: [ ^ aBlock value ].
-	call := ClySpUIProcessCall of: aBlock.
+	call := ClySpUIProcessCall of: [
+		        self applyPendingUpdates.
+		        aBlock value ].
 	self currentWorld defer: [ call run ].
 	^ call waitForResult
 ]
@@ -90,6 +136,26 @@ ClySpMorphicBrowserDriver >> isInUIProcess [
 ClySpMorphicBrowserDriver >> isOpen [
 
 	^ self inUIProcess: [ window isInWorld ]
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> isTabOutOfContext: aString [
+	"The tab shows the ! icon: its tool no longer matches the selection"
+
+	^ self inUIProcess: [ (self toolTitled: aString) containerTab icon == (self iconNamed: #uncommentedClass) ]
+]
+
+{ #category : 'private' }
+ClySpMorphicBrowserDriver >> keystroke: aCharacter at: aMorph [
+
+	^ KeyboardEvent new
+		  setType: #keystroke
+		  buttons: 0
+		  position: aMorph center
+		  keyValue: aCharacter asInteger
+		  charCode: aCharacter asInteger
+		  hand: self currentWorld activeHand
+		  stamp: Time millisecondClockValue
 ]
 
 { #category : 'opening' }
@@ -259,4 +325,14 @@ ClySpMorphicBrowserDriver >> toolTitled: aString [
 	"The tool behind the tab, to check whether it is kept or rebuilt"
 
 	^ self inUIProcess: [ self browser tabManager tools detect: [ :each | each containerTab label = aString ] ]
+]
+
+{ #category : 'editing' }
+ClySpMorphicBrowserDriver >> type: aString [
+	"Types in the selected tab's editor, one key at a time, without accepting"
+
+	self inUIProcess: [
+		| textArea |
+		textArea := self browser tabManager selectedTools first textMorph textArea.
+		aString do: [ :each | (self keystroke: each at: textArea) sentTo: textArea ] ]
 ]
