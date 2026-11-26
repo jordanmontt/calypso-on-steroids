@@ -13,6 +13,12 @@ Class {
 	#package : 'Calypso-Spec-Tests'
 }
 
+{ #category : 'instance creation' }
+ClySpMorphicBrowserDriver class >> onWindow: aWindow [
+
+	^ self new setWindow: aWindow
+]
+
 { #category : 'accessing' }
 ClySpMorphicBrowserDriver >> browser [
 	"The browser shown in my window: going back to a closed browser reopens its window with a new browser"
@@ -77,6 +83,12 @@ ClySpMorphicBrowserDriver >> inUIProcess: aBlock [
 ClySpMorphicBrowserDriver >> isInUIProcess [
 
 	^ Processor activeProcess == MorphicUIManager uiProcess
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> isOpen [
+
+	^ self inUIProcess: [ window isInWorld ]
 ]
 
 { #category : 'opening' }
@@ -157,6 +169,12 @@ ClySpMorphicBrowserDriver >> selectedTabTitle [
 	^ self inUIProcess: [ self browser tabManager tabMorph page containerTab label ]
 ]
 
+{ #category : 'initialization' }
+ClySpMorphicBrowserDriver >> setWindow: aWindow [
+
+	window := aWindow
+]
+
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> shownClasses [
 
@@ -179,6 +197,13 @@ ClySpMorphicBrowserDriver >> shownProtocolNames [
 ClySpMorphicBrowserDriver >> showsClassSide [
 
 	^ self inUIProcess: [ self browser metaLevelScope = ClyClassSideScope ]
+]
+
+{ #category : 'opening' }
+ClySpMorphicBrowserDriver >> spawnBrowser [
+	"As a double click on the selected class: a new browser on it, which can go back to this one"
+
+	^ self class onWindow: (self inUIProcess: [ self browser spawnFullBrowser window ])
 ]
 
 { #category : 'switching' }

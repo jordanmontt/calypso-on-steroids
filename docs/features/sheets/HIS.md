@@ -65,9 +65,9 @@ Back and forward through what the user looked at, like a web browser, also acros
 **Existing tests.** `ClyAccrossWindowNavigationStateTest` (10 tests on taking the state and creating the browser).
 
 **Scenarios.**
-- `HIS-04.a` Given a browser spawned from another, when I go back in it, then it is closed and the original browser is active.
-- `HIS-04.b` Given the original browser closed, when I go back in the spawned one, then the original is reopened with its selection.
-- `HIS-04.c` Given the original browser selected another class since, when I go back in the spawned one, then nothing happens.
+- `HIS-04.a` Given a browser spawned from another, when I go back in it, then it is closed and the original browser is active. → `ClySpNavigationHistoryTest>>testBackInASpawnedBrowserClosesIt`
+- `HIS-04.b` Given the original browser closed, when I go back in the spawned one, then the original is reopened with its selection. → `ClySpNavigationHistoryTest>>testBackInASpawnedBrowserReopensTheClosedOriginal`
+- `HIS-04.c` Given the original browser selected another class since, when I go back in the spawned one, then nothing happens. → `ClySpNavigationHistoryTest>>testBackDoesNothingWhenTheOriginalChangedSince`
 
 **Manual check.** None.
 

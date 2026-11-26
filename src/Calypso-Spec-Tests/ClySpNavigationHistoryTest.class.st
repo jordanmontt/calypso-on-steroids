@@ -4,6 +4,9 @@ I check going back and forward through what the user looked at, like in a web br
 Class {
 	#name : 'ClySpNavigationHistoryTest',
 	#superclass : 'ClySpBrowserTest',
+	#instVars : [
+		'spawned'
+	],
 	#category : 'Calypso-Spec-Tests',
 	#package : 'Calypso-Spec-Tests'
 }
@@ -12,6 +15,13 @@ Class {
 ClySpNavigationHistoryTest class >> isAbstract [
 
 	^ self == ClySpNavigationHistoryTest
+]
+
+{ #category : 'running' }
+ClySpNavigationHistoryTest >> tearDown [
+
+	spawned ifNotNil: [ spawned close ].
+	super tearDown
 ]
 
 { #category : 'tests - What is a step' }
@@ -66,6 +76,49 @@ ClySpNavigationHistoryTest >> testBackAndForwardBetweenTwoClasses [
 	self assert: browser selectedClasses equals: { ClyClass1FromP1Mock }.
 
 	browser goForward.
+	self assert: browser selectedClasses equals: { ClyClass2FromP1Mock }
+]
+
+{ #category : 'tests - Across windows' }
+ClySpNavigationHistoryTest >> testBackDoesNothingWhenTheOriginalChangedSince [
+	"Going back would return to the original browser as it was when this one was opened. The user changed the original since, so Calypso does nothing rather than undo that change."
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	spawned := browser spawnBrowser.
+	browser selectClass: ClyClass2FromP1Mock.
+
+	spawned goBack.
+	spawned goBack.
+
+	self assert: spawned isOpen.
+	self assert: browser selectedClasses equals: { ClyClass2FromP1Mock }
+]
+
+{ #category : 'tests - Across windows' }
+ClySpNavigationHistoryTest >> testBackInASpawnedBrowserClosesIt [
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	spawned := browser spawnBrowser.
+	self assert: spawned isOpen.
+
+	spawned goBack.
+
+	self deny: spawned isOpen.
+	self assert: browser isOpen
+]
+
+{ #category : 'tests - Across windows' }
+ClySpNavigationHistoryTest >> testBackInASpawnedBrowserReopensTheClosedOriginal [
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	browser selectClass: ClyClass2FromP1Mock.
+	spawned := browser spawnBrowser.
+	browser close.
+	self deny: browser isOpen.
+
+	spawned goBack.
+
+	self assert: browser isOpen.
 	self assert: browser selectedClasses equals: { ClyClass2FromP1Mock }
 ]
 
