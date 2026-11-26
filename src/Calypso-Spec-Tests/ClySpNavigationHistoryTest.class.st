@@ -94,6 +94,22 @@ ClySpNavigationHistoryTest >> testBackShowsTheEditorOfThePreviousMethod [
 	self assert: browser editedMethod equals: ClySubclassN1OfClass1FromP1Mock >> #tag1Method1
 ]
 
+{ #category : 'tests - States hold no query results' }
+ClySpNavigationHistoryTest >> testBackShowsTheSystemAsItIsNow [
+
+	| classA classB |
+	classA := self newClassWithMethods: #( #x ).
+	classB := factory newClass.
+	browser openOnClass: classA.
+	browser selectClass: classB.
+
+	classA compile: 'y ^ nil'.
+	browser goBack.
+
+	self assert: browser selectedClasses equals: { classA }.
+	self assert: (browser shownMethods includes: classA >> #y)
+]
+
 { #category : 'tests - What is a step' }
 ClySpNavigationHistoryTest >> testSelectingTheSameClassAgainIsNoStep [
 

@@ -52,7 +52,7 @@ Back and forward through what the user looked at, like a web browser, also acros
 **Existing tests.** `ClyQueryViewStateTest` (closed data sources).
 
 **Scenarios.**
-- `HIS-03.a` Given class A selected, then class B, when a method is added to A and I go back, then A's methods include the new one.
+- `HIS-03.a` Given class A selected, then class B, when a method is added to A and I go back, then A's methods include the new one. → `ClySpNavigationHistoryTest>>testBackShowsTheSystemAsItIsNow`
 
 **Manual check.** None.
 
