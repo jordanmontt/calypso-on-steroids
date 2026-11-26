@@ -1,46 +1,55 @@
 "
-I drive the Morphic browser (ClyFullBrowserMorph) in the terms of a user, for the acceptance tests. I go through the browser API, which selects like a click does: a selection I make counts as the user's.
+I drive the Morphic browser (ClyFullBrowserMorph) in the terms of a user, for the acceptance tests. I act as a user does: in the UI process, clicking the rows and tabs shown.
+
+I hold the browser's window rather than the browser: going back to a closed browser reopens its window with a new browser in it.
 "
 Class {
 	#name : 'ClySpMorphicBrowserDriver',
 	#superclass : 'Object',
 	#instVars : [
-		'browser'
+		'window'
 	],
 	#category : 'Calypso-Spec-Tests',
 	#package : 'Calypso-Spec-Tests'
 }
 
+{ #category : 'accessing' }
+ClySpMorphicBrowserDriver >> browser [
+	"The browser shown in my window: going back to a closed browser reopens its window with a new browser"
+
+	^ window model
+]
+
 { #category : 'opening' }
 ClySpMorphicBrowserDriver >> close [
 
-	browser ifNotNil: [ self inUIProcess: [ browser window close ] ]
+	window ifNotNil: [ self inUIProcess: [ window close ] ]
 ]
 
 { #category : 'selecting' }
 ClySpMorphicBrowserDriver >> deselectProtocol [
 	"As a cmd-click on the selected protocol: the table selection becomes empty."
 
-	self inUIProcess: [ browser methodGroupSelection beEmpty ]
+	self inUIProcess: [ self browser methodGroupSelection beEmpty ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> editedMethod [
 	"The method of the selected tab, which must be a method editor"
 
-	^ self inUIProcess: [ browser tabManager selectedTools first editingMethod ]
+	^ self inUIProcess: [ self browser tabManager selectedTools first editingMethod ]
 ]
 
 { #category : 'navigating' }
 ClySpMorphicBrowserDriver >> goBack [
 
-	self inUIProcess: [ browser navigateBack ]
+	self inUIProcess: [ self browser navigateBack ]
 ]
 
 { #category : 'navigating' }
 ClySpMorphicBrowserDriver >> goForward [
 
-	self inUIProcess: [ browser navigateForward ]
+	self inUIProcess: [ self browser navigateForward ]
 ]
 
 { #category : 'reading' }
@@ -49,7 +58,7 @@ ClySpMorphicBrowserDriver >> highlightedProtocolNames [
 
 	^ self inUIProcess: [
 		  | view |
-		  view := browser methodGroupView.
+		  view := self browser methodGroupView.
 		  view table highlightedIndexes collect: [ :each | (view itemAt: each) name ] ]
 ]
 
@@ -73,7 +82,7 @@ ClySpMorphicBrowserDriver >> isInUIProcess [
 { #category : 'opening' }
 ClySpMorphicBrowserDriver >> openOnClass: aClass [
 
-	self inUIProcess: [ browser := ClyFullBrowserMorph openOnClass: aClass ]
+	self inUIProcess: [ window := (ClyFullBrowserMorph openOnClass: aClass) window ]
 ]
 
 { #category : 'selecting' }
@@ -82,27 +91,27 @@ ClySpMorphicBrowserDriver >> selectClass: aClass [
 
 	self inUIProcess: [
 		| items |
-		items := browser classView findItemsWith: { aClass }.
+		items := self browser classView findItemsWith: { aClass }.
 		items ifEmpty: [ self error: aClass name , ' is not shown in the class pane' ].
-		browser classView table selectIndexes: (items collect: [ :each | each globalPosition ] as: Array) ]
+		self browser classView table selectIndexes: (items collect: [ :each | each globalPosition ] as: Array) ]
 ]
 
 { #category : 'selecting' }
 ClySpMorphicBrowserDriver >> selectMethod: aMethod [
 
-	self inUIProcess: [ browser selectMethod: aMethod ]
+	self inUIProcess: [ self browser selectMethod: aMethod ]
 ]
 
 { #category : 'selecting' }
 ClySpMorphicBrowserDriver >> selectPackage: aPackage [
 
-	self inUIProcess: [ browser selectPackage: aPackage ]
+	self inUIProcess: [ self browser selectPackage: aPackage ]
 ]
 
 { #category : 'selecting' }
 ClySpMorphicBrowserDriver >> selectProtocolNamed: aString [
 
-	self inUIProcess: [ browser selectMethodGroupNamed: aString ]
+	self inUIProcess: [ self browser selectMethodGroupNamed: aString ]
 ]
 
 { #category : 'selecting' }
@@ -111,7 +120,7 @@ ClySpMorphicBrowserDriver >> selectTabTitled: aString [
 
 	self inUIProcess: [
 		| notebook index |
-		notebook := browser tabManager tabMorph.
+		notebook := self browser tabManager tabMorph.
 		index := notebook pages findFirst: [ :each | each label = aString ].
 		index = 0 ifTrue: [ self error: 'No tab titled ' , aString ].
 		notebook tabSelectorMorph selectedIndex: index ]
@@ -120,90 +129,90 @@ ClySpMorphicBrowserDriver >> selectTabTitled: aString [
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedClasses [
 
-	^ self inUIProcess: [ browser classSelection actualObjects ]
+	^ self inUIProcess: [ self browser classSelection actualObjects ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedMethods [
 
-	^ self inUIProcess: [ browser methodSelection actualObjects ]
+	^ self inUIProcess: [ self browser methodSelection actualObjects ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedPackages [
 
-	^ self inUIProcess: [ browser packageSelection actualObjects ]
+	^ self inUIProcess: [ self browser packageSelection actualObjects ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedProtocolNames [
 
-	^ self inUIProcess: [ browser methodGroupSelection items collect: [ :each | each name ] ]
+	^ self inUIProcess: [ self browser methodGroupSelection items collect: [ :each | each name ] ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedTabTitle [
 	"The tab of the tool shown: after going back, the tab selector's index is not kept up to date"
 
-	^ self inUIProcess: [ browser tabManager tabMorph page containerTab label ]
+	^ self inUIProcess: [ self browser tabManager tabMorph page containerTab label ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> shownClasses [
 
-	^ self inUIProcess: [ browser classView dataSource allElements collect: [ :each | each actualObject ] ]
+	^ self inUIProcess: [ self browser classView dataSource allElements collect: [ :each | each actualObject ] ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> shownMethods [
 
-	^ self inUIProcess: [ browser methodView dataSource allElements collect: [ :each | each actualObject ] ]
+	^ self inUIProcess: [ self browser methodView dataSource allElements collect: [ :each | each actualObject ] ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> shownProtocolNames [
 
-	^ self inUIProcess: [ browser methodGroupView dataSource allElements collect: [ :each | each name ] ]
+	^ self inUIProcess: [ self browser methodGroupView dataSource allElements collect: [ :each | each name ] ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> showsClassSide [
 
-	^ self inUIProcess: [ browser metaLevelScope = ClyClassSideScope ]
+	^ self inUIProcess: [ self browser metaLevelScope = ClyClassSideScope ]
 ]
 
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToClassSide [
 
-	self inUIProcess: [ browser switchToMetaLevelScope: ClyClassSideScope ]
+	self inUIProcess: [ self browser switchToMetaLevelScope: ClyClassSideScope ]
 ]
 
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToFullHierarchy [
 
-	self inUIProcess: [ browser switchToFullClassHierarchy ]
+	self inUIProcess: [ self browser switchToFullClassHierarchy ]
 ]
 
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToInstanceSide [
 
-	self inUIProcess: [ browser switchToMetaLevelScope: ClyInstanceSideScope ]
+	self inUIProcess: [ self browser switchToMetaLevelScope: ClyInstanceSideScope ]
 ]
 
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToPackages [
 
-	self inUIProcess: [ browser switchToPackages ]
+	self inUIProcess: [ self browser switchToPackages ]
 ]
 
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToProjects [
 
-	self inUIProcess: [ browser switchToProjects ]
+	self inUIProcess: [ self browser switchToProjects ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> tabTitles [
 
-	^ self inUIProcess: [ browser tabManager tabMorph pages collect: [ :each | each label ] ]
+	^ self inUIProcess: [ self browser tabManager tabMorph pages collect: [ :each | each label ] ]
 ]
