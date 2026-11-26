@@ -75,10 +75,10 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** None on the choice of tab.
 
 **Scenarios.**
-- `TAB-03.a` Given a class, when I select it by hand, then the Comment tab is selected.
-- `TAB-03.b` Given a class with a method, when I select the method by hand, then its method editor is selected.
-- `TAB-03.c` Given a method selected, when I select a protocol by hand, then the method-creation tab is selected.
-- `TAB-03.d` Given I selected the class definition tab by hand, when I select another class, then the class definition tab stays selected.
+- `TAB-03.a` Given a class, when I select it by hand, then the Comment tab is selected. → `ClySpTabsTest>>testSelectingAClassSelectsItsComment`
+- `TAB-03.b` Given a class with a method, when I select the method by hand, then its method editor is selected. → `ClySpTabsTest>>testSelectingAMethodSelectsItsEditor`
+- `TAB-03.c` Given a method selected, when I select a protocol by hand, then the method-creation tab is selected. → `ClySpTabsTest>>testSelectingAProtocolSelectsMethodCreation`
+- `TAB-03.d` Given I selected the class definition tab by hand, when I select another class, then the class definition tab stays selected. → `ClySpTabsTest>>testAClickedTabStaysSelectedForTheNextClass`
 
 **Manual check.** None.
 

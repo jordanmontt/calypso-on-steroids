@@ -30,6 +30,22 @@ ClySpTabsTest >> testAClassShowsItsDefinitionCommentAndMethodCreation [
 	self deny: (browser tabTitles includesAny: #( 'a' 'b' '+' ))
 ]
 
+{ #category : 'tests - Which tab is selected' }
+ClySpTabsTest >> testAClickedTabStaysSelectedForTheNextClass [
+	"The user's choice of tab wins over the default one"
+
+	| classA classB |
+	classA := factory newClass.
+	classB := factory newClass.
+	browser openOnClass: classA.
+	browser selectTabTitled: classA name.
+	self assert: browser selectedTabTitle equals: classA name.
+
+	browser selectClass: classB.
+
+	self assert: browser selectedTabTitle equals: classB name
+]
+
 { #category : 'tests - Tabs chosen from the selection' }
 ClySpTabsTest >> testAMethodAddsItsEditor [
 
@@ -88,6 +104,43 @@ ClySpTabsTest >> testATestClassShowsItsSetUp [
 	browser selectMethod: testClass >> #setUp.
 	self assert: (browser tabTitles count: [ :each | each = 'setUp' ]) equals: 1.
 	self assert: browser editedMethod equals: testClass >> #setUp
+]
+
+{ #category : 'tests - Which tab is selected' }
+ClySpTabsTest >> testSelectingAClassSelectsItsComment [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: factory newClass.
+
+	browser selectClass: class.
+
+	self assert: browser selectedTabTitle equals: 'Comment'
+]
+
+{ #category : 'tests - Which tab is selected' }
+ClySpTabsTest >> testSelectingAMethodSelectsItsEditor [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+
+	browser selectMethod: class >> #a.
+
+	self assert: browser selectedTabTitle equals: 'a'
+]
+
+{ #category : 'tests - Which tab is selected' }
+ClySpTabsTest >> testSelectingAProtocolSelectsMethodCreation [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+
+	browser selectProtocolNamed: 'beta'.
+
+	self assert: browser selectedTabTitle equals: 'Inst. side method'
 ]
 
 { #category : 'tests - Similar tabs are reused' }
