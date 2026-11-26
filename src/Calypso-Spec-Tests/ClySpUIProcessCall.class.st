@@ -14,8 +14,9 @@ Class {
 		'error',
 		'done'
 	],
-	#category : 'Calypso-Spec-Tests',
-	#package : 'Calypso-Spec-Tests'
+	#category : 'Calypso-Spec-Tests-Morphic driver',
+	#package : 'Calypso-Spec-Tests',
+	#tag : 'Morphic driver'
 }
 
 { #category : 'instance creation' }

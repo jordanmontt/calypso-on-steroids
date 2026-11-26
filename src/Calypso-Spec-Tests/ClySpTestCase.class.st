@@ -8,8 +8,9 @@ Class {
 		'windowsBefore',
 		'processesBefore'
 	],
-	#category : 'Calypso-Spec-Tests',
-	#package : 'Calypso-Spec-Tests'
+	#category : 'Calypso-Spec-Tests-Support',
+	#package : 'Calypso-Spec-Tests',
+	#tag : 'Support'
 }
 
 { #category : 'testing' }

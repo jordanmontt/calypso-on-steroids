@@ -4,8 +4,9 @@ I check that a call hands back what its action did: its result, or its error.
 Class {
 	#name : 'ClySpUIProcessCallTest',
 	#superclass : 'TestCase',
-	#category : 'Calypso-Spec-Tests',
-	#package : 'Calypso-Spec-Tests'
+	#category : 'Calypso-Spec-Tests-Morphic driver',
+	#package : 'Calypso-Spec-Tests',
+	#tag : 'Morphic driver'
 }
 
 { #category : 'tests' }

@@ -4,8 +4,9 @@ I test the window check of ClySpTestCase. Each test plays the part of SUnit by h
 Class {
 	#name : 'ClySpTestCaseTest',
 	#superclass : 'TestCase',
-	#category : 'Calypso-Spec-Tests',
-	#package : 'Calypso-Spec-Tests'
+	#category : 'Calypso-Spec-Tests-Support',
+	#package : 'Calypso-Spec-Tests',
+	#tag : 'Support'
 }
 
 { #category : 'tests' }

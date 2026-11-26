@@ -4,8 +4,9 @@ I check what the browser selects while the user navigates: what it keeps, what i
 Class {
 	#name : 'ClySpSelectionTest',
 	#superclass : 'ClySpBrowserTest',
-	#category : 'Calypso-Spec-Tests',
-	#package : 'Calypso-Spec-Tests'
+	#category : 'Calypso-Spec-Tests-Acceptance',
+	#package : 'Calypso-Spec-Tests',
+	#tag : 'Acceptance'
 }
 
 { #category : 'testing' }

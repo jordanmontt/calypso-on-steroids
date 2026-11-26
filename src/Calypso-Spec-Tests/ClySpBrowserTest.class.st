@@ -8,8 +8,9 @@ Class {
 		'browser',
 		'factory'
 	],
-	#category : 'Calypso-Spec-Tests',
-	#package : 'Calypso-Spec-Tests'
+	#category : 'Calypso-Spec-Tests-Acceptance',
+	#package : 'Calypso-Spec-Tests',
+	#tag : 'Acceptance'
 }
 
 { #category : 'testing' }
