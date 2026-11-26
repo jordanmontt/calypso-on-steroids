@@ -105,6 +105,18 @@ ClySpMorphicBrowserDriver >> selectProtocolNamed: aString [
 	self inUIProcess: [ browser selectMethodGroupNamed: aString ]
 ]
 
+{ #category : 'selecting' }
+ClySpMorphicBrowserDriver >> selectTabTitled: aString [
+	"Clicks the tab: its selector changes first, as for a click"
+
+	self inUIProcess: [
+		| notebook index |
+		notebook := browser tabManager tabMorph.
+		index := notebook pages findFirst: [ :each | each label = aString ].
+		index = 0 ifTrue: [ self error: 'No tab titled ' , aString ].
+		notebook tabSelectorMorph selectedIndex: index ]
+]
+
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> selectedClasses [
 
@@ -127,6 +139,13 @@ ClySpMorphicBrowserDriver >> selectedPackages [
 ClySpMorphicBrowserDriver >> selectedProtocolNames [
 
 	^ self inUIProcess: [ browser methodGroupSelection items collect: [ :each | each name ] ]
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> selectedTabTitle [
+	"The tab of the tool shown: after going back, the tab selector's index is not kept up to date"
+
+	^ self inUIProcess: [ browser tabManager tabMorph page containerTab label ]
 ]
 
 { #category : 'reading' }
@@ -181,4 +200,10 @@ ClySpMorphicBrowserDriver >> switchToPackages [
 ClySpMorphicBrowserDriver >> switchToProjects [
 
 	self inUIProcess: [ browser switchToProjects ]
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> tabTitles [
+
+	^ self inUIProcess: [ browser tabManager tabMorph pages collect: [ :each | each label ] ]
 ]

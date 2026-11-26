@@ -37,9 +37,9 @@ Back and forward through what the user looked at, like a web browser, also acros
 **Code.** `ClyBrowserMorph>>changeStateBy:` (snapshot before, `isCurrentStateOf:` after, then `recordNavigationState:`); `ClyNavigationHistory>>recordState:` (`representsConcreteQuery`, `waitingNewState`); `ignoreNavigationDuring:`; `ClyNotebookManager>>pageChanged:` (tab click).
 
 **Scenarios.**
-- `HIS-02.a` Given class A selected, when I select A again, then no step is added.
-- `HIS-02.b` Given class A selected, when a method is added to A elsewhere, then no step is added.
-- `HIS-02.c` Given a class with its Comment tab selected, when I click its definition tab and go back, then the Comment tab is selected again.
+- `HIS-02.a` Given class A selected, when I select A again, then no step is added. → `ClySpNavigationHistoryTest>>testSelectingTheSameClassAgainIsNoStep`
+- `HIS-02.b` Given class A selected, when a method is added to A elsewhere, then no step is added. → `ClySpNavigationHistoryTest>>testASystemChangeIsNoStep`
+- `HIS-02.c` Given a class with its Comment tab selected, when I click its definition tab and go back, then the Comment tab is selected again (B-06: fails on Morphic today). → `ClySpNavigationHistoryTest>>testAClickedTabIsAStep`
 
 **Manual check.** None.
 

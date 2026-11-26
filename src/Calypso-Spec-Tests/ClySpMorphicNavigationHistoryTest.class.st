@@ -9,6 +9,13 @@ Class {
 }
 
 { #category : 'running' }
+ClySpMorphicNavigationHistoryTest >> expectedFailures [
+	"Today's browser does not restore a tab clicked by hand when going back"
+
+	^ #( #testAClickedTabIsAStep )
+]
+
+{ #category : 'running' }
 ClySpMorphicNavigationHistoryTest >> newBrowserDriver [
 
 	^ ClySpMorphicBrowserDriver new

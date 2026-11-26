@@ -14,6 +14,18 @@ ClySpNavigationHistoryTest class >> isAbstract [
 	^ self == ClySpNavigationHistoryTest
 ]
 
+{ #category : 'tests - What is a step' }
+ClySpNavigationHistoryTest >> testAClickedTabIsAStep [
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	browser selectTabTitled: 'Comment'.
+	browser selectTabTitled: 'ClyClass1FromP1Mock'.
+
+	browser goBack.
+
+	self assert: browser selectedTabTitle equals: 'Comment'
+]
+
 { #category : 'tests - Back and forward' }
 ClySpNavigationHistoryTest >> testANewStepClearsForward [
 
@@ -26,6 +38,22 @@ ClySpNavigationHistoryTest >> testANewStepClearsForward [
 	browser goForward.
 
 	self assert: browser selectedClasses equals: { ClySubclassN1OfClass1FromP1Mock }
+]
+
+{ #category : 'tests - What is a step' }
+ClySpNavigationHistoryTest >> testASystemChangeIsNoStep [
+
+	| classA classB |
+	classA := factory newClass.
+	classB := factory newClass.
+	browser openOnClass: classA.
+	browser selectClass: classB.
+
+	classB compile: 'z ^ nil'.
+	self assert: (browser shownMethods includes: classB >> #z).
+	browser goBack.
+
+	self assert: browser selectedClasses equals: { classA }
 ]
 
 { #category : 'tests - Back and forward' }
@@ -64,4 +92,16 @@ ClySpNavigationHistoryTest >> testBackShowsTheEditorOfThePreviousMethod [
 
 	self assert: browser selectedMethods equals: { (ClySubclassN1OfClass1FromP1Mock >> #tag1Method1) }.
 	self assert: browser editedMethod equals: ClySubclassN1OfClass1FromP1Mock >> #tag1Method1
+]
+
+{ #category : 'tests - What is a step' }
+ClySpNavigationHistoryTest >> testSelectingTheSameClassAgainIsNoStep [
+
+	browser openOnClass: ClyClass1FromP1Mock.
+	browser selectClass: ClyClass2FromP1Mock.
+
+	browser selectClass: ClyClass2FromP1Mock.
+	browser goBack.
+
+	self assert: browser selectedClasses equals: { ClyClass1FromP1Mock }
 ]
