@@ -22,7 +22,7 @@ ClySpMorphicBrowserDriver class >> onWindow: aWindow [
 
 { #category : 'private' }
 ClySpMorphicBrowserDriver >> answerConfirm: aBoolean [
-	"Answers whether a confirm dialog was open"
+	"Answers whether a confirm dialog was open. The modal dialog opens in front of every window, so the first one found is the one just opened."
 
 	| dialog label |
 	dialog := self currentWorld systemWindows detect: [ :each | each label = 'Please confirm' ] ifNone: [ ^ false ].
@@ -35,7 +35,7 @@ ClySpMorphicBrowserDriver >> answerConfirm: aBoolean [
 
 { #category : 'running' }
 ClySpMorphicBrowserDriver >> applyPendingUpdates [
-	"A system change reaches the panes through Calypso's own update process, which may not have run yet. A user only acts once it has."
+	"A user's click runs in the UI loop, after the work already waiting there, so the browser is up to date when the user acts. A test runs in its own process and acts at once: Calypso may not have applied a system change to the browser yet, and the test would see the old panes and tabs."
 
 	| shownBrowser |
 	shownBrowser := window ifNotNil: [ window model ].
@@ -50,6 +50,14 @@ ClySpMorphicBrowserDriver >> browser [
 	^ window model
 ]
 
+{ #category : 'system changes' }
+ClySpMorphicBrowserDriver >> changeSystemBy: aBlock [
+	"Makes a test change the system as a user would, from another tool: in the UI process.
+	The browser's editors react to a change at once, in the process that makes it, so a change made from the test process rebuilds the tabs while the UI process draws them."
+
+	^ self inUIProcess: aBlock
+]
+
 { #category : 'opening' }
 ClySpMorphicBrowserDriver >> close [
 	"Discards unaccepted edits without asking: a test that leaves an editor dirty still closes its window"
@@ -59,7 +67,7 @@ ClySpMorphicBrowserDriver >> close [
 
 { #category : 'editing' }
 ClySpMorphicBrowserDriver >> closeTabTitled: aString answeringDiscard: aBoolean [
-	"Clicks the tab's close button, then Yes or No in the dialog asking to discard its edits. The dialog is modal: its own UI loop runs the click queued before it opened."
+	"Clicks the tab's close button, then Yes or No in the dialog asking to discard its edits. The dialog is modal: closeTab: does not return until someone answers it. So the answer is prepared first. defer: does not run the block now: it puts it in a queue, and the UI loop runs that queue at its next cycle. The open dialog runs that cycle, so the block clicks the answer once the dialog is shown."
 
 	self inUIProcess: [
 		| tab answered |
@@ -81,14 +89,13 @@ ClySpMorphicBrowserDriver >> deselectProtocol [
 ClySpMorphicBrowserDriver >> editedMethod [
 	"The method of the selected tab, which must be a method editor"
 
-	^ self inUIProcess: [ self browser tabManager selectedTools first editingMethod ]
+	^ self inUIProcess: [ self selectedTool editingMethod ]
 ]
 
 { #category : 'reading' }
 ClySpMorphicBrowserDriver >> editorText [
-	"The text of the selected tab's editor, accepted or not"
 
-	^ self inUIProcess: [ self browser tabManager selectedTools first pendingText asString ]
+	^ self inUIProcess: [ self selectedTool pendingText asString ]
 ]
 
 { #category : 'navigating' }
@@ -115,7 +122,7 @@ ClySpMorphicBrowserDriver >> highlightedProtocolNames [
 
 { #category : 'running' }
 ClySpMorphicBrowserDriver >> inUIProcess: aBlock [
-	"A click runs in the UI process, and Calypso updates its browsers there too. So aBlock runs there, and I wait until it is done. Run from the test's own process, it would clash with those updates."
+	"A click runs in the UI process, and Calypso updates its browsers there too. So aBlock runs there, and I wait until it is done. Run from the test's own process, it would clash with those updates. Before aBlock, it applies the panes' pending updates, as a user only acts after them; aBlock's result is still the answer."
 
 	| call |
 	self isInUIProcess ifTrue: [ ^ aBlock value ].
@@ -147,6 +154,7 @@ ClySpMorphicBrowserDriver >> isTabOutOfContext: aString [
 
 { #category : 'private' }
 ClySpMorphicBrowserDriver >> keystroke: aCharacter at: aMorph [
+	"The event Morphic makes for a typed character. Sent straight to aMorph, it skips the hand and the keyboard focus."
 
 	^ KeyboardEvent new
 		  setType: #keystroke
@@ -247,6 +255,13 @@ ClySpMorphicBrowserDriver >> selectedTabTitle [
 	^ self inUIProcess: [ self browser tabManager tabMorph page containerTab label ]
 ]
 
+{ #category : 'private' }
+ClySpMorphicBrowserDriver >> selectedTool [
+	"The notebook shows one tab at a time. selectedTools holds at most one tool."
+
+	^ self browser tabManager selectedTools first
+]
+
 { #category : 'initialization' }
 ClySpMorphicBrowserDriver >> setWindow: aWindow [
 
@@ -321,6 +336,13 @@ ClySpMorphicBrowserDriver >> tabTitles [
 ]
 
 { #category : 'reading' }
+ClySpMorphicBrowserDriver >> textOfTabTitled: aString [
+	"Includes the edits not accepted yet"
+
+	^ self inUIProcess: [ (self toolTitled: aString) pendingText asString ]
+]
+
+{ #category : 'reading' }
 ClySpMorphicBrowserDriver >> toolTitled: aString [
 	"The tool behind the tab, to check whether it is kept or rebuilt"
 
@@ -328,11 +350,11 @@ ClySpMorphicBrowserDriver >> toolTitled: aString [
 ]
 
 { #category : 'editing' }
-ClySpMorphicBrowserDriver >> type: aString [
+ClySpMorphicBrowserDriver >> typeInSelectedTab: aString [
 	"Types in the selected tab's editor, one key at a time, without accepting"
 
 	self inUIProcess: [
 		| textArea |
-		textArea := self browser tabManager selectedTools first textMorph textArea.
+		textArea := self selectedTool textMorph textArea.
 		aString do: [ :each | (self keystroke: each at: textArea) sentTo: textArea ] ]
 ]

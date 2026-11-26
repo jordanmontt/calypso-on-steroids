@@ -20,6 +20,13 @@ ClySpMorphicBrowserDriverTest >> setUp [
 ]
 
 { #category : 'tests' }
+ClySpMorphicBrowserDriverTest >> testMakesSystemChangesInTheUIProcess [
+	"The browser's editors update as soon as the system changes, in the process that changes it. If the test process made the change, the tabs would be rebuilt in that process while the UI process draws them. Both would change the same tabs at the same time, and the drawing would fail with index out of range."
+
+	self assert: (driver changeSystemBy: [ Processor activeProcess ]) identicalTo: MorphicUIManager uiProcess
+]
+
+{ #category : 'tests' }
 ClySpMorphicBrowserDriverTest >> testRaisesInTheTestAnErrorOfABrowserAction [
 	"A failing action must fail the test; in the UI process it would only open a debugger"
 

@@ -60,7 +60,7 @@ ClySpNavigationHistoryTest >> testASystemChangeIsNoStep [
 	browser openOnClass: classA.
 	browser selectClass: classB.
 
-	classB compile: 'z ^ nil'.
+	browser changeSystemBy: [ classB compile: 'z ^ nil' ].
 	self assert: (browser shownMethods includes: classB >> #z).
 	browser goBack.
 
@@ -157,7 +157,7 @@ ClySpNavigationHistoryTest >> testBackShowsTheSystemAsItIsNow [
 	browser openOnClass: classA.
 	browser selectClass: classB.
 
-	classA compile: 'y ^ nil'.
+	browser changeSystemBy: [ classA compile: 'y ^ nil' ].
 	browser goBack.
 
 	self assert: browser selectedClasses equals: { classA }.

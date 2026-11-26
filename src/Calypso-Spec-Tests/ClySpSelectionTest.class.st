@@ -159,10 +159,10 @@ ClySpSelectionTest >> testSelectionComesBackWhenTheMethodIsCompiledAgain [
 	class := self newClassWithMethods: #( #x #y ).
 	browser openOnClass: class.
 	browser selectMethod: class >> #x.
-	class removeSelector: #x.
+	browser changeSystemBy: [ class removeSelector: #x ].
 	self assert: browser selectedMethods isEmpty.
 
-	class compile: 'x ^ nil'.
+	browser changeSystemBy: [ class compile: 'x ^ nil' ].
 
 	self assert: browser selectedMethods equals: { (class >> #x) }
 ]
@@ -175,7 +175,7 @@ ClySpSelectionTest >> testSelectionIsDroppedWhenTheMethodIsRemovedElsewhere [
 	browser openOnClass: class.
 	browser selectMethod: class >> #x.
 
-	class removeSelector: #x.
+	browser changeSystemBy: [ class removeSelector: #x ].
 
 	self assert: browser shownMethods equals: { (class >> #y) }.
 	self assert: browser selectedMethods isEmpty
@@ -189,7 +189,7 @@ ClySpSelectionTest >> testSelectionSurvivesAMethodAddedElsewhere [
 	browser openOnClass: class.
 	browser selectMethod: class >> #x.
 
-	class compile: 'z ^ nil'.
+	browser changeSystemBy: [ class compile: 'z ^ nil' ].
 
 	self assert: (browser shownMethods includes: class >> #z).
 	self assert: browser selectedMethods equals: { (class >> #x) }

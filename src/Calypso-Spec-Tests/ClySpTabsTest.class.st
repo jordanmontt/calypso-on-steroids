@@ -54,9 +54,9 @@ ClySpTabsTest >> testADirtyEditorStaysMarkedDirtyWhenItsClassIsRemoved [
 	class := self newClassWithProtocols.
 	browser openOnClass: class.
 	browser selectMethod: class >> #a.
-	browser type: ' ^ 1'.
+	browser typeInSelectedTab: ' ^ 1'.
 
-	factory delete: class.
+	browser changeSystemBy: [ factory delete: class ].
 
 	self assert: (browser tabTitles includes: '*a')
 ]
@@ -69,11 +69,13 @@ ClySpTabsTest >> testADirtyEditorStaysWhenItsClassIsRemoved [
 	class := self newClassWithProtocols.
 	browser openOnClass: class.
 	browser selectMethod: class >> #a.
-	browser type: ' ^ 1'.
+	browser typeInSelectedTab: ' ^ 1'.
 
-	factory delete: class.
+	browser changeSystemBy: [ factory delete: class ].
 
-	self assert: (browser isTabOutOfContext: 'a')
+	self assert: (browser tabTitles includes: 'a').
+	self assert: (browser isTabOutOfContext: 'a').
+	self assert: ((browser textOfTabTitled: 'a') includesSubstring: ' ^ 1')
 ]
 
 { #category : 'tests - Dirty tabs stay' }
@@ -83,7 +85,7 @@ ClySpTabsTest >> testADirtyEditorStaysWhenSelectingAnotherMethod [
 	class := self newClassWithProtocols.
 	browser openOnClass: class.
 	browser selectMethod: class >> #a.
-	browser type: ' ^ 1'.
+	browser typeInSelectedTab: ' ^ 1'.
 
 	browser selectMethod: class >> #b.
 
@@ -99,7 +101,7 @@ ClySpTabsTest >> testADirtyTabStaysWhenIRefuseToDiscardItsEdits [
 	class := self newClassWithProtocols.
 	browser openOnClass: class.
 	browser selectMethod: class >> #a.
-	browser type: ' ^ 1'.
+	browser typeInSelectedTab: ' ^ 1'.
 
 	browser closeTabTitled: '*a' answeringDiscard: false.
 
@@ -174,11 +176,11 @@ ClySpTabsTest >> testAnEditorClosesWhenItsMethodOrClassIsRemoved [
 	browser openOnClass: class.
 	browser selectMethod: class >> #a.
 
-	class removeSelector: #a.
+	browser changeSystemBy: [ class removeSelector: #a ].
 	self deny: (browser tabTitles includes: 'a').
 
 	browser selectMethod: class >> #b.
-	factory delete: class.
+	browser changeSystemBy: [ factory delete: class ].
 	self deny: (browser tabTitles includes: 'b')
 ]
 
@@ -190,7 +192,7 @@ ClySpTabsTest >> testAnEditorShowsTheNewSourceOfItsMethod [
 	browser openOnClass: class.
 	browser selectMethod: class >> #a.
 
-	class compile: 'a ^ 2' classified: 'alpha'.
+	browser changeSystemBy: [ class compile: 'a ^ 2' classified: 'alpha' ].
 
 	self assert: browser editorText equals: 'a ^ 2'
 ]
@@ -204,7 +206,7 @@ ClySpTabsTest >> testAnEditorStaysWhenItsMethodIsRecompiled [
 	browser selectMethod: class >> #a.
 	editor := browser toolTitled: 'a'.
 
-	class compile: 'a ^ 2' classified: 'alpha'.
+	browser changeSystemBy: [ class compile: 'a ^ 2' classified: 'alpha' ].
 
 	self assert: (browser toolTitled: 'a') identicalTo: editor
 ]
@@ -253,7 +255,7 @@ ClySpTabsTest >> testSelectingTheDirtyMethodAgainDropsTheOtherEditor [
 	class := self newClassWithProtocols.
 	browser openOnClass: class.
 	browser selectMethod: class >> #a.
-	browser type: ' ^ 1'.
+	browser typeInSelectedTab: ' ^ 1'.
 	browser selectMethod: class >> #b.
 
 	browser selectMethod: class >> #a.
@@ -297,7 +299,7 @@ ClySpTabsTest >> testTypingMarksTheEditorDirty [
 	browser openOnClass: class.
 	browser selectMethod: class >> #a.
 
-	browser type: ' ^ 1'.
+	browser typeInSelectedTab: ' ^ 1'.
 
 	self assert: browser selectedTabTitle equals: '*a'
 ]
