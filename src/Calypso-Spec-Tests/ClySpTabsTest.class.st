@@ -45,6 +45,21 @@ ClySpTabsTest >> testAMethodAddsItsEditor [
 	self assert: browser editedMethod equals: class >> #a
 ]
 
+{ #category : 'tests - Similar tabs are reused' }
+ClySpTabsTest >> testAMethodEditorIsReusedAcrossProtocols [
+
+	| class editor |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+	editor := browser toolTitled: 'a'.
+
+	browser selectProtocolNamed: 'alpha'.
+	browser selectMethod: class >> #a.
+
+	self assert: (browser toolTitled: 'a') identicalTo: editor
+]
+
 { #category : 'tests - Tabs chosen from the selection' }
 ClySpTabsTest >> testAPackageShowsItsOwnTabs [
 
@@ -73,6 +88,19 @@ ClySpTabsTest >> testATestClassShowsItsSetUp [
 	browser selectMethod: testClass >> #setUp.
 	self assert: (browser tabTitles count: [ :each | each = 'setUp' ]) equals: 1.
 	self assert: browser editedMethod equals: testClass >> #setUp
+]
+
+{ #category : 'tests - Similar tabs are reused' }
+ClySpTabsTest >> testTheClassDefinitionIsReusedForItsMethods [
+
+	| class definition |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	definition := browser toolTitled: class name.
+
+	browser selectMethod: class >> #a.
+
+	self assert: (browser toolTitled: class name) identicalTo: definition
 ]
 
 { #category : 'tests - Tabs chosen from the selection' }

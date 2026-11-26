@@ -51,8 +51,8 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** `ClyNotebookPageRecyclerTest`.
 
 **Scenarios.**
-- `TAB-02.a` Given a method editor open on a method, when I select another protocol that also lists that method and select it again, then the editor is the same tool (not rebuilt).
-- `TAB-02.b` Given a class selected, when I select one of its methods, then the class definition tab is the same tool as before.
+- `TAB-02.a` Given a method editor open on a method, when I select another protocol that also lists that method and select it again, then the editor is the same tool (not rebuilt). → `ClySpTabsTest>>testAMethodEditorIsReusedAcrossProtocols`
+- `TAB-02.b` Given a class selected, when I select one of its methods, then the class definition tab is the same tool as before. → `ClySpTabsTest>>testTheClassDefinitionIsReusedForItsMethods`
 
 **Manual check.** None.
 

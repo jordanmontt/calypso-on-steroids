@@ -252,3 +252,10 @@ ClySpMorphicBrowserDriver >> tabTitles [
 
 	^ self inUIProcess: [ self browser tabManager tabMorph pages collect: [ :each | each label ] ]
 ]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> toolTitled: aString [
+	"The tool behind the tab, to check whether it is kept or rebuilt"
+
+	^ self inUIProcess: [ self browser tabManager tools detect: [ :each | each containerTab label = aString ] ]
+]
