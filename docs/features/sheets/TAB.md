@@ -32,11 +32,11 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** `ClyBrowserToolValidityTest` (29 tests on `isValidInContext:`), `ClyNotebookPageRecyclerTest` (8).
 
 **Scenarios.**
-- `TAB-01.a` Given a package with classes, when I select the package and no class, then the tabs are the package's (no class definition, no method editor).
-- `TAB-01.b` Given a class, when I select it, then there is a class definition tab, a comment tab and a method-creation tab ("+ Inst. side method"), and no method editor.
-- `TAB-01.c` Given a class with a method, when I select the method, then a method editor tab, titled with the method's icon and name, is added to the class tabs.
-- `TAB-01.d` Given two methods selected, then a diff tab is added.
-- `TAB-01.e` Given a test class with a `setUp`, when I select it, then a `setUp` tab is shown; when I select one of its test methods, both the method editor and the `setUp` tab are shown; when I select its `setUp` method, only the method editor on `setUp` is shown.
+- `TAB-01.a` Given a package with classes, when I select the package and no class, then the tabs are the package's (no class definition, no method editor). → `ClySpTabsTest>>testAPackageShowsItsOwnTabs`
+- `TAB-01.b` Given a class, when I select it, then there is a class definition tab, a comment tab and a method-creation tab ("+ Inst. side method"), and no method editor. → `ClySpTabsTest>>testAClassShowsItsDefinitionCommentAndMethodCreation`
+- `TAB-01.c` Given a class with a method, when I select the method, then a method editor tab, titled with the method's icon and name, is added to the class tabs. → `ClySpTabsTest>>testAMethodAddsItsEditor`
+- `TAB-01.d` Given two methods selected, then a diff tab is added. → `ClySpTabsTest>>testTwoMethodsAddADiff`
+- `TAB-01.e` Given a test class with a `setUp`, when I select it, then a `setUp` tab is shown; when I select one of its test methods, both the method editor and the `setUp` tab are shown; when I select its `setUp` method, only the method editor on `setUp` is shown. → `ClySpTabsTest>>testATestClassShowsItsSetUp`
 
 **Manual check.** None.
 

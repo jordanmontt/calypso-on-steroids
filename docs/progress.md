@@ -38,7 +38,7 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 | MTH | 8 | 4 | 4 | 0 | — | — | — | — |
 | SEL | 6 | 5 | 1 | 0 | reviewed 2026-11-24 | 14 | 14 | 3 of 3 |
 | HIS | 4 | 2 | 2 | 0 | reviewed 2026-11-24 | 11 | 11 | 1 of 1 |
-| TAB | 14 | 9 | 5 | 0 | reviewed 2026-11-23 | 27 | 0 | 3 of 4 |
+| TAB | 14 | 9 | 5 | 0 | reviewed 2026-11-23 | 27 | 5 | 3 of 4 |
 | EDT | 17 | 10 | 7 | 0 | reviewed 2026-11-24 | 34 | 0 | 7 of 7 |
 | CMD | 10 | 5 | 5 | 0 | — | — | — | — |
 | DEC | 13 | 5 | 8 | 0 | — | — | — | — |
@@ -104,7 +104,7 @@ Per area: its features by tier (features without a tier, dropped or out of scope
 
 | Feature | Tier | Scenarios | With a test | Manual check |
 |---|---|---:|---:|---|
-| TAB-01 | M | 5 | 0 | — |
+| TAB-01 | M | 5 | 5 | — |
 | TAB-02 | M | 2 | 0 | — |
 | TAB-03 | M | 4 | 0 | — |
 | TAB-04 | M | 4 | 0 | done |

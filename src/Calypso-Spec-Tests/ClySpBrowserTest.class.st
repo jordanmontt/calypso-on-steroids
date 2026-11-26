@@ -44,6 +44,16 @@ ClySpBrowserTest >> newClassWithProtocols [
 	^ class
 ]
 
+{ #category : 'private' }
+ClySpBrowserTest >> newTestClass [
+
+	| class |
+	class := factory make: [ :aBuilder | aBuilder superclass: TestCase ].
+	class compile: 'setUp super setUp' classified: 'running'.
+	class compile: 'testOne' classified: 'tests'.
+	^ class
+]
+
 { #category : 'running' }
 ClySpBrowserTest >> setUp [
 

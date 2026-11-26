@@ -115,6 +115,17 @@ ClySpMorphicBrowserDriver >> selectMethod: aMethod [
 ]
 
 { #category : 'selecting' }
+ClySpMorphicBrowserDriver >> selectMethods: aCollection [
+	"Clicks the methods in the method pane, the first then the others with cmd"
+
+	self inUIProcess: [
+		| items |
+		items := self browser methodView findItemsWith: aCollection.
+		items size = aCollection size ifFalse: [ self error: 'Not all the methods are shown in the method pane' ].
+		self browser methodView table selectIndexes: (items collect: [ :each | each globalPosition ] as: Array) ]
+]
+
+{ #category : 'selecting' }
 ClySpMorphicBrowserDriver >> selectPackage: aPackage [
 
 	self inUIProcess: [ self browser selectPackage: aPackage ]
