@@ -153,6 +153,19 @@ ClySpTabsTest >> testAMethodEditorIsReusedAcrossProtocols [
 	self assert: (browser toolTitled: 'a') identicalTo: editor
 ]
 
+{ #category : 'tests - Third-party tabs' }
+ClySpTabsTest >> testAPackageShowsItsDependencies [
+	"Other projects add their own tools as tabs; the Dependency Analyzer is the one every image has"
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+
+	browser selectPackage: class package.
+
+	self assert: (browser tabTitles includes: 'Dependencies')
+]
+
 { #category : 'tests - Tabs chosen from the selection' }
 ClySpTabsTest >> testAPackageShowsItsOwnTabs [
 

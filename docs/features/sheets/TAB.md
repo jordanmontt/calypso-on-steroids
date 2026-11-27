@@ -206,7 +206,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** Their `tabs` entries in the catalogue; the same `ClyBrowserToolMorph` protocol.
 
 **Scenarios.**
-- `TAB-13.a` Given a package selected, then a Dependencies tab is shown.
+- `TAB-13.a` Given a package selected, then a Dependencies tab is shown. → `ClySpTabsTest>>testAPackageShowsItsDependencies`
 
 **Notes.** The Spec browser hosts them as Morphic tools for now; they must become Spec presenters before Morphic tools stop being accepted (pain point [P-05](../../pain-points.md#p-05-tools-tabs-are-morphs-also-outside-calypso)).
 
