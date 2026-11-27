@@ -156,7 +156,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Scenarios.**
 - `TAB-08.a` Given two methods selected, then the diff tab compares their sources. → `ClySpTabsTest>>testTheDiffComparesTheSourcesOfTwoMethods`
 
-**Manual check.** The colours (look).
+**Manual check.** The colours (look). Checked 2026-11-27.
 
 ## TAB-09: Tab order and closing (M)
 
