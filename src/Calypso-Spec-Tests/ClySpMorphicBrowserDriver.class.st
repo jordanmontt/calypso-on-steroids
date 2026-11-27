@@ -20,6 +20,14 @@ ClySpMorphicBrowserDriver class >> onWindow: aWindow [
 	^ self new setWindow: aWindow
 ]
 
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> actionsOfTabTitled: aString [
+	"The first line of the tooltip of each action icon the tab shows: enough to tell them apart"
+
+	^ self inUIProcess: [
+		  (self toolTitled: aString) containerTab actions collect: [ :each | each balloonText asString lines first ] as: Array ]
+]
+
 { #category : 'private' }
 ClySpMorphicBrowserDriver >> answerConfirm: aBoolean [
 	"Answers whether a confirm dialog was open. The modal dialog opens in front of every window, so the first one found is the one just opened."
@@ -41,6 +49,12 @@ ClySpMorphicBrowserDriver >> applyPendingUpdates [
 	shownBrowser := window ifNotNil: [ window model ].
 	shownBrowser ifNil: [ ^ self ].
 	shownBrowser navigationViews do: [ :each | each dataSource itemCursor ]
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> areToolsMaximized [
+
+	^ self inUIProcess: [ self browser tabManager tabMorph owner == self browser ]
 ]
 
 { #category : 'accessing' }
@@ -90,6 +104,18 @@ ClySpMorphicBrowserDriver >> deselectProtocol [
 	"As a cmd-click on the selected protocol: the table selection becomes empty."
 
 	self inUIProcess: [ self browser methodGroupSelection beEmpty ]
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> diffSources [
+	"The two sources compared by the selected tab, which must be the diff"
+
+	^ self inUIProcess: [
+		  | diff |
+		  diff := self selectedTool allMorphs detect: [ :each | each isKindOf: DiffMorph ].
+		  {
+			  diff sourceTextModel getText asString.
+			  diff destTextModel getText asString } ]
 ]
 
 { #category : 'reading' }
@@ -150,6 +176,12 @@ ClySpMorphicBrowserDriver >> isInUIProcess [
 ClySpMorphicBrowserDriver >> isOpen [
 
 	^ self inUIProcess: [ window isInWorld ]
+]
+
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> isTabBuilt: aString [
+
+	^ self inUIProcess: [ (self toolTitled: aString) isBuilt ]
 ]
 
 { #category : 'reading' }
@@ -306,6 +338,15 @@ ClySpMorphicBrowserDriver >> spawnBrowser [
 	^ self class onWindow: (self inUIProcess: [ self browser spawnFullBrowser window ])
 ]
 
+{ #category : 'reading' }
+ClySpMorphicBrowserDriver >> statusBarText [
+
+	^ self inUIProcess: [
+		  ' ' join: (self selectedTool statusBar allMorphs
+			   select: [ :each | each isKindOf: StringMorph ]
+			   thenCollect: [ :each | each contents asString ]) ]
+]
+
 { #category : 'switching' }
 ClySpMorphicBrowserDriver >> switchToClassSide [
 
@@ -347,6 +388,13 @@ ClySpMorphicBrowserDriver >> textOfTabTitled: aString [
 	"Includes the edits not accepted yet"
 
 	^ self inUIProcess: [ (self toolTitled: aString) pendingText asString ]
+]
+
+{ #category : 'editing' }
+ClySpMorphicBrowserDriver >> toggleMaximizedTools [
+	"Double-clicks a tab header"
+
+	self inUIProcess: [ self browser toggleFullWindowTabs ]
 ]
 
 { #category : 'reading' }

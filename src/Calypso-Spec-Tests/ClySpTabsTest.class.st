@@ -153,6 +153,48 @@ ClySpTabsTest >> testAMethodEditorIsReusedAcrossProtocols [
 	self assert: (browser toolTitled: 'a') identicalTo: editor
 ]
 
+{ #category : 'tests - Per-tool status bar' }
+ClySpTabsTest >> testAMethodEditorShowsItsProtocolInItsStatusBar [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+
+	browser selectMethod: class >> #a.
+
+	self assert: (browser statusBarText includesSubstring: 'Edit protocol: alpha')
+]
+
+{ #category : 'tests - Tab actions' }
+ClySpTabsTest >> testAMethodInAnIcebergRepositoryOffersItsCommitHistory [
+
+	| class repository |
+	class := self newClassWithProtocols.
+	repository := IceRepository registerRepository: (ClySpIcebergRepositoryStub including: class package).
+	[
+		browser openOnClass: class.
+
+		browser selectMethod: class >> #a.
+
+		self assert: ((browser actionsOfTabTitled: 'a') includes: 'I am a command to show method history') ] ensure: [
+		IceRepository registry remove: repository ]
+]
+
+{ #category : 'tests - Tab actions' }
+ClySpTabsTest >> testAMethodTabOffersItsActions [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+
+	browser selectMethod: class >> #a.
+
+	self
+		assert: (browser actionsOfTabTitled: 'a')
+		equals: #( 'Copy selected methods into Clipboard as' 'Show local method version.' 'Go backward in the navigation history'
+			   'Go forward in the navigation history' )
+]
+
 { #category : 'tests - Third-party tabs' }
 ClySpTabsTest >> testAPackageShowsItsDependencies [
 	"Other projects add their own tools as tabs; the Dependency Analyzer is the one every image has"
@@ -239,6 +281,34 @@ ClySpTabsTest >> testAnEditorStaysWhenItsMethodIsRecompiled [
 	self assert: (browser toolTitled: 'a') identicalTo: editor
 ]
 
+{ #category : 'tests - Maximize the tools' }
+ClySpTabsTest >> testMaximizingTheToolsTwiceBringsThePanesBack [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+
+	browser toggleMaximizedTools.
+	self assert: browser areToolsMaximized.
+
+	browser toggleMaximizedTools.
+	self deny: browser areToolsMaximized
+]
+
+{ #category : 'tests - Tools are built when first shown' }
+ClySpTabsTest >> testOpeningAClassBuildsOnlyItsDefinitionAndComment [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+
+	self assert: (browser tabTitles collect: [ :each | each -> (browser isTabBuilt: each) ] as: Array) equals: {
+		('Dependencies' -> false).
+		(class name -> true).
+		('Comment' -> true).
+		('Inst. side method' -> false) }
+]
+
 { #category : 'tests - Which tab is selected' }
 ClySpTabsTest >> testSelectingAClassSelectsItsComment [
 
@@ -320,6 +390,23 @@ ClySpTabsTest >> testTheClassDefinitionIsReusedForItsMethods [
 	browser selectMethod: class >> #a.
 
 	self assert: (browser toolTitled: class name) identicalTo: definition
+]
+
+{ #category : 'tests - Diff tool' }
+ClySpTabsTest >> testTheDiffComparesTheSourcesOfTwoMethods [
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethods: {
+		(class >> #a).
+		(class >> #b) }.
+
+	browser selectTabTitled: 'Diff'.
+
+	self assert: browser diffSources asSet equals: {
+		(class >> #a) sourceCode.
+		(class >> #b) sourceCode } asSet
 ]
 
 { #category : 'tests - Tabs chosen from the selection' }

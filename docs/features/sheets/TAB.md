@@ -142,7 +142,8 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** The `tabActions` interaction (6 catalogue rows); `ClyBrowserToolMorph>>addNotebookPageOn:` builds them with `ClyCommandGroupBuilder` and `ClyCommandGroupMenuRenderer>>notebookActionsOf:`.
 
 **Scenarios.**
-- `TAB-07.a` Given a method editor, then its tab offers the actions declared for `ClyMethod` in `tabActions`.
+- `TAB-07.a` Given a method editor, then its tab offers copy method name, versions, back and forward. → `ClySpTabsTest>>testAMethodTabOffersItsActions`
+- `TAB-07.b` Given a method editor on a method whose package is in an Iceberg repository, then its tab also offers its commit history. → `ClySpTabsTest>>testAMethodInAnIcebergRepositoryOffersItsCommitHistory`
 
 **Manual check.** That the icons show and react to a click. Checked 2026-11-23.
 
@@ -153,7 +154,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyMethodDiffToolMorph` (`build` uses `DiffMorph`; `belongsToCurrentBrowserContext` needs both methods selected).
 
 **Scenarios.**
-- `TAB-08.a` Given two methods selected, then the diff tab compares their sources.
+- `TAB-08.a` Given two methods selected, then the diff tab compares their sources. → `ClySpTabsTest>>testTheDiffComparesTheSourcesOfTwoMethods`
 
 **Manual check.** The colours (look).
 
@@ -176,7 +177,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyNotebookPageMorph newLabel:icon:provider:` with `[ self buildPageAndDecorate ]`; `ClyBrowserToolMorph>>isBuilt`; `whenReadyDo:` runs at once.
 
 **Scenarios.**
-- `TAB-10.a` Given a class selected, then its non-selected tabs are not built yet.
+- `TAB-10.a` Given a class selected, then only its definition and comment are built; the method creation and Dependencies tabs are built when first shown. → `ClySpTabsTest>>testOpeningAClassBuildsOnlyItsDefinitionAndComment`
 
 **Manual check.** None.
 
@@ -195,7 +196,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyBrowserToolMorph>>buildStatusBar`, `fillStatusBar` (per tool), `rebuildStatusBar` (on context change, see bug B-01).
 
 **Scenarios.**
-- `TAB-12.a` Given a method editor, then its status bar shows the protocol of the method.
+- `TAB-12.a` Given a method editor, then its status bar shows the protocol of the method. → `ClySpTabsTest>>testAMethodEditorShowsItsProtocolInItsStatusBar`
 
 **Manual check.** None.
 
@@ -217,6 +218,6 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyNotebookManager>>addTool:` (`onDoubleClick: [ browser toggleFullWindowTabs ]`); `ClyBrowserMorph>>toggleFullWindowTabs` (moves the notebook between the window and the tool panel).
 
 **Scenarios.**
-- `TAB-14.a` Given a browser, when I maximize the tools, then the panes are hidden; when I do it again, they are back.
+- `TAB-14.a` Given a browser, when I maximize the tools, then the panes are hidden; when I do it again, they are back. → `ClySpTabsTest>>testMaximizingTheToolsTwiceBringsThePanesBack`
 
 **Manual check.** The double click itself (checked 2026-11-23).
