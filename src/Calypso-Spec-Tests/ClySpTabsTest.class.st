@@ -47,6 +47,21 @@ ClySpTabsTest >> testAClickedTabStaysSelectedForTheNextClass [
 	self assert: browser selectedTabTitle equals: classB name
 ]
 
+{ #category : 'tests - Tab order and closing' }
+ClySpTabsTest >> testAClosedTabComesBackForTheNextSelectionThatWantsIt [
+
+	| classA classB |
+	classA := factory newClass.
+	classB := factory newClass.
+	browser openOnClass: classA.
+	browser closeTabTitled: 'Comment'.
+	self deny: (browser tabTitles includes: 'Comment').
+
+	browser selectClass: classB.
+
+	self assert: (browser tabTitles includes: 'Comment')
+]
+
 { #category : 'tests - Tabs close when their model is removed' }
 ClySpTabsTest >> testADirtyEditorStaysMarkedDirtyWhenItsClassIsRemoved [
 
@@ -262,6 +277,23 @@ ClySpTabsTest >> testSelectingTheDirtyMethodAgainDropsTheOtherEditor [
 
 	self deny: (browser tabTitles includes: 'b').
 	self deny: (browser isTabOutOfContext: '*a')
+]
+
+{ #category : 'tests - Tab order and closing' }
+ClySpTabsTest >> testTabsAreInToolOrder [
+	"The tabs stay in the same place whatever the user selects first"
+
+	| class |
+	class := self newClassWithProtocols.
+	browser openOnClass: class.
+	browser selectMethod: class >> #a.
+
+	self assert: browser tabTitles asArray equals: {
+		'Dependencies'.
+		class name.
+		'Comment'.
+		'a'.
+		'Inst. side method' }
 ]
 
 { #category : 'tests - Similar tabs are reused' }

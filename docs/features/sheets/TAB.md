@@ -164,8 +164,8 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyNotebookManager>>initialize` → `ClyNotebookMorph>>useSortedTabsBy:`; `ClyBrowserToolMorph class>>tabOrder`; `closeTab:` → `okToClose`, `tabDeleted:`.
 
 **Scenarios.**
-- `TAB-09.a` Given a method selected, then the tabs are in tab order: class creation, class definition, comment, method editor, method creation.
-- `TAB-09.b` Given a tab closed by hand, when I select another item that wants it, then it is back.
+- `TAB-09.a` Given a method selected, then the tabs are in tab order: Dependencies (from the Dependency Analyzer), class definition, comment, method editor, method creation. → `ClySpTabsTest>>testTabsAreInToolOrder`
+- `TAB-09.b` Given a tab closed by hand, when I select another item that wants it, then it is back. → `ClySpTabsTest>>testAClosedTabComesBackForTheNextSelectionThatWantsIt`
 
 **Manual check.** None.
 

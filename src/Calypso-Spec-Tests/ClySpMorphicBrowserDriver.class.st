@@ -66,6 +66,13 @@ ClySpMorphicBrowserDriver >> close [
 ]
 
 { #category : 'editing' }
+ClySpMorphicBrowserDriver >> closeTabTitled: aString [
+	"Clicks the tab's close button. Use `closeTabTitled:answeringDiscard:` dirty tab becose they ask for confirmation in a modal."
+
+	self inUIProcess: [ self browser tabManager closeTab: (self toolTitled: aString) containerTab ]
+]
+
+{ #category : 'editing' }
 ClySpMorphicBrowserDriver >> closeTabTitled: aString answeringDiscard: aBoolean [
 	"Clicks the tab's close button, then Yes or No in the dialog asking to discard its edits. The dialog is modal: closeTab: does not return until someone answers it. So the answer is prepared first. defer: does not run the block now: it puts it in a queue, and the UI loop runs that queue at its next cycle. The open dialog runs that cycle, so the block clicks the answer once the dialog is shown."
 
