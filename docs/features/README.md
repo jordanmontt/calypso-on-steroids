@@ -267,11 +267,12 @@ Details and reproduction in the [walkthrough](walkthrough.md#bugs-found-during-t
 
 | Id | Bug |
 |---|---|
-| B-01 | After an edit conflict the tab loses its `*` and the status bar is duplicated |
+| B-01 | After an edit conflict the tab loses its `*` and the status bar is duplicated; the `*` is also lost when the class of a dirty editor is removed (TAB-05.d) |
 | B-02 | `spawnQueryBrowserOn:` opens a debugger (`StMethodBrowser class` does not understand `#on:systemScope:`) |
 | B-03 | Duplicate method-creation tab after running tests from a class icon |
 | B-04 | Debugger on right click in the empty area of the method pane |
 | B-05 | ⌘F (Find class) in the class pane lists every class of the image, not only the classes of the selected package (found by you, K-5). **To fix in the Spec browser**: list only the classes of the selected package(s) |
+| B-06 | Going back after clicking tabs by hand sometimes shows another tab than the one left, with no tab marked as selected (HIS-02.c) |
 
 ## Dropped features
 

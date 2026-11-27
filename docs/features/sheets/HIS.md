@@ -23,10 +23,10 @@ Back and forward through what the user looked at, like a web browser, also acros
 **Existing tests.** `ClyBrowserStateTest`, `ClyFullBrowserStateTest`, `ClyQueryViewStateTest` (taking and applying states); none on back and forward.
 
 **Scenarios.**
-- `HIS-01.a` Given class A selected, then class B, when I go back, then A is selected; when I go forward, then B is selected.
-- `HIS-01.b` Given method `x` selected, then method `y`, when I go back, then `x` is selected and its editor is shown.
-- `HIS-01.c` Given the class side shown, when I go back, then the instance side is shown.
-- `HIS-01.d` Given I went back, when I select another class, then going forward does nothing.
+- `HIS-01.a` Given class A selected, then class B, when I go back, then A is selected; when I go forward, then B is selected. → `ClySpNavigationHistoryTest>>testBackAndForwardBetweenTwoClasses`
+- `HIS-01.b` Given method `x` selected, then method `y`, when I go back, then `x` is selected and its editor is shown. → `ClySpNavigationHistoryTest>>testBackShowsTheEditorOfThePreviousMethod`
+- `HIS-01.c` Given the class side shown, when I go back, then the instance side is shown. → `ClySpNavigationHistoryTest>>testBackReturnsToTheInstanceSide`
+- `HIS-01.d` Given I went back, when I select another class, then going forward does nothing. → `ClySpNavigationHistoryTest>>testANewStepClearsForward`
 
 **Manual check.** Alt+Left / Alt+Right in a pane and in an editor (T-09). Checked 2026-11-23 (walkthrough, K-6).
 
@@ -37,9 +37,9 @@ Back and forward through what the user looked at, like a web browser, also acros
 **Code.** `ClyBrowserMorph>>changeStateBy:` (snapshot before, `isCurrentStateOf:` after, then `recordNavigationState:`); `ClyNavigationHistory>>recordState:` (`representsConcreteQuery`, `waitingNewState`); `ignoreNavigationDuring:`; `ClyNotebookManager>>pageChanged:` (tab click).
 
 **Scenarios.**
-- `HIS-02.a` Given class A selected, when I select A again, then no step is added.
-- `HIS-02.b` Given class A selected, when a method is added to A elsewhere, then no step is added.
-- `HIS-02.c` Given a class with its Comment tab selected, when I click its definition tab and go back, then the Comment tab is selected again.
+- `HIS-02.a` Given class A selected, when I select A again, then no step is added. → `ClySpNavigationHistoryTest>>testSelectingTheSameClassAgainIsNoStep`
+- `HIS-02.b` Given class A selected, when a method is added to A elsewhere, then no step is added. → `ClySpNavigationHistoryTest>>testASystemChangeIsNoStep`
+- `HIS-02.c` Given a class with its Comment tab selected, when I click its definition tab and go back, then the Comment tab is selected again (B-06: fails on Morphic today). → `ClySpNavigationHistoryTest>>testAClickedTabIsAStep`
 
 **Manual check.** None.
 
@@ -52,7 +52,7 @@ Back and forward through what the user looked at, like a web browser, also acros
 **Existing tests.** `ClyQueryViewStateTest` (closed data sources).
 
 **Scenarios.**
-- `HIS-03.a` Given class A selected, then class B, when a method is added to A and I go back, then A's methods include the new one.
+- `HIS-03.a` Given class A selected, then class B, when a method is added to A and I go back, then A's methods include the new one. → `ClySpNavigationHistoryTest>>testBackShowsTheSystemAsItIsNow`
 
 **Manual check.** None.
 
@@ -65,9 +65,9 @@ Back and forward through what the user looked at, like a web browser, also acros
 **Existing tests.** `ClyAccrossWindowNavigationStateTest` (10 tests on taking the state and creating the browser).
 
 **Scenarios.**
-- `HIS-04.a` Given a browser spawned from another, when I go back in it, then it is closed and the original browser is active.
-- `HIS-04.b` Given the original browser closed, when I go back in the spawned one, then the original is reopened with its selection.
-- `HIS-04.c` Given the original browser selected another class since, when I go back in the spawned one, then nothing happens.
+- `HIS-04.a` Given a browser spawned from another, when I go back in it, then it is closed and the original browser is active. → `ClySpNavigationHistoryTest>>testBackInASpawnedBrowserClosesIt`
+- `HIS-04.b` Given the original browser closed, when I go back in the spawned one, then the original is reopened with its selection. → `ClySpNavigationHistoryTest>>testBackInASpawnedBrowserReopensTheClosedOriginal`
+- `HIS-04.c` Given the original browser selected another class since, when I go back in the spawned one, then nothing happens. → `ClySpNavigationHistoryTest>>testBackDoesNothingWhenTheOriginalChangedSince`
 
 **Manual check.** None.
 

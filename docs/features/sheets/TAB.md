@@ -32,11 +32,11 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** `ClyBrowserToolValidityTest` (29 tests on `isValidInContext:`), `ClyNotebookPageRecyclerTest` (8).
 
 **Scenarios.**
-- `TAB-01.a` Given a package with classes, when I select the package and no class, then the tabs are the package's (no class definition, no method editor).
-- `TAB-01.b` Given a class, when I select it, then there is a class definition tab, a comment tab and a method-creation tab ("+ Inst. side method"), and no method editor.
-- `TAB-01.c` Given a class with a method, when I select the method, then a method editor tab, titled with the method's icon and name, is added to the class tabs.
-- `TAB-01.d` Given two methods selected, then a diff tab is added.
-- `TAB-01.e` Given a test class with a `setUp`, when I select it, then a `setUp` tab is shown; when I select one of its test methods, both the method editor and the `setUp` tab are shown; when I select its `setUp` method, only the method editor on `setUp` is shown.
+- `TAB-01.a` Given a package with classes, when I select the package and no class, then the tabs are the package's (no class definition, no method editor). → `ClySpTabsTest>>testAPackageShowsItsOwnTabs`
+- `TAB-01.b` Given a class, when I select it, then there is a class definition tab, a comment tab and a method-creation tab ("+ Inst. side method"), and no method editor. → `ClySpTabsTest>>testAClassShowsItsDefinitionCommentAndMethodCreation`
+- `TAB-01.c` Given a class with a method, when I select the method, then a method editor tab, titled with the method's icon and name, is added to the class tabs. → `ClySpTabsTest>>testAMethodAddsItsEditor`
+- `TAB-01.d` Given two methods selected, then a diff tab is added. → `ClySpTabsTest>>testTwoMethodsAddADiff`
+- `TAB-01.e` Given a test class with a `setUp`, when I select it, then a `setUp` tab is shown; when I select one of its test methods, both the method editor and the `setUp` tab are shown; when I select its `setUp` method, only the method editor on `setUp` is shown. → `ClySpTabsTest>>testATestClassShowsItsSetUp`
 
 **Manual check.** None.
 
@@ -51,8 +51,8 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** `ClyNotebookPageRecyclerTest`.
 
 **Scenarios.**
-- `TAB-02.a` Given a method editor open on a method, when I select another protocol that also lists that method and select it again, then the editor is the same tool (not rebuilt).
-- `TAB-02.b` Given a class selected, when I select one of its methods, then the class definition tab is the same tool as before.
+- `TAB-02.a` Given a method editor open on a method, when I select another protocol that also lists that method and select it again, then the editor is the same tool (not rebuilt). → `ClySpTabsTest>>testAMethodEditorIsReusedAcrossProtocols`
+- `TAB-02.b` Given a class selected, when I select one of its methods, then the class definition tab is the same tool as before. → `ClySpTabsTest>>testTheClassDefinitionIsReusedForItsMethods`
 
 **Manual check.** None.
 
@@ -75,10 +75,10 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** None on the choice of tab.
 
 **Scenarios.**
-- `TAB-03.a` Given a class, when I select it by hand, then the Comment tab is selected.
-- `TAB-03.b` Given a class with a method, when I select the method by hand, then its method editor is selected.
-- `TAB-03.c` Given a method selected, when I select a protocol by hand, then the method-creation tab is selected.
-- `TAB-03.d` Given I selected the class definition tab by hand, when I select another class, then the class definition tab stays selected.
+- `TAB-03.a` Given a class, when I select it by hand, then the Comment tab is selected. → `ClySpTabsTest>>testSelectingAClassSelectsItsComment`
+- `TAB-03.b` Given a class with a method, when I select the method by hand, then its method editor is selected. → `ClySpTabsTest>>testSelectingAMethodSelectsItsEditor`
+- `TAB-03.c` Given a method selected, when I select a protocol by hand, then the method-creation tab is selected. → `ClySpTabsTest>>testSelectingAProtocolSelectsMethodCreation`
+- `TAB-03.d` Given I selected the class definition tab by hand, when I select another class, then the class definition tab stays selected. → `ClySpTabsTest>>testAClickedTabStaysSelectedForTheNextClass`
 
 **Manual check.** None.
 
@@ -95,10 +95,10 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** None.
 
 **Scenarios.**
-- `TAB-04.a` Given a method editor, when I type without accepting, then its tab title starts with `*`.
-- `TAB-04.b` Given a dirty editor on `x`, when I select `y`, then the `x` editor stays, marked as not in the current context, and a `y` editor is selected.
-- `TAB-04.c` Given then, when I select `x` again, then the `y` editor is gone and the `x` editor is no longer marked.
-- `TAB-04.d` Given a dirty editor, when I close its tab and refuse to discard, then the tab stays.
+- `TAB-04.a` Given a method editor, when I type without accepting, then its tab title starts with `*`. → `ClySpTabsTest>>testTypingMarksTheEditorDirty`
+- `TAB-04.b` Given a dirty editor on `x`, when I select `y`, then the `x` editor stays, marked as not in the current context, and a `y` editor is selected. → `ClySpTabsTest>>testADirtyEditorStaysWhenSelectingAnotherMethod`
+- `TAB-04.c` Given then, when I select `x` again, then the `y` editor is gone and the `x` editor is no longer marked. → `ClySpTabsTest>>testSelectingTheDirtyMethodAgainDropsTheOtherEditor`
+- `TAB-04.d` Given a dirty editor, when I close its tab and refuse to discard, then the tab stays. → `ClySpTabsTest>>testADirtyTabStaysWhenIRefuseToDiscardItsEdits`
 
 **Manual check.** The orange triangle and the "!" icon (look). Checked 2026-11-23.
 
@@ -113,9 +113,10 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** None.
 
 **Scenarios.**
-- `TAB-05.a` Given a method editor, when the method or its class is removed from another tool, then its tab closes.
-- `TAB-05.b` Given a method editor, when the method is recompiled elsewhere, then the editor stays and shows the new source.
-- `TAB-05.c` Given a method editor with unaccepted edits, when its class is removed, then its tab stays, marked as not in the current context.
+- `TAB-05.a` Given a method editor, when the method or its class is removed from another tool, then its tab closes. → `ClySpTabsTest>>testAnEditorClosesWhenItsMethodOrClassIsRemoved`
+- `TAB-05.b` Given a method editor, when the method is recompiled elsewhere, then the editor stays: the same tool, not a new one (its new source is TAB-06.a). → `ClySpTabsTest>>testAnEditorStaysWhenItsMethodIsRecompiled`
+- `TAB-05.c` Given a method editor with unaccepted edits, when its class is removed, then its tab stays, marked as not in the current context. → `ClySpTabsTest>>testADirtyEditorStaysWhenItsClassIsRemoved`
+- `TAB-05.d` Given then, its tab title still starts with `*` (B-01: fails on Morphic today). → `ClySpTabsTest>>testADirtyEditorStaysMarkedDirtyWhenItsClassIsRemoved`
 
 **Manual check.** None.
 
@@ -130,7 +131,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Existing tests.** None.
 
 **Scenarios.**
-- `TAB-06.a` Given a method editor on `x`, when `x` is recompiled elsewhere with another source, then the editor shows the new source.
+- `TAB-06.a` Given a method editor on `x`, when `x` is recompiled elsewhere with another source, then the editor shows the new source. → `ClySpTabsTest>>testAnEditorShowsTheNewSourceOfItsMethod`
 
 **Manual check.** None.
 
@@ -141,7 +142,8 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** The `tabActions` interaction (6 catalogue rows); `ClyBrowserToolMorph>>addNotebookPageOn:` builds them with `ClyCommandGroupBuilder` and `ClyCommandGroupMenuRenderer>>notebookActionsOf:`.
 
 **Scenarios.**
-- `TAB-07.a` Given a method editor, then its tab offers the actions declared for `ClyMethod` in `tabActions`.
+- `TAB-07.a` Given a method editor, then its tab offers copy method name, versions, back and forward. → `ClySpTabsTest>>testAMethodTabOffersItsActions`
+- `TAB-07.b` Given a method editor on a method whose package is in an Iceberg repository, then its tab also offers its commit history. → `ClySpTabsTest>>testAMethodInAnIcebergRepositoryOffersItsCommitHistory`
 
 **Manual check.** That the icons show and react to a click. Checked 2026-11-23.
 
@@ -152,9 +154,9 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyMethodDiffToolMorph` (`build` uses `DiffMorph`; `belongsToCurrentBrowserContext` needs both methods selected).
 
 **Scenarios.**
-- `TAB-08.a` Given two methods selected, then the diff tab compares their sources.
+- `TAB-08.a` Given two methods selected, then the diff tab compares their sources. → `ClySpTabsTest>>testTheDiffComparesTheSourcesOfTwoMethods`
 
-**Manual check.** The colours (look).
+**Manual check.** The colours (look). Checked 2026-11-27.
 
 ## TAB-09: Tab order and closing (M)
 
@@ -163,8 +165,8 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyNotebookManager>>initialize` → `ClyNotebookMorph>>useSortedTabsBy:`; `ClyBrowserToolMorph class>>tabOrder`; `closeTab:` → `okToClose`, `tabDeleted:`.
 
 **Scenarios.**
-- `TAB-09.a` Given a method selected, then the tabs are in tab order: class creation, class definition, comment, method editor, method creation.
-- `TAB-09.b` Given a tab closed by hand, when I select another item that wants it, then it is back.
+- `TAB-09.a` Given a method selected, then the tabs are in tab order: Dependencies (from the Dependency Analyzer), class definition, comment, method editor, method creation. → `ClySpTabsTest>>testTabsAreInToolOrder`
+- `TAB-09.b` Given a tab closed by hand, when I select another item that wants it, then it is back. → `ClySpTabsTest>>testAClosedTabComesBackForTheNextSelectionThatWantsIt`
 
 **Manual check.** None.
 
@@ -175,7 +177,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyNotebookPageMorph newLabel:icon:provider:` with `[ self buildPageAndDecorate ]`; `ClyBrowserToolMorph>>isBuilt`; `whenReadyDo:` runs at once.
 
 **Scenarios.**
-- `TAB-10.a` Given a class selected, then its non-selected tabs are not built yet.
+- `TAB-10.a` Given a class selected, then only its definition and comment are built; the method creation and Dependencies tabs are built when first shown. → `ClySpTabsTest>>testOpeningAClassBuildsOnlyItsDefinitionAndComment`
 
 **Manual check.** None.
 
@@ -194,7 +196,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyBrowserToolMorph>>buildStatusBar`, `fillStatusBar` (per tool), `rebuildStatusBar` (on context change, see bug B-01).
 
 **Scenarios.**
-- `TAB-12.a` Given a method editor, then its status bar shows the protocol of the method.
+- `TAB-12.a` Given a method editor, then its status bar shows the protocol of the method. → `ClySpTabsTest>>testAMethodEditorShowsItsProtocolInItsStatusBar`
 
 **Manual check.** None.
 
@@ -205,7 +207,7 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** Their `tabs` entries in the catalogue; the same `ClyBrowserToolMorph` protocol.
 
 **Scenarios.**
-- `TAB-13.a` Given a package selected, then a Dependencies tab is shown.
+- `TAB-13.a` Given a package selected, then a Dependencies tab is shown. → `ClySpTabsTest>>testAPackageShowsItsDependencies`
 
 **Notes.** The Spec browser hosts them as Morphic tools for now; they must become Spec presenters before Morphic tools stop being accepted (pain point [P-05](../../pain-points.md#p-05-tools-tabs-are-morphs-also-outside-calypso)).
 
@@ -216,6 +218,6 @@ Under the four panes, the browser shows a notebook of **tools**, one per tab: ed
 **Code.** `ClyNotebookManager>>addTool:` (`onDoubleClick: [ browser toggleFullWindowTabs ]`); `ClyBrowserMorph>>toggleFullWindowTabs` (moves the notebook between the window and the tool panel).
 
 **Scenarios.**
-- `TAB-14.a` Given a browser, when I maximize the tools, then the panes are hidden; when I do it again, they are back.
+- `TAB-14.a` Given a browser, when I maximize the tools, then the panes are hidden; when I do it again, they are back. → `ClySpTabsTest>>testMaximizingTheToolsTwiceBringsThePanesBack`
 
 **Manual check.** The double click itself (checked 2026-11-23).

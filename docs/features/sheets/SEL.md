@@ -1,6 +1,6 @@
 # SEL: selection
 
-Status: **reviewed** 2026-11-24 (manual checks done for SEL-03, 06). Code read on Pharo 15 build 145, 2026-11-24.
+Status: **reviewed** 2026-11-24 (manual checks done for SEL-01, 03, 06). Code read on Pharo 15 build 145, 2026-11-24.
 
 How the four panes select, what they keep when their items change, and how a selection drives the rest of the browser. These rules are invisible but the browser feels wrong without them; refactoring R-02 moves them out of the Morphic views so a Spec pane can use them.
 
@@ -25,13 +25,13 @@ How the four panes select, what they keep when their items change, and how a sel
 **Existing tests.** None on restoring by name.
 
 **Scenarios.**
-- `SEL-01.a` Given method `x` selected by hand in class A, when I select class B which has `x`, then `x` is selected in B.
-- `SEL-01.b` Given then, when I select class C which has no `x`, then no method is selected; when I select class D which has `x`, then `x` is selected in D.
-- `SEL-01.c` Given a method selected on the instance side, when I switch to the class side and back, then the method is selected again.
-- `SEL-01.d` Given a package selected, when I switch to Projects and back to All Packages, then the package is selected again.
-- `SEL-01.e` Given a protocol selected in class A, when I select class B which has the same protocol, then no protocol is selected and all methods of B are shown.
+- `SEL-01.a` Given method `x` selected by hand in class A, when I select class B which has `x`, then `x` is selected in B. → `ClySpSelectionTest>>testSameSelectorStaysSelectedWhenChangingClass`
+- `SEL-01.b` Given then, when I select class C which has no `x`, then no method is selected; when I select class D which has `x`, then `x` is selected in D. → `ClySpSelectionTest>>testSelectorComesBackAfterAClassWithoutIt`
+- `SEL-01.c` Given a method selected on the instance side, when I switch to the class side and back, then the method is selected again. → `ClySpSelectionTest>>testMethodComesBackAfterARoundTripToTheClassSide`
+- `SEL-01.d` Given a package selected, when I switch to Projects and back to All Packages, then the package is selected again. → `ClySpSelectionTest>>testPackageComesBackAfterProjectsMode`
+- `SEL-01.e` Given a protocol selected in class A, when I select class B which has the same protocol, then no protocol is selected and all methods of B are shown. → `ClySpSelectionTest>>testProtocolIsDroppedWhenChangingClass`
 
-**Manual check.** `SEL-01.e` in the image (read from the code only).
+**Manual check.** `SEL-01.e` in the image (read from the code only). Checked 2026-11-25.
 
 ## SEL-02: Selection survives item changes (M)
 
@@ -42,9 +42,9 @@ How the four panes select, what they keep when their items change, and how a sel
 **Existing tests.** `ClyQueryViewStateTest`, `ClyQueryViewMorphShouldExpandTest` (expansion, not selection after an update).
 
 **Scenarios.**
-- `SEL-02.a` Given method `x` selected, when another method is added to the class elsewhere, then `x` is still selected.
-- `SEL-02.b` Given method `x` selected, when `x` is removed elsewhere, then no method is selected.
-- `SEL-02.c` Given then, when `x` is compiled again elsewhere, then `x` is selected again.
+- `SEL-02.a` Given method `x` selected, when another method is added to the class elsewhere, then `x` is still selected. → `ClySpSelectionTest>>testSelectionSurvivesAMethodAddedElsewhere`
+- `SEL-02.b` Given method `x` selected, when `x` is removed elsewhere, then no method is selected. → `ClySpSelectionTest>>testSelectionIsDroppedWhenTheMethodIsRemovedElsewhere`
+- `SEL-02.c` Given then, when `x` is compiled again elsewhere, then `x` is selected again. → `ClySpSelectionTest>>testSelectionComesBackWhenTheMethodIsCompiledAgain`
 
 **Manual check.** None.
 
@@ -55,7 +55,7 @@ How the four panes select, what they keep when their items change, and how a sel
 **Code.** `ClyFullBrowserMorph>>methodSelectionChanged` → `methodGroupView highlightItemsWhich:` (`includesMethod:`); `ClyHighlightingSelection`.
 
 **Scenarios.**
-- `SEL-03.a` Given method `x` in protocol `accessing` selected with no protocol selected, then `accessing` is highlighted and not selected.
+- `SEL-03.a` Given method `x` in protocol `accessing` selected with no protocol selected, then `accessing` is highlighted and not selected. → `ClySpSelectionTest>>testProtocolOfTheSelectedMethodIsHighlighted`
 
 **Manual check.** The highlight colour (look). Checked 2026-11-24.
 
@@ -66,7 +66,7 @@ How the four panes select, what they keep when their items change, and how a sel
 **Code.** `ClyQueryViewMorph>>ignoreNavigationDuring:` (sets `navigationSelector` to nil for the block); `ClyBrowserMorph>>ignoreNavigationDuring:` (no history); senders `silentlySelectPackageOfSelectedClass`, `itemsChangedIn:`.
 
 **Scenarios.**
-- `SEL-04.a` Given hierarchy mode, when I select a class of another package, then its package is selected in the package pane and the class pane still shows the hierarchy.
+- `SEL-04.a` Given hierarchy mode, when I select a class of another package, then its package is selected in the package pane and the class pane still shows the hierarchy. → `ClySpSelectionTest>>testPackageOfAClassFollowsInHierarchyMode`
 
 **Manual check.** None.
 
@@ -77,9 +77,9 @@ How the four panes select, what they keep when their items change, and how a sel
 **Code.** `ClyFullBrowserMorph>>packageSelectionChanged` (`switchToFlatClasses`), `classSelectionChanged` (`changeMethodGroupQueryBy:`, `selectCurrentExtensionMethodGroup`), `methodGroupSelectionChanged` (`showQueries:as:`, `showAllMethods`), `methodSelectionChanged`; `ClyBrowserMorph>>changeStateBy:` (one title, history and tools update per change).
 
 **Scenarios.**
-- `SEL-05.a` Given a package, when I select it, then the class pane lists its classes.
-- `SEL-05.b` Given a class, when I select it, then the group pane lists its protocols and the method pane all its methods, sorted by selector.
-- `SEL-05.c` Given a class selected, when I select a protocol, then the method pane lists only its methods.
+- `SEL-05.a` Given a package, when I select it, then the class pane lists its classes. → `ClySpSelectionTest>>testClassPaneListsTheClassesOfTheSelectedPackage`
+- `SEL-05.b` Given a class, when I select it, then the group pane lists its protocols and the method pane all its methods, sorted by selector. → `ClySpSelectionTest>>testGroupAndMethodPanesShowTheSelectedClass`
+- `SEL-05.c` Given a class selected, when I select a protocol, then the method pane lists only its methods. → `ClySpSelectionTest>>testMethodPaneShowsOnlyTheMethodsOfTheSelectedProtocol`
 
 **Manual check.** None.
 
@@ -90,7 +90,7 @@ How the four panes select, what they keep when their items change, and how a sel
 **Code.** `ClyQueryViewMorph>>initializeTable` (`allowsDeselection: true`); only the retired query browser denies it.
 
 **Scenarios.**
-- `SEL-06.a` Given a protocol selected, when I deselect it, then all methods of the class are shown.
+- `SEL-06.a` Given a protocol selected, when I deselect it, then all methods of the class are shown. → `ClySpSelectionTest>>testDeselectingTheProtocolShowsAllMethods`
 
 **Manual check.** ⌘-click deselects (T-09). Checked 2026-11-24.
 
